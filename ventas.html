@@ -15,53 +15,108 @@
       <button type="button" onclick="window.location.href='nuevaVentas.html'">Nuevo comprador</button>
    </div>
 
-   <TAble>
-      <div>
-         <h4>Datos del comprador</h4>
-         <thead>
-            <tr>
-               <th>Comprador</th>
-               <th>DNI</th>
-               <th>TEL</th>
-               <th>MAIL</th>
-               <th>Dirección</th>
-               <th>Cuotas</th>
-               <th>1era vivienda</th>
-               <th>Certificados</th>
-               <th>Doc certificados</th>
-               <th>Sellado o N3</th>
-               <th>Observaciones</th>
-               <th>Cómo nos conocieron</th>
-               <th>A qué se dedica</th>
-               <th>Status social</th>
-               <th>Conformación familiar</th>
-               <th>Objetivo de compra</th>
-            </tr>
-      </div>
-   </TAble>
+   <div>
+      <h4>Datos del comprador</h4>
+   </div>
    <table>
-      <div>
-         <h4>Cuenta corriente</h4>
-         <div>
+
+      <thead>
+         <tr>
+            <th>Comprador</th>
+            <th>DNI</th>
+            <th>Tel</th>
+            <th>MAIL</th>
+            <th>Dirección</th>
+            <th>Cuotas</th>
+            <th>1era vivienda</th>
+            <th>Certificados</th>
+            <th>Doc certificados</th>
+            <th>Sellado o N3</th>
+            <th>Observaciones</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+         </tr>
+      </tbody>
+
+   </table>
+   <div>
+      <h4>Informacion Venta</h4>
+   </div>
+   <table>
+      <thead>
          <tr>
             <th>Depto U/F</th>
             <th>Cochera U/F</th>
             <th>Baulera U/F</th>
          </tr>
-         </div>
-         <div> 
+
+      </thead>
+      <tbody>
+         <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+         </tr>
+      </tbody>
+   </table>
+   <div>
+      <h4>Cuenta Corriente</h4>
+   </div>
+   <form action="" method="post">
+      <table>
+         <thead>
             <tr>
                <th>Fecha</th>
                <th>Cuota</th>
                <th>A/B</th>
-               <th>Liquidacion</th>
-               <th>Ingeso</th>
+               <th>Ingreso</th>
+               <th>Egreso</th>
                <th>Saldo</th>
-            </tr>
-         </div>
-      </div>
-   </table>
-   
-</body>
+               <th>Opciones</th>
 
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td><button type="button">Modificar</button></td>
+               <td><button type="submit">Guardar</button></td>
+            </tr>
+            <tr>
+
+               <td><input type="date" name="fec"></td>
+               <td><input type="number" name="cuo"></td>
+               <td><select id="tpag" name="tpag">
+                     <option value="a">A</option>
+                     <option value="b">B</option>
+                  </select>
+               </td>
+               <td><input type="number" name="ing"></td>
+               <td><input type="number" name="egr"></td>
+               <td><input type="number" name="saldo"></td>
+               <td><button type="button">Modificar</button></td>
+               <td><button type="submit">Guardar</button></td>
+            </tr>
+         </tbody>
+      </table>
+   </form>
+</body>
 </html>
