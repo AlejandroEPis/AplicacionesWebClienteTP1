@@ -95,8 +95,7 @@
                <th>Ingreso</th>
                <th>Egreso</th>
                <th>Saldo</th>
-               <th>Opciones</th>
-
+               <th colspan="2">Opciones</th>
             </tr>
          </thead>
          <tbody>
@@ -111,17 +110,18 @@
                <td><button type="submit">Guardar</button></td>
             </tr>
             <tr>
-
                <td><input type="date" name="fec"></td>
-               <td><input type="number" name="cuo"></td>
-               <td><select id="tpag" name="tpag">
+               <td><input type="number" name="cuo" placeholder="N° Cuota"></td>
+               <td>
+                  <select id="tpag" name="tpag">
+                     <option value="">Seleccione</option>
                      <option value="a">A</option>
                      <option value="b">B</option>
                   </select>
                </td>
-               <td><input type="number" name="ing"></td>
-               <td><input type="number" name="egr"></td>
-               <td><input type="number" name="saldo"></td>
+               <td><input type="number" name="ing" placeholder="Ingreso"></td>
+               <td><input type="number" name="egr" placeholder="Egreso"></td>
+               <td><input type="number" name="saldo" placeholder="Saldo"></td>
                <td><button type="button">Modificar</button></td>
                <td><button type="submit">Guardar</button></td>
             </tr>

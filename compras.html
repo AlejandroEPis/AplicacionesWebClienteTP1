@@ -6,28 +6,30 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Compras</title>
 </head>
-   <header>
-      <nav>
-         <h4>Administracion Edificio</h4>
-         <ul>
-            <li><a href="panel.html">Inicio</a></li>
-            <li><a href="ventas.html">Ventas</a></li>
-            <li><a href="compras.html">Compras</a></li>
-         </ul>
-      </nav>
-   </header>
+
+
 <body>
     <header>
-        <h2>Compras</h2>
+        <nav>
+            <h4>Administracion Edificio</h4>
+            <ul>
+                <li><a href="panel.html">Inicio</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="compras.html">Compras</a></li>
+            </ul>
+        </nav>
     </header>
-
-
-    <TAble>
-        <div>
-            <button type="button" onclick="window.location.href='nuevaCompra.html'">Nuevo Proveedor</button>
-        </div>
-        <div>
-            <h4>Datos del Proveedor</h4>
+    <div>
+        <h2>Compras</h2>
+    </div>
+    <div>
+        <button type="button" onclick="window.location.href='nuevaProveedor.html'">Nuevo Proveedor</button>
+    </div>
+    <div>
+        <h4>Datos del Proveedor</h4>
+    </div>
+    <form action="" method="post">
+        <table>
             <thead>
                 <tr>
                     <th>Nombre Fantasia</th>
@@ -40,66 +42,105 @@
                 </tr>
             </thead>
             <tbody>
-                <th></th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             </tbody>
-    </table>
-      <table>
-        <div>
-            <button type="button" onclick="window.location.href='nuevaFactura.html'">Nueva Factura</button>
-        </div>
-        <div>
-            <h4>Cuenta corriente</h4>
+        </table>
 
+        <h4>Cuenta Corriente</h4>
+        <table>
             <thead>
                 <tr>
-
                     <th>Fecha</th>
-                <tr>
-                    <th>Factura</th>
                     <th>Letra</th>
                     <th>N° Punto de Venta</th>
                     <th>N° de Factura</th>
-                </tr>
-                <tr>
-                    <th>A</th>
-                    <th>Debe</th>
-                    <th>Pago</th>
-                    <th>Saldo</th>
-                </tr>
-                <tr>
-                    <th>B</th>
-                    <th>Debe</th>
-                    <th>Pago</th>
-                    <th>Saldo</th>
-                </tr>
-                <th>Saldo</th>
+                    <th>A - Debe</th>
+                    <th>A - Pago</th>
+                    <th>A - Saldo</th>
+                    <th>B - Debe</th>
+                    <th>B - Pago</th>
+                    <th>B - Saldo</th>
+                    <th>Saldo Total</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button type="button">Modificar</button>
+                    </td>
+                    <td>
+                        <button type="submit">Guardar</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="date" id="ffac" name="ffac">
+                    </td>
+                    <td>
+                        <select id="letrafac" name="lfac">
+                            <option value="a">A</option>
+                            <option value="b">B</option>
+                            <option value="c">C</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" id="npvent" name="npvent" placeholder="Pto Venta">
+                    </td>
+                    <td>
+                        <input type="number" id="nfac" name="nfac" placeholder="N° Factura">
+                    </td>
+                    <td>
+                        <input type="number" id="totfaca" name="totfaca" placeholder="Debe A">
+                    </td>
+                    <td>
+                        <input type="number" id="pagfaca" name="pagfaca" placeholder="Pago A">
+                    </td>
+                    <td>
+                        <input type="number" id="salfaca" name="salfaca" placeholder="Saldo A">
+                    </td>
+                    <td>
+                        <input type="number" id="totfacb" name="totfacb" placeholder="Debe B">
+                    </td>
+                    <td>
+                        <input type="number" id="pagfacb" name="pagfacb" placeholder="Pago B">
+                    </td>
+                    <td>
+                        <input type="number" id="salfacb" name="salfacb" placeholder="Saldo B">
+                    </td>
+                    <td>
+                        <input type="number" id="saltot" name="saltot" placeholder="Saldo Total">
+                    </td>
+                    <td>
+                        <button type="button">Modificar</button>
+                    </td>
+                    <td>
+                        <button type="submit">Guardar</button>
+                    </td>
+                </tr>
             </tbody>
-        </div>
-    </table>
-        </div>
-    </table>
+        </table>
+    </form>
 </body>
 
 </html>
