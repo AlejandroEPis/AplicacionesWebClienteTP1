@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administracion</title>
 </head>
 
@@ -22,88 +22,68 @@
         <h2>Ventas</h2>
     </div>
     <main>
-        <div>
-            <h4>Datos del comprador</h4>
 
-            <form action method="post">
-                <table>
-                    <tr>
-                        <td><label for="comprador">Comprador</label></td>
-                        <td><input type="text" id="comprador" name="comprador"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="dni">DNI</label></td>
-                        <td><input type="text" id="dni" name="dni"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="tel">TEL</label></td>
-                        <td><input type="tel" id="tel" name="tel"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="mail">MAIL</label></td>
-                        <td><input type="email" id="mail" name="mail"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="direccion">Dirección</label></td>
-                        <td><input type="text" id="direccion" name="direccion"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="cuotas">Cuotas</label></td>
-                        <td><input type="number" id="cuotas" name="cuotas"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="primera_vivienda">1era vivienda</label></td>
-                        <td>
-                            <select id="primera_vivienda" name="primera_vivienda">
-                                <option value="">Seleccione...</option>
-                                <option value="si">Sí</option>
-                                <option value="no">No</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="certificados">Certificados</label></td>
-                        <td><input type="text" id="certificados" name="certificados"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="doc_certificados">Doc certificados</label></td>
-                        <td><input type="text" id="doc_certificados" name="doc_certificados"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="sellado_n3">Sellado o N3</label></td>
-                        <td><input type="text" id="sellado_n3" name="sellado_n3"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="observaciones">Observaciones</label></td>
-                        <td><textarea id="observaciones" name="observaciones"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td><label for="como_conocieron">Cómo nos conocieron</label></td>
-                        <td><input type="text" id="como_conocieron" name="como_conocieron"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="dedicacion">A qué se dedica</label></td>
-                        <td><input type="text" id="dedicacion" name="dedicacion"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="status_social">Status social</label></td>
-                        <td><input type="text" id="status_social" name="status_social"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="familia">Conformación familiar</label></td>
-                        <td><input type="text" id="familia" name="familia"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="objetivo_compra">Objetivo de compra</label></td>
-                        <td><input type="text" id="objetivo_compra" name="objetivo_compra"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <button type="submit">Guardar</button>
-                        </td>
-                    </tr>
-                </table>
+        <h4>Datos del comprador</h4>
 
+        <form action="" method="post">
+            <table>
+                <tr>
+                    <td><label for="comprador">Comprador</label></td>
+                    <td><input type="text" id="comprador" name="comprador"></td>
+                </tr>
+                <tr>
+                    <td><label for="dni">DNI</label></td>
+                    <td><input type="text" id="dni" name="dni"></td>
+                </tr>
+                <tr>
+                    <td><label for="tel">TEL</label></td>
+                    <td><input type="tel" id="tel" name="tel"></td>
+                </tr>
+                <tr>
+                    <td><label for="mail">MAIL</label></td>
+                    <td><input type="email" id="mail" name="mail"></td>
+                </tr>
+                <tr>
+                    <td><label for="direccion">Dirección</label></td>
+                    <td><input type="text" id="direccion" name="direccion"></td>
+                </tr>
+                <tr>
+                    <td><label for="cuotas">Cuotas</label></td>
+                    <td><input type="number" id="cuotas" name="cuotas"></td>
+                </tr>
+                <tr>
+                    <td><label for="primera_vivienda">1era vivienda</label></td>
+                    <td>
+                        <select id="primera_vivienda" name="primera_vivienda">
+                            <option value="">Seleccione...</option>
+                            <option value="si">Sí</option>
+                            <option value="no">No</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="certificados">Certificados</label></td>
+                    <td><input type="text" id="certificados" name="certificados"></td>
+                </tr>
+                <tr>
+                    <td><label for="doc_certificados">Doc certificados</label></td>
+                    <td><input type="text" id="doc_certificados" name="doc_certificados"></td>
+                </tr>
+                <tr>
+                    <td><label for="sellado_n3">Sellado o N3</label></td>
+                    <td><input type="text" id="sellado_n3" name="sellado_n3"></td>
+                </tr>
+                <tr>
+                    <td><label for="observaciones">Observaciones</label></td>
+                    <td><textarea id="observaciones" name="observaciones"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Guardar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </main>
 
 </body>
