@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/TP1/assets/styles.css">
     <title>Administracion</title>
 </head>
 
@@ -15,6 +16,7 @@
                 <li><a href="panel.html">Inicio</a></li>
                 <li><a href="ventas.html">Ventas</a></li>
                 <li><a href="compras.html">Compras</a></li>
+                <li><a href="estadisticas.html">Estadisticas</a></li>
             </ul>
         </nav>
     </header>
@@ -28,7 +30,11 @@
         <form action="" method="post">
             <table>
                 <tr>
-                    <td><label for="comprador">Comprador</label></td>
+                    <td><label for="ape">Apellido</label></td>
+                    <td><input type="text" id="comprador" name="comprador"></td>
+                </tr>
+                <tr>
+                    <td><label for="nom">Nombre</label></td>
                     <td><input type="text" id="comprador" name="comprador"></td>
                 </tr>
                 <tr>
@@ -36,11 +42,11 @@
                     <td><input type="text" id="dni" name="dni"></td>
                 </tr>
                 <tr>
-                    <td><label for="tel">TEL</label></td>
+                    <td><label for="tel">Tel</label></td>
                     <td><input type="tel" id="tel" name="tel"></td>
                 </tr>
                 <tr>
-                    <td><label for="mail">MAIL</label></td>
+                    <td><label for="mail">Mail</label></td>
                     <td><input type="email" id="mail" name="mail"></td>
                 </tr>
                 <tr>
