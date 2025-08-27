@@ -1,7 +1,46 @@
-:root{
-    background:#E0E0E0; ;
+/* Pagina Completa*/
+* {
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    background: #E0E0E0;
     font-family: "Roboto";
 }
-header{
-    background-color:#233a7a ;
+
+/* Cuerpo */
+body {}
+
+/*Barra de Navegacion*/
+header {
+    background-color: #233a7a;
+    border-style: groove;
+    border-color: black;
+    color: white;
+    height: 3.75rem;
+    width: 100%;
+}
+
+nav{
+    display: flex;
+}
+header nav h4 {
+    line-height: 3.75rem;
+    margin-left: 3.75rem;
+}
+nav ul{
+    margin-left: auto;
+    display: flex;
+}
+nav ul li {
+    display: inline-block;
+    margin-right: 3rem;
+    line-height: 3.75rem;
+}
+
+nav ul li a {
+    color: white;
 }
