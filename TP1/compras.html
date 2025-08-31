@@ -1,149 +1,207 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/TP1/assets/styles.css">
+    <link rel="stylesheet" href="./assets/styles.css">
     <title>Compras</title>
 </head>
 
 
 <body>
     <header>
+        <h1>Administracion Edificio</h1>
         <nav>
-            <h4>Administracion Edificio</h4>
-         <ul>
-            <li><a href="panel.html">Inicio</a></li>
-            <li><a href="ventas.html">Ventas</a></li>
-            <li><a href="compras.html">Compras</a></li>
-            <li><a href="estadisticas.html">Estadisticas</a></li>
-         </ul>
+            <ul>
+                <li><a href="panel.html">Inicio</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="compras.html" aria-current="page">Compras</a></li>
+                <li><a href="estadisticas.html">Estadisticas</a></li>
+            </ul>
         </nav>
     </header>
-    <div>
+    <main>
+
         <h2>Compras</h2>
-    </div>
-    <div>
-        <a href="nuevaProveedor.html">Nuevo Proveedor</a>
-        <button type="button" onclick="window.location.href='nuevaProveedor.html'">Nuevo Proveedor</button>
-    </div>
-    <div>
-        <h4>Datos del Proveedor</h4>
-    </div>
-    <form action="" method="post">
-        <table>
+
+        <table class="tableProveedor">
+
+            <caption>Datos del Proveedor</caption>
             <thead>
                 <tr>
-                    <th>Nombre Fantasia</th>
-                    <th>Razon Social/Persona</th>
-                    <th>CUIT</th>
-                    <th>Domicilio comercial</th>
-                    <th>Condicion IVA</th>
-                    <th>Telefo</th>
-                    <th>MAIL</th>
+                    <th colspan="7">
+                        <form role="search" action="" method="get">
+                            <label for="q">Buscar proveedor</label>
+                            <input type="search" id="q" name="q" placeholder="Nombre, CUIT…">
+                            <button type="submit">Buscar</button>
+                        </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="col">Nombre Fantasia</th>
+                    <th scope="col">Razon Social/Persona</th>
+                    <th scope="col">CUIT</th>
+                    <th scope="col">Domicilio comercial</th>
+                    <th scope="col">Condicion IVA</th>
+                    <th scope="col">Telefo</th>
+                    <th scope="col">MAIL</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>Ejemplo</td>
+                    <td>Ejemplo</td>
+                    <td>20328006082</td>
+                    <td>Ejemplo 1234</td>
+                    <td>Consumidor Final</td>
+                    <td>11-0000-0000</td>
+                    <td>ejemplo@ejemplo.com.ar</td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <details>
+                            <summary>Nuevo proveedor</summary>
+
+                            <form action="" method="post">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="text" id="nfan" name="nfan" placeholder="Nombre Fantasia"
+                                                    required></td>
+                                            <td><input type="text" id="rsoper" name="rsoper"
+                                                    placeholder="Razon Social/Persona" required></td>
+                                            <td><input type="text" id="cuit" name="cuit" inputmode="numeric"
+                                                    placeholder="CUIT"></td>
+                                            <td><input type="text" id="dcom" name="dcom"
+                                                    placeholder="Domicilio comercial"></td>
+                                            <td>
+                                                <select id="cIVA" name="cIVA">
+                                                    <option value="responsable">Responsable Inscripto</option>
+                                                    <option value="monotributo">Monotributista</option>
+                                                    <option value="exento">Exento</option>
+                                                    <option value="consumidor">Consumidor Final</option>
+                                                    <option value="noResponsable">No Responsable</option>
+                                                    <option value="noAlcanzado">No Alcanzado</option>
+                                                </select>
+                                            </td>
+                                            <td><input type="tel" id="tel" name="tel" placeholder="Telefo" required>
+                                            </td>
+                                            <td><input type="email" id="mail" name="mail" placeholder="MAIL" required>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <p><button type="submit">Confirmar</button></p>
+                            </form>
+
+                        </details>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
 
-        <h4>Cuenta Corriente</h4>
-        <table>
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Letra</th>
-                    <th>N° Punto de Venta</th>
-                    <th>N° de Factura</th>
-                    <th>A - Debe</th>
-                    <th>A - Pago</th>
-                    <th>A - Saldo</th>
-                    <th>B - Debe</th>
-                    <th>B - Pago</th>
-                    <th>B - Saldo</th>
-                    <th>Saldo Total</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <button type="button">Modificar</button>
-                    </td>
-                    <td>
-                        <button type="submit">Guardar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="date" id="ffac" name="ffac">
-                    </td>
-                    <td>
-                        <select id="letrafac" name="lfac">
-                            <option value="a">A</option>
-                            <option value="b">B</option>
-                            <option value="c">C</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="number" id="npvent" name="npvent" placeholder="Pto Venta">
-                    </td>
-                    <td>
-                        <input type="number" id="nfac" name="nfac" placeholder="N° Factura">
-                    </td>
-                    <td>
-                        <input type="number" id="totfaca" name="totfaca" placeholder="Debe A">
-                    </td>
-                    <td>
-                        <input type="number" id="pagfaca" name="pagfaca" placeholder="Pago A">
-                    </td>
-                    <td>
-                        <input type="number" id="salfaca" name="salfaca" placeholder="Saldo A">
-                    </td>
-                    <td>
-                        <input type="number" id="totfacb" name="totfacb" placeholder="Debe B">
-                    </td>
-                    <td>
-                        <input type="number" id="pagfacb" name="pagfacb" placeholder="Pago B">
-                    </td>
-                    <td>
-                        <input type="number" id="salfacb" name="salfacb" placeholder="Saldo B">
-                    </td>
-                    <td>
-                        <input type="number" id="saltot" name="saltot" placeholder="Saldo Total">
-                    </td>
-                    <td>
-                        <button type="button">Modificar</button>
-                    </td>
-                    <td>
-                        <button type="submit">Guardar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
+        <form class="formCompras" action="" method="post">
+            <table>
+                <caption>Cuenta Corriente</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Letra</th>
+                        <th scope="col">N° P de Venta</th>
+                        <th scope="col">N° de Factura</th>
+                        <th scope="col">A - Debe</th>
+                        <th scope="col">A - Pago</th>
+                        <th scope="col">A - Saldo</th>
+                        <th scope="col">B - Debe</th>
+                        <th scope="col">B - Pago</th>
+                        <th scope="col">B - Saldo</th>
+                        <th scope="col">Saldo Total</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>11/11/2020</td>
+                        <td>C</td>
+                        <td>3</td>
+                        <td>505</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>
+                            <button type="button">Modificar</button>
+                        </td>
+                        <td>
+                            <button type="submit">Guardar</button>
+                        </td>
+                        <td>
+                            <button type="submit">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="date" id="ffac" name="ffac" required>
+                        </td>
+                        <td>
+                            <select id="letrafac" name="lfac">
+                                <option value="a">A</option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" id="npvent" name="npvent" min="0" max="99999" step="1" placeholder="Pto Venta">
+                        </td>
+                        <td>
+                            <input type="number" id="nfac" name="nfac" min="0" max="99999999" step="1" placeholder="N° Factura" required>
+                        </td>
+                        <td>
+                            <input type="number" id="totfaca" name="totfaca" step="0.01" placeholder="Debe A">
+                        </td>
+                        <td>
+                            <input type="number" id="pagfaca" name="pagfaca" step="0.01" placeholder="Pago A">
+                        </td>
+                        <td>
+                            <input type="number" id="salfaca" name="salfaca" step="0.01" placeholder="Saldo A">
+                        </td>
+                        <td>
+                            <input type="number" id="totfacb" name="totfacb" step="0.01" placeholder="Debe B">
+                        </td>
+                        <td>
+                            <input type="number" id="pagfacb" name="pagfacb" step="0.01" placeholder="Pago B">
+                        </td>
+                        <td>
+                            <input type="number" id="salfacb" name="salfacb" step="0.01" placeholder="Saldo B">
+                        </td>
+                        <td>
+                            <input type="number" id="saltot" name="saltot" step="0.01" placeholder="Saldo Total">
+                        </td>
+                        <td>
+                            <button type="button">Modificar</button>
+                        </td>
+                        <td>
+                            <button type="submit">Guardar</button>
+                        </td>
+                        <td>
+                            <button type="submit">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <div>
+            <a href="panel.html">Voler</a>
+        </div>
+    </main>
 </body>
-
 </html>

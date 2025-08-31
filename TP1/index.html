@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/TP1/assets/styles.css">
   <title>Administración</title>
 </head>
-<body>
-    <header>
-        <nav>
-            <h4>Administracion Edificio</h4>
-        </nav>
-    </header>
 
-  <main> 
+<body>
+  <header>
+    <nav>
+      <h1>Administracion Edificio</h1>
+    </nav>
+  </header>
+
+  <main>
+    <section class="login">
       <form action="" method="post">
-         <h3>Ingresar</h3>
+        <h3>Ingresar</h3>
         <label for="usuario">Usuario</label><br>
         <input type="text" id="usuario" name="usuario" placeholder="Ingresá tu usuario" required><br><br>
         <label for="clave">Clave</label><br>
@@ -30,8 +33,12 @@
         <input type="password" id="nuevaClave" name="nuevaClave" placeholder="Elegí una clave" required><br><br>
         <label for="confirmarClave">Confirmar clave</label><br>
         <input type="password" id="confirmarClave" name="confirmarClave" placeholder="Repetí la clave" required><br><br>
+        <label for="confirmarClave">Codigo Cliente</label><br>
+        <input type="password" id="cclien" name="confirmarClave" placeholder="Codigo Cliente" required><br><br>
         <input type="submit" value="Crear cuenta">
       </form>
+    </section>
   </main>
 </body>
+
 </html>
