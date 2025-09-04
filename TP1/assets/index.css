@@ -1,0 +1,63 @@
+/*Pagina Index*/
+
+
+/*Login*/
+
+header.heaLog {
+  display: flex;
+  justify-content: center; 
+  align-items: center;   
+}
+
+header.heaLog h1 {
+  margin: 0 ;
+}
+
+.navLog{
+  margin: 0 ;
+}
+
+
+main.inLog {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 3.75rem);
+  
+}
+
+
+.login {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: whitesmoke;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 2rem;
+  width: fit-content;
+  margin: 0;
+}
+
+.login form {
+  max-width: 400px;
+}
+
+/*Botones Login*/
+
+.bIng{
+  color: white;
+  background-color: #28C76F;;
+  border-radius: 5px ;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.bCrea{
+  color: white;
+  background-color: #3A6FF7;
+  border-radius: 5px ;
+  padding: 5px;
+  cursor: pointer;
+}

@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/TP1/assets/styles.css">
   <title>Administración</title>
 </head>
 
 <body>
-  <header>
-    <nav>
+  <header class="heaLog">
+    <nav class="navLog" >
       <h1>Administracion Edificio</h1>
     </nav>
   </header>
 
-  <main>
+  <main class="inLog">
     <section class="login">
       <form action="" method="post">
         <h3>Ingresar</h3>
@@ -23,9 +24,9 @@
         <input type="text" id="usuario" name="usuario" placeholder="Ingresá tu usuario" required><br><br>
         <label for="clave">Clave</label><br>
         <input type="password" id="clave" name="clave" placeholder="Ingresá tu clave" required><br><br>
-        <input type="submit" value="Ingresar">
+        <input class="bIng" type="submit" value="Ingresar">
       </form>
-      <form action="" method="post">
+      <form class="creUs" action="" method="post">
         <h3>Crear nuevo usuario</h3>
         <label for="nuevoUsuario">Usuario</label><br>
         <input type="text" id="nuevoUsuario" name="nuevoUsuario" placeholder="Elegí un usuario" required><br><br>
@@ -35,7 +36,7 @@
         <input type="password" id="confirmarClave" name="confirmarClave" placeholder="Repetí la clave" required><br><br>
         <label for="confirmarClave">Codigo Cliente</label><br>
         <input type="password" id="cclien" name="confirmarClave" placeholder="Codigo Cliente" required><br><br>
-        <input type="submit" value="Crear cuenta">
+        <input class="bCrea" type="submit" value="Crear cuenta">
       </form>
     </section>
   </main>
