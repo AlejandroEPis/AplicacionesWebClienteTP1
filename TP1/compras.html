@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/styles.css">
     <title>Compras</title>
 </head>
@@ -16,74 +17,72 @@
             <ul>
                 <li><a href="panel.html">Inicio</a></li>
                 <li><a href="ventas.html">Ventas</a></li>
-                <li><a href="compras.html" aria-current="page">Compras</a></li>
+                <li><a href="compras.html">Compras</a></li>
                 <li><a href="estadisticas.html">Estadisticas</a></li>
+                <li><a href="mayor.html">Mayor</a></li>
             </ul>
         </nav>
     </header>
     <aside>
-            <h4>Saldos</h4>
-            <ul>
-                <li>
-                    <h5>Efectivo Pesos Usuario...</h5>
-                    <dl>
-                        <dt>Pesos</dt>
-                    </dl>
-                </li>
-                <li>
-                    <h5>Efectivo Pesos Usuario...</h5>
-                    <dl>
-                        <dt>Pesos</dt>
-                    </dl>
-                </li>
-                <li>
-                    <h5>Efectivo USD Usuario...</h5>
-                    <dl>
-                        <dt>USD</dt>
-                    </dl>
-                </li>
-                <li>
-                    <h5>Efectivo USD Usuario...</h5>
-                    <dl>
-                        <dt>USD</dt>
-                    </dl>
-                </li>
-                <li>
-                    <h5>Saldo Pesos</h5>
-                    <dl>
-                        <dt>Pesos</dt>
-                    </dl>
-                </li>
-                <li>
-                    <h5>Saldo Pesos</h5>
-                    <dl>
-                        <dt>USD</dt>
-                    </dl>
-                </li>
-                <li>
-                    <h5>Saldo CA Pesos</h5>
-                    <dl>
-                        <dt>Pesos</dt>
-                    </dl>
-                </li>
-                <li>
-                    <h5>Saldo CA USD</h5>
-                    <dl>
-                        <dt>USD</dt>
-                    </dl>
-                </li>
-                <li>
-                    <h5>Cheques</h5>
-                    <dl>
-                        <dt>Saldos Cheques</dt>
-                    </dl>
-                </li>
-            </ul>
-        </aside>
+        <h4>Saldos</h4>
+        <ul>
+            <li>
+                <h5>Efectivo Pesos Usuario...</h5>
+                <dl>
+                    <dt>Pesos</dt>
+                </dl>
+            </li>
+            <li>
+                <h5>Efectivo Pesos Usuario...</h5>
+                <dl>
+                    <dt>Pesos</dt>
+                </dl>
+            </li>
+            <li>
+                <h5>Efectivo USD Usuario...</h5>
+                <dl>
+                    <dt>USD</dt>
+                </dl>
+            </li>
+            <li>
+                <h5>Efectivo USD Usuario...</h5>
+                <dl>
+                    <dt>USD</dt>
+                </dl>
+            </li>
+            <li>
+                <h5>Saldo Pesos</h5>
+                <dl>
+                    <dt>Pesos</dt>
+                </dl>
+            </li>
+            <li>
+                <h5>Saldo Pesos</h5>
+                <dl>
+                    <dt>USD</dt>
+                </dl>
+            </li>
+            <li>
+                <h5>Saldo CA Pesos</h5>
+                <dl>
+                    <dt>Pesos</dt>
+                </dl>
+            </li>
+            <li>
+                <h5>Saldo CA USD</h5>
+                <dl>
+                    <dt>USD</dt>
+                </dl>
+            </li>
+            <li>
+                <h5>Cheques</h5>
+                <dl>
+                    <dt>Saldos Cheques</dt>
+                </dl>
+            </li>
+        </ul>
+    </aside>
     <main>
-
-        
-
         <h2>Compras</h2>
 
         <table class="tableProveedor">
@@ -91,7 +90,7 @@
             <caption>Datos del Proveedor</caption>
             <thead>
                 <tr>
-                    <th colspan="7">
+                    <th colspan="8">
                         <form role="search" action="" method="get">
                             <label for="q">Buscar proveedor</label>
                             <input type="search" id="q" name="q" placeholder="Nombre, CUIT…">
@@ -107,6 +106,7 @@
                     <th scope="col">Condicion IVA</th>
                     <th scope="col">Telefo</th>
                     <th scope="col">MAIL</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -118,45 +118,53 @@
                     <td>Consumidor Final</td>
                     <td>11-0000-0000</td>
                     <td>ejemplo@ejemplo.com.ar</td>
+                    <td class="bot">
+                        <button class="bGua" type="submit">Guardar</button>
+                        <button class="bMod" type="submit">Modificar</button>
+                        <button class="bEli" type="submit">Eliminar</button>
+                    </td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="7">
+                    <td colspan="8">
                         <details>
-                            <summary>Nuevo proveedor</summary>
+                            <summary class="bNuPr">Nuevo proveedor</summary>
 
                             <form action="" method="post">
                                 <table>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="text" id="nfan" name="nfan" placeholder="Nombre Fantasia"
-                                                    required></td>
-                                            <td><input type="text" id="rsoper" name="rsoper"
-                                                    placeholder="Razon Social/Persona" required></td>
-                                            <td><input type="text" id="cuit" name="cuit" inputmode="numeric"
-                                                    placeholder="CUIT"></td>
-                                            <td><input type="text" id="dcom" name="dcom"
-                                                    placeholder="Domicilio comercial"></td>
-                                            <td>
-                                                <select id="cIVA" name="cIVA">
-                                                    <option value="responsable">Responsable Inscripto</option>
-                                                    <option value="monotributo">Monotributista</option>
-                                                    <option value="exento">Exento</option>
-                                                    <option value="consumidor">Consumidor Final</option>
-                                                    <option value="noResponsable">No Responsable</option>
-                                                    <option value="noAlcanzado">No Alcanzado</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="tel" id="tel" name="tel" placeholder="Telefo" required>
-                                            </td>
-                                            <td><input type="email" id="mail" name="mail" placeholder="MAIL" required>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                    <tr>
+                                        <td><input type="text" id="nfan" name="nfan" placeholder="Nombre Fantasia"
+                                                required></td>
+                                        <td><input type="text" id="rsoper" name="rsoper"
+                                                placeholder="Razon Social/Persona" required></td>
+                                        <td><input type="text" id="cuit" name="cuit" inputmode="numeric"
+                                                placeholder="CUIT"></td>
+                                        <td><input type="text" id="dcom" name="dcom" placeholder="Domicilio comercial">
+                                        </td>
+                                        <td>
+                                            <select id="cIVA" name="cIVA">
+                                                <option value="responsable">Responsable Inscripto</option>
+                                                <option value="monotributo">Monotributista</option>
+                                                <option value="exento">Exento</option>
+                                                <option value="consumidor">Consumidor Final</option>
+                                                <option value="noResponsable">No Responsable</option>
+                                                <option value="noAlcanzado">No Alcanzado</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="tel" id="tel" name="tel" placeholder="Telefo" required>
+                                        </td>
+                                        <td><input type="email" id="mail" name="mail" placeholder="MAIL" required>
+                                        </td>
+                                        <td class="bot">
+                                            <button class="bGua" type="submit">Confirmar</button>
+                                            <button class="bMod" type="submit">Cancelar</button>
+
+                                        </td>
+                                    </tr>
+
                                 </table>
 
-                                <p><button type="submit">Confirmar</button></p>
                             </form>
 
                         </details>
@@ -174,15 +182,10 @@
                         <th scope="col" class="cLetra">Letra</th>
                         <th scope="col" class="cPventa">Pto Venta</th>
                         <th scope="col" class="cNfactura">N° de Factura</th>
-                        <th scope="col" class="cDebeA">A Debe</th>
-                        <th scope="col" class="cPagoA">A Pago</th>
-                        <th scope="col" class="cSaldoA">A Saldo</th>
-                        <th scope="col" class="cDebeB">B Debe</th>
-                        <th scope="col" class="cPagoB">B Pago</th>
-                        <th scope="col" class="cSaldoB">B Saldo</th>
-                        <th scope="col" class="cSaldoTotal">S. Total</th>
+                        <th scope="col" class="cDebeA">Debe</th>
+                        <th scope="col" class="cPagoA">Pago</th>
+                        <th scope="col" class="cSaldoA">Saldo</th>
                         <th scope="col" class="cBtn"> </th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -194,14 +197,10 @@
                         <td>5</td>
                         <td>3</td>
                         <td>2</td>
-                        <td>5</td>
-                        <td>3</td>
-                        <td>2</td>
-                        <td>2</td>
                         <td class="bot">
-                            <button type="submit">Guardar</button>
-                            <button type="submit">Modificar</button>
-                            <button type="submit">Eliminar</button>
+                            <button class="bGua" type="submit">Guardar</button>
+                            <button class="bMod" type="submit">Modificar</button>
+                            <button class="bEli" type="submit">Eliminar</button>
                         </td>
 
                     </tr>
@@ -233,30 +232,16 @@
                         <td>
                             <input type="number" id="salfaca" name="salfaca" step="0.01" placeholder="Saldo A">
                         </td>
-                        <td>
-                            <input type="number" id="totfacb" name="totfacb" step="0.01" placeholder="Debe B">
-                        </td>
-                        <td>
-                            <input type="number" id="pagfacb" name="pagfacb" step="0.01" placeholder="Pago B">
-                        </td>
-                        <td>
-                            <input type="number" id="salfacb" name="salfacb" step="0.01" placeholder="Saldo B">
-                        </td>
-                        <td>
-                            <input type="number" id="saltot" name="saltot" step="0.01" placeholder="Saldo Total">
-                        </td>
                         <td class="bot">
-                            <button type="submit">Guardar</button>
-                            <button type="submit">Modificar</button>
-                            <button type="submit">Eliminar</button>
+                            <button class="bGua" type="submit">Guardar</button>
+                            <button class="bMod" type="submit">Modificar</button>
+                            <button class="bEli" type="submit">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </form>
-        <div>
-            <a href="panel.html">Voler</a>
-        </div>
+        <a class="bVol" href="panel.html">Volver</a>
     </main>
     <footer>
         <table>

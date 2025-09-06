@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="/TP1/assets/styles.css">
    <title>Administracion</title>
 </head>
@@ -14,9 +15,10 @@
       <nav>
          <ul>
             <li><a href="panel.html">Inicio</a></li>
-            <li><a href="ventas.html" aria-current="page">Ventas</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
             <li><a href="compras.html">Compras</a></li>
             <li><a href="estadisticas.html">Estadisticas</a></li>
+            <li><a href="mayor.html">Mayor</a></li>
          </ul>
       </nav>
    </header>
@@ -81,125 +83,254 @@
       </ul>
    </aside>
 
-   <div>
+   <main>
       <h2>Ventas</h2>
-   </div>
 
-   <div>
+
+      <!--<div>
       <a href="nuevaVentas.html">Nuevo comprador</a>
-   </div>
-   <div>
-      <h4>Buscar comprador</h4>
+   </div>-->
+
       <form action="" method="get">
-         <input type="text" name="q" placeholder="Nombre o DNI">
-         <input type="submit" value="Buscar">
+         <table class="tVen">
+            <caption>Datos del comprador</caption>
+            <thead>
+               <tr>
+                  <th colspan="12">
+                     <label for="q">Buscar Comprador</label>
+                     <input type="text" name="q" placeholder="Nombre o DNI">
+                     <input type="submit" value="Buscar">
+                  </th>
+               </tr>
+               <tr>
+                  <th scope="col">Comprador</th>
+                  <th scope="col">DNI</th>
+                  <th scope="col">Tel</th>
+                  <th scope="col">MAIL</th>
+                  <th scope="col">Dirección</th>
+                  <th scope="col">Cuotas</th>
+                  <th scope="col">1era vivienda</th>
+                  <th scope="col">Certificados</th>
+                  <th scope="col">Doc certificados</th>
+                  <th scope="col">Sellado o N3</th>
+                  <th scope="col">Observaciones</th>
+                  <th scope="col">Opciones</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>el</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>
+                     <button class="bGua" type="submit">Guardar</button>
+                     <button class="bMod" type="submit">Modificar</button>
+                     <button class="bEli" type="submit">Eliminar</button>
+                  </td>
+               </tr>
+            </tbody>
+            <tfoot>
+               <tr>
+                  <td colspan="11">
+                     <details>
+                        <summary class="bNuPr">Nuevo Comprador</summary>
+
+                        <form action="" method="post">
+                           <table>
+                              <tr>
+                                 <td><label for="ape">Apellido</label></td>
+                                 <td><input type="text" id="comprador" name="comprador"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="nom">Nombre</label></td>
+                                 <td><input type="text" id="comprador" name="comprador"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="dni">DNI</label></td>
+                                 <td><input type="text" id="dni" name="dni"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="tel">Tel</label></td>
+                                 <td><input type="tel" id="tel" name="tel"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="mail">Mail</label></td>
+                                 <td><input type="email" id="mail" name="mail"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="direccion">Dirección</label></td>
+                                 <td><input type="text" id="direccion" name="direccion"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="cuotas">Cuotas</label></td>
+                                 <td><input type="number" id="cuotas" name="cuotas"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="primera_vivienda">1era vivienda</label></td>
+                                 <td>
+                                    <select id="primera_vivienda" name="primera_vivienda">
+                                       <option value="">Seleccione...</option>
+                                       <option value="si">Sí</option>
+                                       <option value="no">No</option>
+                                    </select>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td><label for="certificados">Certificados</label></td>
+                                 <td><input type="text" id="certificados" name="certificados"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="doc_certificados">Doc certificados</label></td>
+                                 <td><input type="text" id="doc_certificados" name="doc_certificados"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="sellado_n3">Sellado o N3</label></td>
+                                 <td><input type="text" id="sellado_n3" name="sellado_n3"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="observaciones">Observaciones</label></td>
+                                 <td><textarea id="observaciones" name="observaciones"></textarea></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="depto">Depto U/F</label></td>
+                                 <td><input type="number" id="depto" name="depto"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="cochera">Cochera U/F</label></td>
+                                 <td><input type="number" id="cochera" name="cochera"></td>
+                              </tr>
+                              <tr>
+                                 <td><label for="baulera">Baulera U/F</label></td>
+                                 <td><input type="number" id="baulera" name="baulera"></td>
+                              </tr>
+                              <tr>
+                                 <td colspan="2">
+                                    <button class="bGua" type="submit">Confirmar</button>
+                                    <button class="bMod" type="submit">Cancelar</button>
+                                 </td>
+                              </tr>
+                           </table>
+                        </form>
+                     </details>
+                  </td>
+               </tr>
+            </tfoot>
+         </table>
       </form>
-   </div>
-   <div>
-      <h4>Datos del comprador</h4>
-   </div>
-   <table>
 
-      <thead>
-         <tr>
-            <th>Comprador</th>
-            <th>DNI</th>
-            <th>Tel</th>
-            <th>MAIL</th>
-            <th>Dirección</th>
-            <th>Cuotas</th>
-            <th>1era vivienda</th>
-            <th>Certificados</th>
-            <th>Doc certificados</th>
-            <th>Sellado o N3</th>
-            <th>Observaciones</th>
-         </tr>
-      </thead>
-      <tbody>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-         </tr>
-      </tbody>
-
-   </table>
-   <div>
       <h4>Informacion Venta</h4>
-   </div>
-   <table>
-      <thead>
-         <tr>
-            <th>Depto U/F</th>
-            <th>Cochera U/F</th>
-            <th>Baulera U/F</th>
-         </tr>
 
-      </thead>
-      <tbody>
-         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-         </tr>
-      </tbody>
-   </table>
-   <div>
-      <h4>Cuenta Corriente</h4>
-   </div>
-   <form action="" method="post">
-      <table>
+      <table class="tInfoVen">
          <thead>
             <tr>
-               <th>Fecha</th>
-               <th>Cuota</th>
-               <th>A/B</th>
-               <th>Ingreso</th>
-               <th>Egreso</th>
-               <th>Saldo</th>
-               <th colspan="2">Opciones</th>
+               <th scope="col">Depto U/F</th>
+               <th scope="col">Cochera U/F</th>
+               <th scope="col">Baulera U/F</th>
+               <th scope="col">Opciones</th>
             </tr>
+
          </thead>
          <tbody>
-            <tr>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td><button type="button">Modificar</button></td>
-               <td><button type="submit">Guardar</button></td>
-            </tr>
-            <tr>
-               <td><input type="date" name="fec"></td>
-               <td><input type="number" name="cuo" placeholder="N° Cuota"></td>
-               <td>
-                  <select id="tpag" name="tpag">
-                     <option value="">Seleccione</option>
-                     <option value="a">A</option>
-                     <option value="b">B</option>
-                  </select>
-               </td>
-               <td><input type="number" name="ing" placeholder="Ingreso"></td>
-               <td><input type="number" name="egr" placeholder="Egreso"></td>
-               <td><input type="number" name="saldo" placeholder="Saldo"></td>
-               <td><button type="button">Modificar</button></td>
-               <td><button type="submit">Guardar</button></td>
-            </tr>
+            <td>ej</td>
+            <td>ej</td>
+            <td>ej</td>
+            <td colspan="3" class="bot">
+               <button class="bGua" type="submit">Guardar</button>
+               <button class="bMod" type="submit">Modificar</button>
+               <button class="bEli" type="submit">Eliminar</button>
+            </td>
          </tbody>
+         <tfoot>
+            <tr>
+               <td><input type="number" id="depto" name="depto" placeholder="Depto U/F"></td>
+               <td><input type="number" id="cochera" name="cochera" placeholder="Cochera U/F"></td>
+               <td><input type="number" id="baulera" name="baulera" placeholder="Baulera U/F"></td>
+               <td class="bot">
+                  <button class="bGua" type="submit">Guardar</button>
+                  <button class="bMod" type="submit">Modificar</button>
+                  <button class="bEli" type="submit">Eliminar</button>
+               </td>
+            </tr>
+         </tfoot>
       </table>
-      </main>
-   </form>
+      <div>
+         <h4>Cuenta Corriente</h4>
+      </div>
+      <form method="post">
+         <table class="tCC">
+            <thead>
+               <tr>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Cuota</th>
+                  <th scope="col">Tipo de pago</th>
+                  <th scope="col">Destino</th>
+                  <th scope="col">Ingreso</th>
+                  <th scope="col">Egreso</th>
+                  <th scope="col">Saldo</th>
+                  <th scope="col">Opciones</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td>ej</td>
+                  <td class="bot">
+                     <button class="bGua" type="submit">Guardar</button>
+                     <button class="bMod" type="submit">Modificar</button>
+                     <button class="bEli" type="submit">Eliminar</button>
+                  </td>
+               </tr>
+               <tr>
+                  <td><input type="date" name="fec"></td>
+                  <td><input type="number" name="cuo" placeholder="N° Cuota"></td>
+                  <td>
+                     <select id="tpago" name="tpago">
+                        <option value="">Seleccione</option>
+                        <option value="a">Pesos</option>
+                        <option value="b">USD</option>
+                        <option value="c">Transferencia Pesos</option>
+                        <option value="d">Transferencia USD</option>
+                        <option value="e">Cheque</option>
+                     </select>
+                  </td>
+                  <td>
+                     <select id="dpago" name="dpago">
+                        <option value="">Seleccione</option>
+                        <option value="">Usuario x</option>
+                        <option value="a">Usuario x</option>
+                        <option value="b">Caja de Ahorro</option>
+                        <option value="c">Cuenta Corriente</option>
+                        <option value="d">Cheque</option>
+                     </select>
+                  </td>
+                  <td><input type="number" name="ing" placeholder="Ingreso"></td>
+                  <td><input type="number" name="egr" placeholder="Egreso"></td>
+                  <td><input type="number" name="saldo" placeholder="Saldo"></td>
+                  <td class="bot">
+                     <button class="bGua" type="submit">Guardar</button>
+                     <button class="bMod" type="submit">Modificar</button>
+                     <button class="bEli" type="submit">Eliminar</button>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
 
+      </form>
+   </main>
+   <a class="bVol" href="panel.html">Volver</a>
    <footer>
       <table>
          <caption>Resumen financiero</caption>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="/TP1/assets/styles.css">
    <title>Estadisticas</title>
 </head>
@@ -13,98 +14,113 @@
    <header>
       <h1>Administracion Edificio</h1>
       <nav>
-         <ul>
-            <li><a href="panel.html">Inicio</a></li>
-            <li><a href="ventas.html">Ventas</a></li>
-            <li><a href="compras.html">Compras</a></li>
-            <li><a href="estadisticas.html">Estadisticas</a></li>
-         </ul>
+            <ul>
+                <li><a href="panel.html">Inicio</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="compras.html" aria-current="page">Compras</a></li>
+                <li><a href="estadisticas.html">Estadisticas</a></li>
+                <li><a href="mayor.html">Mayor</a></li>
+            </ul>
       </nav>
    </header>
-</body>
+<h2>Estadisticas</h2>
 
-<form action="" method="post">
-   <table>
-      <caption>Ejecucion de Presupuesto</caption>
-      <tr>
-         <th>Presupuesto Pactado</th>
-         <th>Presupuesto Ejecutado</th>
-         <th>Faltante de Ejecucion</th>
-      </tr>
+   <form class="tPresu" action="" method="post">
+      <table class="tPresu">
+         <caption>Ejecucion de Presupuesto</caption>
+         <thead>
+            <tr>
+               <th scope="col">Presupuesto Pactado</th>
+               <th scope="col">Presupuesto Ejecutado</th>
+               <th scope="col">Faltante de Ejecucion</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>
+                  <input type="number" id="prePac" name="prePac" placeholder="Ingrese el Presupuesto" required>
+               </td>
+               <td></td>
+               <td></td>
+            </tr>
+            </tbody>
+      </table> 
+   </form>
 
+   <table class="tGas">
+      <caption>Gastos Rubro</caption>
+      <thead>
+         <tr>
+            <th scope="col">Mano de Obra</th>
+            <th scope="col">Materiales</th>
+            <th scope="col">Honorarios Profecionales</th>
+            <th scope="col">Permisos/Tasas/Impuesto</th>
+            <th scope="col">Servicios y Gastos Generales</th>
 
-      <tr>
-         <td>
-            <input type="number" id="prePac" name="prePac" placeholder="Ingrese el Presupuesto" required>
-         </td>
-         <td></td>
-         <td></td>
-      </tr>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+         </tr>
+      </tbody>
    </table>
-</form>
-
-<table>
-   <caption>Gastos Rubro</caption>
-   <thead>
+   <table class="tSal">
+      <caption>Saldos</caption>
+      <thead>
       <tr>
-         <th>Mano de Obra</th>
-         <th>Materiales</th>
-         <th>Honorarios Profecionales</th>
-         <th>Permisos/Tasas/Impuesto</th>
-         <th>Servicios y Gastos Generales</th>
+         <th scope="col">Efectivo Pesos Usuario...</th>
+         <th scope="col">Efectivo Pesos Usuario...</th>
+         <th scope="col">Efectivo USD Usuario...</th>
+         <th scope="col">Efectivo USD Usuario...</th>
+         <th scope="col">Saldo Pesos</th>
+         <th scope="col">Saldo USD</th>
+         <th scope="col">Saldo CA Pesos</th>
+         <th scope="col">Saldo CA USD</th>
+         <th scope="col">Cheques</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
 
       </tr>
-   </thead>
-   <tbody>
+      </tbody>
+   </table>
+
+   <table class="tInGr">
+      <caption>Ingresos/Gastos</caption>
+      <thead>
       <tr>
-         <td></td>
-         <td></td>
-         <td></td>
-         <td></td>
-         <td></td>
-
+         <th scope="col">Morosidad</th>
+         <th scope="col"> % Morosidad</th>
+         <th scope="col">Gastos sin cancelar</th>
+         <th scope="col">% Pediente de Caneclacio</th>
       </tr>
-   </tbody>
-</table>
-<table>
-   <tr>
-      <th>Efectivo Pesos Usuario...</th>
-      <th>Efectivo Pesos Usuario...</th>
-      <th>Efectivo USD Usuario...</th>
-      <th>Efectivo USD Usuario...</th>
-      <th>Saldo Pesos</th>
-      <th>Saldo USD</th>
-      <th>Saldo CA Pesos</th>
-      <th>Saldo CA USD</th>
-      <th>Cheques</th>
-   </tr>
-   <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-
-   </tr>
-</table>
-
-<table>
-   <rt>
-      <th>Morosidad</th>
-      <th> % Morosidad</th>
-      <th>Gastos sin cancelar</th>
-      <th></th>
-   </rt>
-   <rt>
-      <td>$5000000</td>
-      <td>20%</td>
-      <td>$1000000</td>
-   </rt>
-</table>
-
+      </thead>
+      <tbody>
+      <tr>
+         <td>$5000000</td>
+         <td>20%</td>
+         <td>$1000000</td>
+         <td>$5000000</td>
+      </tr>
+      </tbody>
+   </table>
+   <a class="bVol" href="panel.html">Volver</a>
+</body>
 
 </html>
