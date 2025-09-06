@@ -2,44 +2,115 @@
 <html lang="es-AR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/TP1/assets/styles.css">
-  <title>Administración</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="/TP1/assets/styles.css">
+   <title>Administración</title>
 </head>
 
 <body>
-  <header class="heaLog">
-    <nav class="navLog" >
+   <header class="heaLo">
       <h1>Administracion Edificio</h1>
-    </nav>
-  </header>
+   </header>
 
-  <main class="inLog">
-    <section class="login">
-      <form action="" method="post">
-        <h3>Ingresar</h3>
-        <label for="usuario">Usuario</label><br>
-        <input type="text" id="usuario" name="usuario" placeholder="Ingresá tu usuario" required><br><br>
-        <label for="clave">Clave</label><br>
-        <input type="password" id="clave" name="clave" placeholder="Ingresá tu clave" required><br><br>
-        <input class="bIng" type="submit" value="Ingresar">
-      </form>
-      <form class="creUs" action="" method="post">
-        <h3>Crear nuevo usuario</h3>
-        <label for="nuevoUsuario">Usuario</label><br>
-        <input type="text" id="nuevoUsuario" name="nuevoUsuario" placeholder="Elegí un usuario" required><br><br>
-        <label for="nuevaClave">Clave</label><br>
-        <input type="password" id="nuevaClave" name="nuevaClave" placeholder="Elegí una clave" required><br><br>
-        <label for="confirmarClave">Confirmar clave</label><br>
-        <input type="password" id="confirmarClave" name="confirmarClave" placeholder="Repetí la clave" required><br><br>
-        <label for="confirmarClave">Codigo Cliente</label><br>
-        <input type="password" id="cclien" name="confirmarClave" placeholder="Codigo Cliente" required><br><br>
-        <input class="bCrea" type="submit" value="Crear cuenta">
-      </form>
-    </section>
-  </main>
+   <aside>
+      <div class="infAs">
+         <h4>Saldos</h4>
+         <dl class="saldo">
+            <dt>Efectivo Pesos Usuario…</dt>
+            <dd>$0</dd>
+         </dl>
+
+         <dl class="saldo">
+            <dt>Efectivo USD Usuario…</dt>
+            <dd>$0</dd>
+         </dl>
+         <dl class="saldo">
+            <dt>Efectivo Pesos Usuario…</dt>
+            <dd>$0</dd>
+         </dl>
+
+         <dl class="saldo">
+            <dt>Efectivo USD Usuario…</dt>
+            <dd>$0</dd>
+         </dl>
+
+         <dl class="saldo">
+            <dt>Saldo Pesos</dt>
+            <dd>$0</dd>
+         </dl>
+
+         <dl class="saldo">
+            <dt>Saldo USD</dt>
+            <dd>$0</dd>
+         </dl>
+
+         <dl class="saldo">
+            <dt>Saldo CA Pesos</dt>
+            <dd>$0</dd>
+         </dl>
+
+         <dl class="saldo">
+            <dt>Saldo CA USD</dt>
+            <dd>$0</dd>
+         </dl>
+
+         <dl class="saldo">
+            <dt>Cheques</dt>
+            <dd>$0</dd>
+         </dl>
+      </div>
+   </aside>
+   <main>
+      <h2>Ingrese Usuario</h2>
+
+      <div class="inLog">
+         <section class="login">
+            <form action="" method="post">
+               <h3>Ingresar</h3>
+               <label for="usuario">Usuario</label>
+               <input type="text" id="usuario" name="usuario" placeholder="Ingresá tu usuario" required>
+               <label for="clave">Clave</label>
+               <input type="password" id="clave" name="clave" placeholder="Ingresá tu clave" required>
+               <input class="bIng" type="submit" value="Ingresar">
+            </form>
+            <form class="creUs" action="" method="post">
+               <h3>Crear nuevo usuario</h3>
+               <label for="nuevoUsuario">Usuario</label>
+               <input type="text" id="nuevoUsuario" name="nuevoUsuario" placeholder="Elegí un usuario" required>
+               <label for="nuevaClave">Clave</label>
+               <input type="password" id="nuevaClave" name="nuevaClave" placeholder="Elegí una clave" required>
+               <label for="confirmarClave">Confirmar clave</label>
+               <input type="password" id="confirmarClave" name="confirmarClave" placeholder="Repetí la clave"
+                  required>
+               <label for="confirmarClave">Codigo Cliente</label>
+               <input type="password" id="cclien" name="confirmarClave" placeholder="Codigo Cliente" required>
+               <input class="bCrea" type="submit" value="Crear cuenta">
+            </form>
+         </section>
+      </div>
+   </main>
+   <footer>
+      <table>
+         <caption>Resumen financiero</caption>
+         <thead>
+            <tr>
+               <th scope="col">Morosidad (ARS)</th>
+               <th scope="col">% Morosidad</th>
+               <th scope="col">Gastos sin cancelar (ARS)</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>$5000000</td>
+               <td>20%</td>
+               <td>$1000000</td>
+            </tr>
+         </tbody>
+      </table>
+   </footer>
 </body>
+
 
 </html>

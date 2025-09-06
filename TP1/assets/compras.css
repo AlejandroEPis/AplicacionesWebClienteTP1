@@ -1,3 +1,16 @@
+/*Mostrar informacion Header Asider y Footer*/
+aside > * {
+  visibility: visible;
+}
+
+footer > * {
+  visibility: visible;
+}
+
+header nav {
+  display: block;
+}
+
 /*Proveedor*/
 .tableProveedor {
     background: whitesmoke;

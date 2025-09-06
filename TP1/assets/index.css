@@ -1,47 +1,46 @@
 /*Pagina Index*/
 
 
-/*Login*/
-
-header.heaLog {
-  display: flex;
-  justify-content: center; 
-  align-items: center;   
-}
-
-header.heaLog h1 {
-  margin: 0 ;
-}
-
-.navLog{
-  margin: 0 ;
-}
-
-
-main.inLog {
-  margin: 0;
+/* Header*/
+header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 3.75rem);
-  
+  position: relative;
+  height: 3.75rem;
+  background-color: #233a7a;
+  color: white;
 }
 
+header h1 {
+  margin: 0;
+  position: absolute;  
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*Login*/
+.inLog {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
 
 .login {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
   gap: 2rem;
-  background: whitesmoke;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 2rem;
-  width: fit-content;
-  margin: 0;
+  border: 2px groove black;
+  border-radius: 5px;
+  padding: 1.5rem;
+  background: white;
 }
 
 .login form {
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 300px;
 }
 
 /*Botones Login*/
@@ -60,4 +59,17 @@ main.inLog {
   border-radius: 5px ;
   padding: 5px;
   cursor: pointer;
+}
+
+/*Ocultar informacion Header Asider y Footer*/
+aside > * {
+  visibility: hidden;
+}
+
+footer > * {
+  visibility: hidden;
+}
+
+header nav {
+  display: none;
 }
