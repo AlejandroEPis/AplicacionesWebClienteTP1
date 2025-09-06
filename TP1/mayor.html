@@ -73,8 +73,118 @@
       </div>
    </aside>
    <main>
+      <h2>Mayor</h2>
+      <div>
+         <table class="tMaMo">
+            <caption>Carga de Movimientos</caption>
+
+            <thead>
+               <tr>
+                  <th scope="col">N° de Movimiento</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Medio de Pago</th>
+                  <th scope="col">Destino</th>
+                  <th scope="col">Salida</th>
+                  <th scope="col">Medio de Pago</th>
+                  <th scope="col">Destino</th>
+                  <th scope="col">Ingreso</th>
+                  <th scope="col">Opciones</th>
+               </tr>
+            </thead>
+            <tr>
+               <td><input type="number" name="ing" placeholder="Ingreso"></td>
+               <td><input type="date" name="fec"></td>
+               <td>
+                  <select id="dpago" name="dpago">
+                     <option value="">Seleccione</option>
+                     <option value="a">Usuario x</option>
+                     <option value="b">Usuario x</option>
+                     <option value="c">Caja de Ahorro</option>
+                     <option value="d">Cuenta Corriente</option>
+                     <option value="e">Cheque</option>
+                  </select>
+               </td>
+               <td>
+                  <select id="dpago" name="dpago">
+                     <option value="">Seleccione</option>
+                     <option value="a">Usuario x</option>
+                     <option value="b">Usuario x</option>
+                     <option value="c">Caja de Ahorro</option>
+                     <option value="d">Cuenta Corriente</option>
+                     <option value="e">Cheque</option>
+                  </select>
+               </td>
+               <td><input type="number" name="egr" placeholder="Egreso"></td>
+
+               <td>
+                  <select id="dpago" name="dpago">
+                     <option value="">Seleccione</option>
+                     <option value="a">Usuario x</option>
+                     <option value="b">Usuario x</option>
+                     <option value="c">Caja de Ahorro</option>
+                     <option value="d">Cuenta Corriente</option>
+                     <option value="e">Cheque</option>
+                  </select>
+               </td>
+               <td>
+                  <select id="dpago" name="dpago">
+                     <option value="">Seleccione</option>
+                     <option value="a">Usuario x</option>
+                     <option value="b">Usuario x</option>
+                     <option value="c">Caja de Ahorro</option>
+                     <option value="d">Cuenta Corriente</option>
+                     <option value="e">Cheque</option>
+                  </select>
+               </td>
+               <td><input type="number" name="ing"></td>
+               <td>
+                  <button class="bGua" type="submit">Guardar</button>
+                  <button class="bMod" type="reset">Cancelar</button>
+               </td>
+            </tr>
+         </table>
 
 
+
+
+
+         <table class="tHiMa">
+            <caption>Historial movimientos</caption>
+            <thead>
+               <tr>
+                  <th scope="col">N° de Movimiento</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Medio de Pago</th>
+                  <th scope="col">Destino</th>
+                  <th scope="col">Salida</th>
+                  <th scope="col">Medio de Pago</th>
+                  <th scope="col">Destino</th>
+                  <th scope="col">Ingreso</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>001</td>
+                  <td>06/09/2025</td>
+                  <td>Efectivo</td>
+                  <td>Proveedor X</td>
+                  <td>$10.000</td>
+                  <td>Transferencia</td>
+                  <td>Cuenta Corriente</td>
+                  <td>$15.000</td>
+               </tr>
+            </tbody>
+         </table>
+
+
+
+
+
+
+
+
+
+      </div>
 
       <a class="bVol" href="panel.html">Volver</a>
    </main>
