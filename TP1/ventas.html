@@ -6,7 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="/TP1/assets/styles.css">
-   <title>Administracion</title>
+   <title>Ventas</title>
 </head>
 
 <body>
@@ -126,8 +126,6 @@
                   <td colspan="11">
                      <details>
                         <summary class="bNuPr">Nuevo Comprador</summary>
-
-                        <form action="" method="post">
                            <table>
                               <tr>
                                  <td><label for="ape">Apellido</label></td>
@@ -202,7 +200,6 @@
                                  </td>
                               </tr>
                            </table>
-                        </form>
                      </details>
                   </td>
                </tr>
@@ -210,9 +207,9 @@
          </table>
       </form>
 
-      <h4>Informacion Venta</h4>
-
+     
       <table class="tInfoVen">
+         <caption>Informacion Venta</caption>
          <thead>
             <tr>
                <th scope="col">Depto U/F</th>
@@ -245,11 +242,9 @@
             </tr>
          </tfoot>
       </table>
-      <div>
-         <h4>Cuenta Corriente</h4>
-      </div>
-      <form method="post">
-         <table class="tCC">
+      <form class="cuentaCorriente" method="post">  
+         <table>
+            <caption>Cuenta Corriente</caption>
             <thead>
                <tr>
                   <th scope="col">Fecha</th>

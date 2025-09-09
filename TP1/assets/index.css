@@ -60,16 +60,3 @@ header h1 {
   padding: 5px;
   cursor: pointer;
 }
-
-/*Ocultar informacion Header Asider y Footer*/
-aside > * {
-  visibility: hidden;
-}
-
-footer > * {
-  visibility: hidden;
-}
-
-header nav {
-  display: none;
-}

@@ -121,63 +121,56 @@
                         <td colspan="8">
                             <details>
                                 <summary class="bNuPr">Nuevo proveedor</summary>
+                                <table>
+                                    <tr>
+                                        <td><input type="text" id="nfan" name="nfan" placeholder="Nombre Fantasia"
+                                                required></td>
+                                        <td><input type="text" id="rsoper" name="rsoper"
+                                                placeholder="Razon Social/Persona" required></td>
+                                        <td><input type="text" id="cuit" name="cuit" inputmode="numeric"
+                                                placeholder="CUIT"></td>
+                                        <td><input type="text" id="dcom" name="dcom" placeholder="Domicilio comercial">
+                                        </td>
+                                        <td>
+                                            <select id="cIVA" name="cIVA">
+                                                <option value="responsable">Responsable Inscripto</option>
+                                                <option value="monotributo">Monotributista</option>
+                                                <option value="exento">Exento</option>
+                                                <option value="consumidor">Consumidor Final</option>
+                                                <option value="noResponsable">No Responsable</option>
+                                                <option value="noAlcanzado">No Alcanzado</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="tel" id="tel" name="tel" placeholder="Telefo" required>
+                                        </td>
+                                        <td><input type="email" id="mail" name="mail" placeholder="MAIL" required>
+                                        </td>
+                                        <td class="bot">
+                                            <button class="bGua" type="submit">Confirmar</button>
+                                            <button class="bMod" type="submit">Cancelar</button>
 
-                                <form action="" method="post">
-                                    <table>
-                                        <tr>
-                                            <td><input type="text" id="nfan" name="nfan" placeholder="Nombre Fantasia"
-                                                    required></td>
-                                            <td><input type="text" id="rsoper" name="rsoper"
-                                                    placeholder="Razon Social/Persona" required></td>
-                                            <td><input type="text" id="cuit" name="cuit" inputmode="numeric"
-                                                    placeholder="CUIT"></td>
-                                            <td><input type="text" id="dcom" name="dcom"
-                                                    placeholder="Domicilio comercial">
-                                            </td>
-                                            <td>
-                                                <select id="cIVA" name="cIVA">
-                                                    <option value="responsable">Responsable Inscripto</option>
-                                                    <option value="monotributo">Monotributista</option>
-                                                    <option value="exento">Exento</option>
-                                                    <option value="consumidor">Consumidor Final</option>
-                                                    <option value="noResponsable">No Responsable</option>
-                                                    <option value="noAlcanzado">No Alcanzado</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="tel" id="tel" name="tel" placeholder="Telefo" required>
-                                            </td>
-                                            <td><input type="email" id="mail" name="mail" placeholder="MAIL" required>
-                                            </td>
-                                            <td class="bot">
-                                                <button class="bGua" type="submit">Confirmar</button>
-                                                <button class="bMod" type="submit">Cancelar</button>
-
-                                            </td>
-                                        </tr>
-
-                                    </table>
-
-                                </form>
-
+                                        </td>
+                                    </tr>
+                                </table>
                             </details>
                         </td>
                     </tr>
                 </tfoot>
             </table>
 
-            <form class="formCompras" action="" method="post">
+            <form class="cuentaCorriente" action="" method="post">
                 <table>
                     <caption>Cuenta Corriente</caption>
                     <thead>
                         <tr>
-                            <th scope="col" class="cFecha">Fecha</th>
-                            <th scope="col" class="cLetra">Letra</th>
-                            <th scope="col" class="cPventa">Pto Venta</th>
-                            <th scope="col" class="cNfactura">N° de Factura</th>
-                            <th scope="col" class="cDebeA">Debe</th>
-                            <th scope="col" class="cPagoA">Pago</th>
-                            <th scope="col" class="cSaldoA">Saldo</th>
-                            <th scope="col" class="cBtn"> </th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Letra</th>
+                            <th scope="col">Pto Venta</th>
+                            <th scope="col">N° de Factura</th>
+                            <th scope="col">Debe</th>
+                            <th scope="col">Pago</th>
+                            <th scope="col">Saldo</th>
+                            <th scope="col"> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -194,7 +187,47 @@
                                 <button class="bMod" type="submit">Modificar</button>
                                 <button class="bEli" type="submit">Eliminar</button>
                             </td>
-
+                        <tr>
+                            <td>11/11/2020</td>
+                            <td>C</td>
+                            <td>3</td>
+                            <td>505</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>11/11/2020</td>
+                            <td>C</td>
+                            <td>3</td>
+                            <td>505</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>11/11/2020</td>
+                            <td>C</td>
+                            <td>3</td>
+                            <td>505</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -208,21 +241,19 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="number" id="npvent" name="npvent" min="0" max="99999" step="1"
-                                    placeholder="Pto Venta">
+                                <input type="number" id="npvent" name="npvent" min="0" max="99999" step="1">
                             </td>
                             <td>
-                                <input type="number" id="nfac" name="nfac" min="0" max="99999999" step="1"
-                                    placeholder="N° Factura" required>
+                                <input type="number" id="nfac" name="nfac" min="0" max="99999999" step="1" required>
                             </td>
                             <td>
-                                <input type="number" id="totfaca" name="totfaca" step="0.01" placeholder="Debe A">
+                                <input type="number" id="totfaca" name="totfaca" step="0.01">
                             </td>
                             <td>
-                                <input type="number" id="pagfaca" name="pagfaca" step="0.01" placeholder="Pago A">
+                                <input type="number" id="pagfaca" name="pagfaca" step="0.01">
                             </td>
                             <td>
-                                <input type="number" id="salfaca" name="salfaca" step="0.01" placeholder="Saldo A">
+                                <input type="number" id="salfaca" name="salfaca" step="0.01">
                             </td>
                             <td class="bot">
                                 <button class="bGua" type="submit">Guardar</button>
@@ -233,7 +264,6 @@
                     </tbody>
                 </table>
 
-            </form>
         </div>
         <a class="bVol" href="panel.html">Volver</a>
     </main>
