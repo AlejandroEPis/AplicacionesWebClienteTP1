@@ -11,72 +11,46 @@
 
 
 <body>
-    <header class="heaNo">
-        <h1>Administracion Edificio</h1>
-        <nav class="navLog">
 
-            <ul>
-                <li><a href="panel.html">Inicio</a></li>
-                <li><a href="ventas.html">Ventas</a></li>
-                <li><a href="compras.html">Compras</a></li>
-                <li><a href="estadisticas.html">Estadisticas</a></li>
-                <li><a href="mayor.html">Mayor</a></li>
-            </ul>
-        </nav>
-    </header>
-    <aside>
-        <div class="infAs">
-            <h4>Saldos</h4>
-            <dl class="saldo">
-                <dt>Efectivo Pesos Usuario…</dt>
-                <dd>$0</dd>
-            </dl>
+    <body>
+        <header class="heaNo">
+            <h1>Administracion Edificio</h1>
+            <nav>
+                <ul>
+                    <li><a href="panel.html">Inicio</a></li>
+                    <li><a href="ventas.html">Ventas</a></li>
+                    <li><a href="compras.html">Compras</a></li>
+                    <li><a href="estadisticas.html">Estadisticas</a></li>
+                    <li><a href="mayor.html">Mayor</a></li>
+                </ul>
+            </nav>
+        </header>
 
-            <dl class="saldo">
-                <dt>Efectivo USD Usuario…</dt>
-                <dd>$0</dd>
-            </dl>
-            <dl class="saldo">
-                <dt>Efectivo Pesos Usuario…</dt>
-                <dd>$0</dd>
-            </dl>
-
-            <dl class="saldo">
-                <dt>Efectivo USD Usuario…</dt>
-                <dd>$0</dd>
-            </dl>
-
-            <dl class="saldo">
-                <dt>Saldo Pesos</dt>
-                <dd>$0</dd>
-            </dl>
-
-            <dl class="saldo">
-                <dt>Saldo USD</dt>
-                <dd>$0</dd>
-            </dl>
-
-            <dl class="saldo">
-                <dt>Saldo CA Pesos</dt>
-                <dd>$0</dd>
-            </dl>
-
-            <dl class="saldo">
-                <dt>Saldo CA USD</dt>
-                <dd>$0</dd>
-            </dl>
-
-            <dl class="saldo">
-                <dt>Cheques</dt>
-                <dd>$0</dd>
-            </dl>
-        </div>
-    </aside>
-    <main>
-        <div>
+        <aside>
+            <h3>Saldos</h3>
+            <dt>Efectivo Pesos Usuario…</dt>
+            <dd>$0</dd>
+            <dt>Efectivo USD Usuario…</dt>
+            <dd>$0</dd>
+            <dt>Efectivo Pesos Usuario…</dt>
+            <dd>$0</dd>
+            <dt>Efectivo USD Usuario…</dt>
+            <dd>$0</dd>
+            <dt>Saldo Pesos</dt>
+            <dd>$0</dd>
+            <dt>Saldo USD</dt>
+            <dd>$0</dd>
+            <dt>Saldo CA Pesos</dt>
+            <dd>$0</dd>
+            <dt>Saldo CA USD</dt>
+            <dd>$0</dd>
+            <dt>Cheques</dt>
+            <dd>$0</dd>
+        </aside>
+        <main>
             <h2>Compras</h2>
 
-            <table class="tableProveedor">
+            <table class="tCCVeCo">
 
                 <caption>Datos del Proveedor</caption>
                 <thead>
@@ -121,16 +95,25 @@
                         <td colspan="8">
                             <details>
                                 <summary class="bNuPr">Nuevo proveedor</summary>
-                                <table>
+                                <table class="nueClPr">
                                     <tr>
-                                        <td><input type="text" id="nfan" name="nfan" placeholder="Nombre Fantasia"
-                                                required></td>
-                                        <td><input type="text" id="rsoper" name="rsoper"
-                                                placeholder="Razon Social/Persona" required></td>
-                                        <td><input type="text" id="cuit" name="cuit" inputmode="numeric"
-                                                placeholder="CUIT"></td>
-                                        <td><input type="text" id="dcom" name="dcom" placeholder="Domicilio comercial">
-                                        </td>
+                                        <td><label for="nfan">Nombre Fantasía</label></td>
+                                        <td><input type="text" id="nfan" name="nfan" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="rsoper">Razón Social/Persona</label></td>
+                                        <td><input type="text" id="rsoper" name="rsoper" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="cuit">CUIT</label></td>
+                                        <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="dcom">Domicilio comercial</label></td>
+                                        <td><input type="text" id="dcom" name="dcom"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="cIVA">Condición IVA</label></td>
                                         <td>
                                             <select id="cIVA" name="cIVA">
                                                 <option value="responsable">Responsable Inscripto</option>
@@ -141,14 +124,19 @@
                                                 <option value="noAlcanzado">No Alcanzado</option>
                                             </select>
                                         </td>
-                                        <td><input type="tel" id="tel" name="tel" placeholder="Telefo" required>
-                                        </td>
-                                        <td><input type="email" id="mail" name="mail" placeholder="MAIL" required>
-                                        </td>
-                                        <td class="bot">
+                                    </tr>
+                                    <tr>
+                                        <td><label for="tel">Teléfono</label></td>
+                                        <td><input type="tel" id="tel" name="tel" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="mail">Mail</label></td>
+                                        <td><input type="email" id="mail" name="mail" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="bot">
                                             <button class="bGua" type="submit">Confirmar</button>
                                             <button class="bMod" type="submit">Cancelar</button>
-
                                         </td>
                                     </tr>
                                 </table>
@@ -158,7 +146,8 @@
                 </tfoot>
             </table>
 
-            <form class="cuentaCorriente" action="" method="post">
+
+            <form class="tCCVeCo" action="" method="post">
                 <table>
                     <caption>Cuenta Corriente</caption>
                     <thead>
@@ -201,7 +190,7 @@
                                 <button class="bEli" type="submit">Eliminar</button>
                             </td>
                         </tr>
-                                                <tr>
+                        <tr>
                             <td>11/11/2020</td>
                             <td>C</td>
                             <td>3</td>
@@ -215,7 +204,7 @@
                                 <button class="bEli" type="submit">Eliminar</button>
                             </td>
                         </tr>
-                                                <tr>
+                        <tr>
                             <td>11/11/2020</td>
                             <td>C</td>
                             <td>3</td>
@@ -264,28 +253,27 @@
                     </tbody>
                 </table>
 
-        </div>
-        <a class="bVol" href="panel.html">Volver</a>
-    </main>
-    <footer>
-        <table>
-            <caption>Resumen financiero</caption>
-            <thead>
-                <tr>
-                    <th scope="col">Morosidad (ARS)</th>
-                    <th scope="col">% Morosidad</th>
-                    <th scope="col">Gastos sin cancelar (ARS)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>$5000000</td>
-                    <td>20%</td>
-                    <td>$1000000</td>
-                </tr>
-            </tbody>
-        </table>
-    </footer>
-</body>
+                <a class="bVol" href="panel.html">Volver</a>
+        </main>
+        <footer>
+            <table>
+                <caption>Resumen financiero</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Morosidad (ARS)</th>
+                        <th scope="col">% Morosidad</th>
+                        <th scope="col">Gastos sin cancelar (ARS)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$5000000</td>
+                        <td>20%</td>
+                        <td>$1000000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </footer>
+    </body>
 
 </html>

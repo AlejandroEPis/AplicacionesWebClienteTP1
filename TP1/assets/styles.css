@@ -35,238 +35,308 @@ body {
 }
 
 /* Header N°1*/
-header .heaLo {
+header.heaLo {
   position: fixed;
   top: 0;
   left: 12.5%;
-  width: calc(100% - 12.5%);
-  height: 3.75rem;
-  background-color: #233a7a;
-  color: white;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom-style: groove;
-  border-color: black
+  width: calc(100% - 12.5%);
+  height: 10vh;
+  color: white;
+  background: #233a7a;
+
+}
+
+/* Header N°2*/
+header.heaNo {
+  position: fixed;
+  top: 0;
+  left: 12.5%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 12.5%);
+  height: 10vh;
+  color: white;
+  background: #233a7a;
+  padding-left: 4vh;
+  padding-right: 4vh;
+}
+
+.heaNo nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.heaNo nav a {
+  font-size: 2.5vh;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 3.5vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* Aside*/
 aside {
   position: fixed;
-  top: 0;
   left: 0;
   width: 12.5%;
-  height: 100vh;
-  background: #233a7a;
-  color: white;
-  border-right: groove;
-  border-color: black;
-}
-
-aside .infAs {
-  position: absolute;
-  top: 3.75rem;
-  bottom: 5rem;
-  left: 0;
-  right: 0;
-  overflow-y: auto;
-  padding: 1rem;
-  box-sizing: border-box;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-evenly;
+  height: 100vh;
+  padding-top: 10vh;
+  padding-bottom: 12vh;
+  background-color: #233a7a;
+  color: white;
+
 }
 
-aside .saldo {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
+aside h3 {
+  font-size: 2.5vh;
+  text-decoration: underline;
+}
+
+dl {
   margin: 0;
-  text-align: center; 
+  padding: 0;
+  width: 100%;
 }
 
-aside .saldo dt {
-  font-weight: bold;
-  margin-bottom: 0.25rem; 
+dt {
+  font-weight: bolder;
+  font-size: 2vh;
 }
 
-aside .saldo dd {
-  margin: 0;
+dd {
+  text-align: center;
+  font-size: 2vh;
 }
 
 
 /* Main*/
 main {
-  position: absolute;
-  top: 3.75rem; 
-  bottom: 5rem;
+  position: fixed;
+  top: 10vh;
+  bottom: 12vh;
   left: 12.5%;
   width: calc(100% - 12.5%);
-  overflow-y: auto;
-  padding: 1rem 2rem;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   background: #E0E0E0;
+  border: 2px groove black;
+  border-radius: 5px;
+
 }
+
+h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 3vh;
+  color: #233a7a;
+  text-decoration: underline;
+  padding: 2.0vh 0vh 0 2.0vh;
+}
+
 /*Footer*/
 footer {
   position: fixed;
   bottom: 0;
   left: 12.5%;
   width: calc(100% - 12.5%);
-  height: 5rem;
+  height: 12vh;
   background-color: #233a7a;
+  font-size: 2vh;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-style: groove;
-  border-color: black;
-}
-
-/* Header N°2*/
-.heaNo {
-  position: fixed;
-  top: 0;
-  left: 12.5%;
-  width: calc(100% - 12.5%);
-  height: 3.75rem;
-  background-color: #233a7a;
-  color: white;
-  display: flex;
-  justify-content: flex-start; 
-  align-items: center;
-  padding: 0 2rem;
-  border-bottom: 2px solid black;
-  box-sizing: border-box;
-}
-
-.heaNo h1 {
-  margin: 0;
-  font-size: 1.2rem;
-  position: static !important; 
-  transform: none !important; 
-  text-align: left;
-}
-
-.navLog {
-  margin-left: auto; 
-}
-
-.navLog ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-}
-
-.navLog a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
 }
 
 /*Botones Guardar Modificar Eliminar*/
 
 .bGua {
-    color: white;
-    background-color: #28C76F;
-    border-radius: 5px;
-    padding: 5px;
-    cursor: pointer;
+  color: white;
+  background-color: #28C76F;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .bMod {
-    color: white;
-    background-color: #FF9F43;
-    border-radius: 5px;
-    padding: 5px;
-    cursor: pointer;
+  color: white;
+  background-color: #FF9F43;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .bEli {
-    color: white;
-    background-color: #FF4D4F;
-    border-radius: 5px;
-    padding: 5px;
-    cursor: pointer;
+  color: white;
+  background-color: #FF4D4F;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
 }
+
 /*Boton Volver*/
 
 .bVol {
-    position: fixed;
-    bottom:120px;
-    right: 20px;
-    text-decoration: none;
-    color: white;
-    background-color: #3A6FF7;
-    border-radius: 5px;
-    padding: 5px;
-    cursor: pointer;
-    width: 140px;
-    text-align: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: violet;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 50px;
+  font-size: 2vh;
+  font-weight: bold;
+  z-index: 1000;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
 }
 
-/*Scroll Cuenta Corriente*/
-
-.cuentaCorriente {
-  max-height: 300px;
-  overflow-y: auto; 
-  display: block;
+.bVol:hover {
+  transform: scale(1.1);
+  background: rgb(235, 194, 211);
 }
 
-.cuentaCorriente table {
-  background: whitesmoke;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  margin: 1rem auto;
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-  font-size: 0.9rem;
+/*Tablas*/
+.tCCVeCo {
+ max-width: 95%;
+  margin: 0 2vh 2vh 2vh;
+  background-color: #E0E0E0;
+  border: 2px solid black;
+  border-radius: 6px;
+  
 }
 
-.cuentaCorriente caption {
+.tCCVeCo caption {
+  font-size: 2.8vh;
   caption-side: top;
   font-weight: bold;
-  padding: 0.5rem;
   text-align: left;
 }
 
-.cuentaCorriente th,
-.cuentaCorriente td {
-  border: 1px solid #ccc;
-  padding: 0.5rem;
-  text-align: left;
+.tCCVeCo th,
+.tCCVeCo td {
+  border: 1px solid black;
+  text-align: center;
+  font-size: 2vh;
+  padding: 0.2%;
 }
 
-.cuentaCorriente thead th {
-  position: sticky;
-  top: 0;
+.tCCVeCo thead th {
   background-color: #233a7a;
   color: white;
-  z-index: 2;
+  text-align: center;
 }
 
-.cuentaCorriente tbody td {
-  background-color: #f4f4f4;
+.tCCVeCo tfoot {
+  background-color: #ccc;
+  text-align: center;
 }
 
-.cuentaCorriente tfoot td {
-  background-color: #f4f4f4;
-  font-style: italic;
+.cuotas {
+  min-width: 7ch;
 }
 
-.cuentaCorriente::-webkit-scrollbar {
-  width: 10px;
+input {
+  width: 95%;
+  height: 100%;
+  font-size: 2vh;
+
 }
-.cuentaCorriente::-webkit-scrollbar-track {
-  background: #f1f1f1;
+
+select {
+  width: 95%;
+  height: 100%;
+  font-size: 2vh;
 }
-.cuentaCorriente::-webkit-scrollbar-thumb {
+
+.bot {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #233a7a;
+  width: 195px;
+  height: 29px;
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+
+.botopc {
+  width: 195px;
+}
+
+.bNuPr {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+  background-color: #3A6FF7;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.buschor {
   background-color: #233a7a;
-  border-radius: 5px;
+  text-align: left;
 }
-.cuentaCorriente::-webkit-scrollbar-thumb:hover {
-  background-color: #1a2d5c;
+
+.buschor input {
+  width: 200px;
+}
+
+.lupa {
+  background-color: #233a7a;
+  border: none;
+}
+
+.nueClPr {
+  background-color: #233a7a;
+  color: white;
+}
+
+/*Scroll CC*/
+.scroll {
+  max-height: 19vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.scroll table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.scroll thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #233a7a;
+  color: white;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
 }

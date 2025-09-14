@@ -34,19 +34,3 @@
 }
 
 
-.bNuPr {
-    color: white;
-    background-color: #3A6FF7;
-    border-radius: 5px;
-    padding: 5px;
-    cursor: pointer;
-    width: 140px;
-}
-
-.bot {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 0.5rem;
-    justify-content: center;
-}
