@@ -9,50 +9,115 @@
    <title>Mayor</title>
 </head>
 
-
 <body>
+   <header class="heaNo">
+      <h1>Administracion Edificio</h1>
+      <nav>
+         <ul>
+            <li><a href="panel.html">Inicio</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="compras.html">Compras</a></li>
+            <li><a href="estadisticas.html">Estadisticas</a></li>
+            <li><a href="mayor.html">Mayor</a></li>
+         </ul>
+      </nav>
+   </header>
 
-   <body>
-      <header class="heaNo">
-         <h1>Administracion Edificio</h1>
-         <nav>
-            <ul>
-               <li><a href="panel.html">Inicio</a></li>
-               <li><a href="ventas.html">Ventas</a></li>
-               <li><a href="compras.html">Compras</a></li>
-               <li><a href="estadisticas.html">Estadisticas</a></li>
-               <li><a href="mayor.html">Mayor</a></li>
-            </ul>
-         </nav>
-      </header>
+   <aside>
+      <h3>Saldos</h3>
+      <dt>Efectivo Pesos Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo USD Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo Pesos Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo USD Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Saldo Pesos</dt>
+      <dd>$0</dd>
+      <dt>Saldo USD</dt>
+      <dd>$0</dd>
+      <dt>Saldo CA Pesos</dt>
+      <dd>$0</dd>
+      <dt>Saldo CA USD</dt>
+      <dd>$0</dd>
+      <dt>Cheques</dt>
+      <dd>$0</dd>
+   </aside>
+   <main>
+      <h2>Mayor</h2>
 
-      <aside>
-         <h3>Saldos</h3>
-         <dt>Efectivo Pesos Usuario…</dt>
-         <dd>$0</dd>
-         <dt>Efectivo USD Usuario…</dt>
-         <dd>$0</dd>
-         <dt>Efectivo Pesos Usuario…</dt>
-         <dd>$0</dd>
-         <dt>Efectivo USD Usuario…</dt>
-         <dd>$0</dd>
-         <dt>Saldo Pesos</dt>
-         <dd>$0</dd>
-         <dt>Saldo USD</dt>
-         <dd>$0</dd>
-         <dt>Saldo CA Pesos</dt>
-         <dd>$0</dd>
-         <dt>Saldo CA USD</dt>
-         <dd>$0</dd>
-         <dt>Cheques</dt>
-         <dd>$0</dd>
-      </aside>
-      <main>
-         <h2>Mayor</h2>
+      <table class="tCCVeCo">
+         <caption>Carga de Movimientos</caption>
 
+         <thead>
+            <tr>
+               <th scope="col">N° de Movimiento</th>
+               <th scope="col">Fecha</th>
+               <th scope="col">Medio de Pago</th>
+               <th scope="col">Destino</th>
+               <th scope="col">Salida</th>
+               <th scope="col">Medio de Pago</th>
+               <th scope="col">Destino</th>
+               <th scope="col">Ingreso</th>
+               <th class="botopc" scope="col">Opciones</th>
+            </tr>
+         </thead>
+         <tr>
+            <td><input type="number" name="ing" placeholder="Ingreso"></td>
+            <td><input type="date" name="fec"></td>
+            <td>
+               <select id="mpago" name="mpago">
+                  <option value="">Seleccione</option>
+                  <option value="a">Usuario x</option>
+                  <option value="b">Usuario x</option>
+                  <option value="c">Caja de Ahorro</option>
+                  <option value="d">Cuenta Corriente</option>
+                  <option value="e">Cheque</option>
+               </select>
+            </td>
+            <td>
+               <select id="dpago" name="dpago">
+                  <option value="">Seleccione</option>
+                  <option value="a">Usuario x</option>
+                  <option value="b">Usuario x</option>
+                  <option value="c">Caja de Ahorro</option>
+                  <option value="d">Cuenta Corriente</option>
+                  <option value="e">Cheque</option>
+               </select>
+            </td>
+            <td><input type="number" name="egr" placeholder="Egreso"></td>
+
+            <td>
+               <select id="mpago" name="mpago">
+                  <option value="">Seleccione</option>
+                  <option value="a">Usuario x</option>
+                  <option value="b">Usuario x</option>
+                  <option value="c">Caja de Ahorro</option>
+                  <option value="d">Cuenta Corriente</option>
+                  <option value="e">Cheque</option>
+               </select>
+            </td>
+            <td>
+               <select id="dpago" name="dpago">
+                  <option value="">Seleccione</option>
+                  <option value="a">Usuario x</option>
+                  <option value="b">Usuario x</option>
+                  <option value="c">Caja de Ahorro</option>
+                  <option value="d">Cuenta Corriente</option>
+                  <option value="e">Cheque</option>
+               </select>
+            </td>
+            <td><input type="number" name="ing"></td>
+            <td class="bot">
+               <button class="bGua" type="submit">Guardar</button>
+               <button class="bMod" type="reset">Cancelar</button>
+            </td>
+         </tr>
+      </table>
+      <div class="scroll">
          <table class="tCCVeCo">
-            <caption>Carga de Movimientos</caption>
-
+            <caption>Historial movimientos</caption>
             <thead>
                <tr>
                   <th scope="col">N° de Movimiento</th>
@@ -63,116 +128,48 @@
                   <th scope="col">Medio de Pago</th>
                   <th scope="col">Destino</th>
                   <th scope="col">Ingreso</th>
-                  <th class="botopc" scope="col">Opciones</th>
-               </tr>
-            </thead>
-            <tr>
-               <td><input type="number" name="ing" placeholder="Ingreso"></td>
-               <td><input type="date" name="fec"></td>
-               <td>
-                  <select id="mpago" name="mpago">
-                     <option value="">Seleccione</option>
-                     <option value="a">Usuario x</option>
-                     <option value="b">Usuario x</option>
-                     <option value="c">Caja de Ahorro</option>
-                     <option value="d">Cuenta Corriente</option>
-                     <option value="e">Cheque</option>
-                  </select>
-               </td>
-               <td>
-                  <select id="dpago" name="dpago">
-                     <option value="">Seleccione</option>
-                     <option value="a">Usuario x</option>
-                     <option value="b">Usuario x</option>
-                     <option value="c">Caja de Ahorro</option>
-                     <option value="d">Cuenta Corriente</option>
-                     <option value="e">Cheque</option>
-                  </select>
-               </td>
-               <td><input type="number" name="egr" placeholder="Egreso"></td>
-
-               <td>
-                  <select id="mpago" name="mpago">
-                     <option value="">Seleccione</option>
-                     <option value="a">Usuario x</option>
-                     <option value="b">Usuario x</option>
-                     <option value="c">Caja de Ahorro</option>
-                     <option value="d">Cuenta Corriente</option>
-                     <option value="e">Cheque</option>
-                  </select>
-               </td>
-               <td>
-                  <select id="dpago" name="dpago">
-                     <option value="">Seleccione</option>
-                     <option value="a">Usuario x</option>
-                     <option value="b">Usuario x</option>
-                     <option value="c">Caja de Ahorro</option>
-                     <option value="d">Cuenta Corriente</option>
-                     <option value="e">Cheque</option>
-                  </select>
-               </td>
-               <td><input type="number" name="ing"></td>
-               <td class="bot">
-                  <button class="bGua" type="submit">Guardar</button>
-                  <button class="bMod" type="reset">Cancelar</button>
-               </td>
-            </tr>
-         </table>
-         <div class="scroll">
-            <table class="tCCVeCo">
-               <caption>Historial movimientos</caption>
-               <thead>
-                  <tr>
-                     <th scope="col">N° de Movimiento</th>
-                     <th scope="col">Fecha</th>
-                     <th scope="col">Medio de Pago</th>
-                     <th scope="col">Destino</th>
-                     <th scope="col">Salida</th>
-                     <th scope="col">Medio de Pago</th>
-                     <th scope="col">Destino</th>
-                     <th scope="col">Ingreso</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <tr>
-                     <td>001</td>
-                     <td>06/09/2025</td>
-                     <td>Efectivo</td>
-                     <td>Proveedor X</td>
-                     <td>$10.000</td>
-                     <td>Transferencia</td>
-                     <td>Cuenta Corriente</td>
-                     <td>$15.000</td>
-                  </tr>
-               </tbody>
-            </table>
-         </div>
-
-
-
-      </main>
-      <a class="bVol" href="panel.html">←</a>
-
-      <footer>
-
-         <table>
-            <caption>Resumen financiero</caption>
-            <thead>
-               <tr>
-                  <th scope="col">Morosidad (ARS)</th>
-                  <th scope="col">% Morosidad</th>
-                  <th scope="col">Gastos sin cancelar (ARS)</th>
                </tr>
             </thead>
             <tbody>
                <tr>
-                  <td>$5000000</td>
-                  <td>20%</td>
-                  <td>$1000000</td>
+                  <td>001</td>
+                  <td>06/09/2025</td>
+                  <td>Efectivo</td>
+                  <td>Proveedor X</td>
+                  <td>$10.000</td>
+                  <td>Transferencia</td>
+                  <td>Cuenta Corriente</td>
+                  <td>$15.000</td>
                </tr>
             </tbody>
          </table>
-      </footer>
-   </body>
+      </div>
+
+
+
+   </main>
+   <a class="bVol" href="panel.html">←</a>
+
+   <footer>
+
+      <table>
+         <caption>Resumen financiero</caption>
+         <thead>
+            <tr>
+               <th scope="col">Morosidad (ARS)</th>
+               <th scope="col">% Morosidad</th>
+               <th scope="col">Gastos sin cancelar (ARS)</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>$5000000</td>
+               <td>20%</td>
+               <td>$1000000</td>
+            </tr>
+         </tbody>
+      </table>
+   </footer>
+</body>
 
 </html>

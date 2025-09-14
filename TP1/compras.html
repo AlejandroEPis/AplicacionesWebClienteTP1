@@ -9,225 +9,222 @@
     <title>Compras</title>
 </head>
 
-
 <body>
+    <header class="heaNo">
+        <h1>Administracion Edificio</h1>
+        <nav>
+            <ul>
+                <li><a href="panel.html">Inicio</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="compras.html">Compras</a></li>
+                <li><a href="estadisticas.html">Estadisticas</a></li>
+                <li><a href="mayor.html">Mayor</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <body>
-        <header class="heaNo">
-            <h1>Administracion Edificio</h1>
-            <nav>
-                <ul>
-                    <li><a href="panel.html">Inicio</a></li>
-                    <li><a href="ventas.html">Ventas</a></li>
-                    <li><a href="compras.html">Compras</a></li>
-                    <li><a href="estadisticas.html">Estadisticas</a></li>
-                    <li><a href="mayor.html">Mayor</a></li>
-                </ul>
-            </nav>
-        </header>
+    <aside>
+        <h3>Saldos</h3>
+        <dt>Efectivo Pesos Usuario…</dt>
+        <dd>$0</dd>
+        <dt>Efectivo USD Usuario…</dt>
+        <dd>$0</dd>
+        <dt>Efectivo Pesos Usuario…</dt>
+        <dd>$0</dd>
+        <dt>Efectivo USD Usuario…</dt>
+        <dd>$0</dd>
+        <dt>Saldo Pesos</dt>
+        <dd>$0</dd>
+        <dt>Saldo USD</dt>
+        <dd>$0</dd>
+        <dt>Saldo CA Pesos</dt>
+        <dd>$0</dd>
+        <dt>Saldo CA USD</dt>
+        <dd>$0</dd>
+        <dt>Cheques</dt>
+        <dd>$0</dd>
+    </aside>
+    <main>
+        <h2>Compras</h2>
 
-        <aside>
-            <h3>Saldos</h3>
-            <dt>Efectivo Pesos Usuario…</dt>
-            <dd>$0</dd>
-            <dt>Efectivo USD Usuario…</dt>
-            <dd>$0</dd>
-            <dt>Efectivo Pesos Usuario…</dt>
-            <dd>$0</dd>
-            <dt>Efectivo USD Usuario…</dt>
-            <dd>$0</dd>
-            <dt>Saldo Pesos</dt>
-            <dd>$0</dd>
-            <dt>Saldo USD</dt>
-            <dd>$0</dd>
-            <dt>Saldo CA Pesos</dt>
-            <dd>$0</dd>
-            <dt>Saldo CA USD</dt>
-            <dd>$0</dd>
-            <dt>Cheques</dt>
-            <dd>$0</dd>
-        </aside>
-        <main>
-            <h2>Compras</h2>
+        <table class="tCCVeCo">
 
-            <table class="tCCVeCo">
-
-                <caption>Datos del Proveedor</caption>
-                <thead>
-                    <tr>
-                        <th class="buschor" colspan="8">
-                            <input class="busc" type="search" id="q" name="q" placeholder="Nombre o DNI">
-                            <button class="lupa" submit>🔍</button>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Nombre Fantasia</th>
-                        <th scope="col">Razon Social/Persona</th>
-                        <th scope="col">CUIT</th>
-                        <th scope="col">Domicilio comercial</th>
-                        <th scope="col">Condicion IVA</th>
-                        <th scope="col">Telefo</th>
-                        <th scope="col">MAIL</th>
-                        <th class="botopc" scope="col">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>Ejemplo</td>
-                        <td>20328006082</td>
-                        <td>Ejemplo 1234</td>
-                        <td>Consumidor Final</td>
-                        <td>11-0000-0000</td>
-                        <td>ejemplo@ejemplo.com.ar</td>
-                        <td class="bot">
-                            <button class="bGua" type="submit">Guardar</button>
-                            <button class="bMod" type="submit">Modificar</button>
-                            <button class="bEli" type="submit">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="8">
-                            <a class="bNuPr" href="infoProveedor.html">Nuevo Proveedor</a>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
+            <caption>Datos del Proveedor</caption>
+            <thead>
+                <tr>
+                    <th class="buschor" colspan="8">
+                        <input class="busc" type="search" id="q" name="q" placeholder="Nombre o DNI">
+                        <button class="lupa" submit>🔍</button>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="col">Nombre Fantasia</th>
+                    <th scope="col">Razon Social/Persona</th>
+                    <th scope="col">CUIT</th>
+                    <th scope="col">Domicilio comercial</th>
+                    <th scope="col">Condicion IVA</th>
+                    <th scope="col">Telefo</th>
+                    <th scope="col">MAIL</th>
+                    <th class="botopc" scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ejemplo</td>
+                    <td>Ejemplo</td>
+                    <td>20328006082</td>
+                    <td>Ejemplo 1234</td>
+                    <td>Consumidor Final</td>
+                    <td>11-0000-0000</td>
+                    <td>ejemplo@ejemplo.com.ar</td>
+                    <td class="bot">
+                        <button class="bGua" type="submit">Guardar</button>
+                        <button class="bMod" type="submit">Modificar</button>
+                        <button class="bEli" type="submit">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8">
+                        <a class="bNuPr" href="infoProveedor.html">Nuevo Proveedor</a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
 
 
-            <form action="" method="post">
-                <div class="scroll scrollc">
-                    <table class="tCCVeCo">
-                        <caption>Cuenta Corriente</caption>
-                        <thead class="ccHead">
+        <form action="" method="post">
+            <div class="scroll scrollc">
+                <table class="tCCVeCo">
+                    <caption>Cuenta Corriente</caption>
+                    <thead class="ccHead">
 
-                            <tr>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Letra</th>
-                                <th scope="col">Pto Venta</th>
-                                <th scope="col">N° de Factura</th>
-                                <th scope="col">Debe</th>
-                                <th scope="col">Pago</th>
-                                <th scope="col">Saldo</th>
-                                <th class="botopc" scope="col">Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody class="ccBody">
-                            <tr>
-                                <td>11/11/2020</td>
-                                <td>C</td>
-                                <td>3</td>
-                                <td>505</td>
-                                <td>5</td>
-                                <td>3</td>
-                                <td>2</td>
-                                <td class="bot">
-                                    <button class="bGua" type="submit">Guardar</button>
-                                    <button class="bMod" type="submit">Modificar</button>
-                                    <button class="bEli" type="submit">Eliminar</button>
-                                </td>
-                            <tr>
-                                <td>11/11/2020</td>
-                                <td>C</td>
-                                <td>3</td>
-                                <td>505</td>
-                                <td>5</td>
-                                <td>3</td>
-                                <td>2</td>
-                                <td class="bot">
-                                    <button class="bGua" type="submit">Guardar</button>
-                                    <button class="bMod" type="submit">Modificar</button>
-                                    <button class="bEli" type="submit">Eliminar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>11/11/2020</td>
-                                <td>C</td>
-                                <td>3</td>
-                                <td>505</td>
-                                <td>5</td>
-                                <td>3</td>
-                                <td>2</td>
-                                <td class="bot">
-                                    <button class="bGua" type="submit">Guardar</button>
-                                    <button class="bMod" type="submit">Modificar</button>
-                                    <button class="bEli" type="submit">Eliminar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>11/11/2020</td>
-                                <td>C</td>
-                                <td>3</td>
-                                <td>505</td>
-                                <td>5</td>
-                                <td>3</td>
-                                <td>2</td>
-                                <td class="bot">
-                                    <button class="bGua" type="submit">Guardar</button>
-                                    <button class="bMod" type="submit">Modificar</button>
-                                    <button class="bEli" type="submit">Eliminar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="date" id="ffac" name="ffac" required>
-                                </td>
-                                <td>
-                                    <select id="letrafac" name="lfac">
-                                        <option value="a">A</option>
-                                        <option value="b">B</option>
-                                        <option value="c">C</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="number" id="npvent" name="npvent" min="0" max="99999" step="1">
-                                </td>
-                                <td>
-                                    <input type="number" id="nfac" name="nfac" min="0" max="99999999" step="1" required>
-                                </td>
-                                <td>
-                                    <input type="number" id="totfaca" name="totfaca" step="0.01">
-                                </td>
-                                <td>
-                                    <input type="number" id="pagfaca" name="pagfaca" step="0.01">
-                                </td>
-                                <td>
-                                    <input type="number" id="salfaca" name="salfaca" step="0.01">
-                                </td>
-                                <td class="bot">
-                                    <button class="bGua" type="submit">Guardar</button>
-                                    <button class="bMod" type="submit">Modificar</button>
-                                    <button class="bEli" type="submit">Eliminar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </form>
+                        <tr>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Letra</th>
+                            <th scope="col">Pto Venta</th>
+                            <th scope="col">N° de Factura</th>
+                            <th scope="col">Debe</th>
+                            <th scope="col">Pago</th>
+                            <th scope="col">Saldo</th>
+                            <th class="botopc" scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ccBody">
+                        <tr>
+                            <td>11/11/2020</td>
+                            <td>C</td>
+                            <td>3</td>
+                            <td>505</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
+                        <tr>
+                            <td>11/11/2020</td>
+                            <td>C</td>
+                            <td>3</td>
+                            <td>505</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11/11/2020</td>
+                            <td>C</td>
+                            <td>3</td>
+                            <td>505</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11/11/2020</td>
+                            <td>C</td>
+                            <td>3</td>
+                            <td>505</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="date" id="ffac" name="ffac" required>
+                            </td>
+                            <td>
+                                <select id="letrafac" name="lfac">
+                                    <option value="a">A</option>
+                                    <option value="b">B</option>
+                                    <option value="c">C</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" id="npvent" name="npvent" min="0" max="99999" step="1">
+                            </td>
+                            <td>
+                                <input type="number" id="nfac" name="nfac" min="0" max="99999999" step="1" required>
+                            </td>
+                            <td>
+                                <input type="number" id="totfaca" name="totfaca" step="0.01">
+                            </td>
+                            <td>
+                                <input type="number" id="pagfaca" name="pagfaca" step="0.01">
+                            </td>
+                            <td>
+                                <input type="number" id="salfaca" name="salfaca" step="0.01">
+                            </td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
 
-        </main>
-        <a class="bVol" href="panel.html">←</a>
-        <footer>
-            <table>
-                <caption>Resumen financiero</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Morosidad (ARS)</th>
-                        <th scope="col">% Morosidad</th>
-                        <th scope="col">Gastos sin cancelar (ARS)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>$5000000</td>
-                        <td>20%</td>
-                        <td>$1000000</td>
-                    </tr>
-                </tbody>
-            </table>
-        </footer>
-    </body>
+    </main>
+    <a class="bVol" href="panel.html">←</a>
+    <footer>
+        <table>
+            <caption>Resumen financiero</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Morosidad (ARS)</th>
+                    <th scope="col">% Morosidad</th>
+                    <th scope="col">Gastos sin cancelar (ARS)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>$5000000</td>
+                    <td>20%</td>
+                    <td>$1000000</td>
+                </tr>
+            </tbody>
+        </table>
+    </footer>
+</body>
 
 </html>
