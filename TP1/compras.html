@@ -55,11 +55,10 @@
                 <caption>Datos del Proveedor</caption>
                 <thead>
                     <tr>
-                        <th colspan="8">
-                            <form role="search" action="" method="get">
-                                <label for="q">Buscar proveedor</label>
-                                <input type="search" id="q" name="q" placeholder="Nombre, CUIT…">
-                                <button type="submit">Buscar</button>
+                        <th class="buschor" colspan="8">
+                            <form>
+                                <input class="busc" type="search" id="q" name="q" placeholder="Nombre o DNI">
+                                <button class="lupa" submit>🔍</button>
                             </form>
                         </th>
                     </tr>
@@ -71,7 +70,7 @@
                         <th scope="col">Condicion IVA</th>
                         <th scope="col">Telefo</th>
                         <th scope="col">MAIL</th>
-                        <th></th>
+                        <th class="botopc" scope="col">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,7 +133,7 @@
                                         <td><input type="email" id="mail" name="mail" required></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" class="bot">
+                                        <td class="bot" colspan="2">
                                             <button class="bGua" type="submit">Confirmar</button>
                                             <button class="bMod" type="submit">Cancelar</button>
                                         </td>
@@ -147,114 +146,118 @@
             </table>
 
 
-            <form class="tCCVeCo" action="" method="post">
-                <table>
-                    <caption>Cuenta Corriente</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Letra</th>
-                            <th scope="col">Pto Venta</th>
-                            <th scope="col">N° de Factura</th>
-                            <th scope="col">Debe</th>
-                            <th scope="col">Pago</th>
-                            <th scope="col">Saldo</th>
-                            <th scope="col"> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>11/11/2020</td>
-                            <td>C</td>
-                            <td>3</td>
-                            <td>505</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td class="bot">
-                                <button class="bGua" type="submit">Guardar</button>
-                                <button class="bMod" type="submit">Modificar</button>
-                                <button class="bEli" type="submit">Eliminar</button>
-                            </td>
-                        <tr>
-                            <td>11/11/2020</td>
-                            <td>C</td>
-                            <td>3</td>
-                            <td>505</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td class="bot">
-                                <button class="bGua" type="submit">Guardar</button>
-                                <button class="bMod" type="submit">Modificar</button>
-                                <button class="bEli" type="submit">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11/11/2020</td>
-                            <td>C</td>
-                            <td>3</td>
-                            <td>505</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td class="bot">
-                                <button class="bGua" type="submit">Guardar</button>
-                                <button class="bMod" type="submit">Modificar</button>
-                                <button class="bEli" type="submit">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11/11/2020</td>
-                            <td>C</td>
-                            <td>3</td>
-                            <td>505</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td class="bot">
-                                <button class="bGua" type="submit">Guardar</button>
-                                <button class="bMod" type="submit">Modificar</button>
-                                <button class="bEli" type="submit">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="date" id="ffac" name="ffac" required>
-                            </td>
-                            <td>
-                                <select id="letrafac" name="lfac">
-                                    <option value="a">A</option>
-                                    <option value="b">B</option>
-                                    <option value="c">C</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="number" id="npvent" name="npvent" min="0" max="99999" step="1">
-                            </td>
-                            <td>
-                                <input type="number" id="nfac" name="nfac" min="0" max="99999999" step="1" required>
-                            </td>
-                            <td>
-                                <input type="number" id="totfaca" name="totfaca" step="0.01">
-                            </td>
-                            <td>
-                                <input type="number" id="pagfaca" name="pagfaca" step="0.01">
-                            </td>
-                            <td>
-                                <input type="number" id="salfaca" name="salfaca" step="0.01">
-                            </td>
-                            <td class="bot">
-                                <button class="bGua" type="submit">Guardar</button>
-                                <button class="bMod" type="submit">Modificar</button>
-                                <button class="bEli" type="submit">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <form action="" method="post">
+                <div class="scroll scrollc">
+                    <table class="tCCVeCo">
+                        <caption>Cuenta Corriente</caption>
+                        <thead class="ccHead">
 
-                <a class="bVol" href="panel.html">Volver</a>
+                            <tr>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Letra</th>
+                                <th scope="col">Pto Venta</th>
+                                <th scope="col">N° de Factura</th>
+                                <th scope="col">Debe</th>
+                                <th scope="col">Pago</th>
+                                <th scope="col">Saldo</th>
+                                <th class="botopc" scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="ccBody">
+                            <tr>
+                                <td>11/11/2020</td>
+                                <td>C</td>
+                                <td>3</td>
+                                <td>505</td>
+                                <td>5</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td class="bot">
+                                    <button class="bGua" type="submit">Guardar</button>
+                                    <button class="bMod" type="submit">Modificar</button>
+                                    <button class="bEli" type="submit">Eliminar</button>
+                                </td>
+                            <tr>
+                                <td>11/11/2020</td>
+                                <td>C</td>
+                                <td>3</td>
+                                <td>505</td>
+                                <td>5</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td class="bot">
+                                    <button class="bGua" type="submit">Guardar</button>
+                                    <button class="bMod" type="submit">Modificar</button>
+                                    <button class="bEli" type="submit">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>11/11/2020</td>
+                                <td>C</td>
+                                <td>3</td>
+                                <td>505</td>
+                                <td>5</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td class="bot">
+                                    <button class="bGua" type="submit">Guardar</button>
+                                    <button class="bMod" type="submit">Modificar</button>
+                                    <button class="bEli" type="submit">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>11/11/2020</td>
+                                <td>C</td>
+                                <td>3</td>
+                                <td>505</td>
+                                <td>5</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td class="bot">
+                                    <button class="bGua" type="submit">Guardar</button>
+                                    <button class="bMod" type="submit">Modificar</button>
+                                    <button class="bEli" type="submit">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="date" id="ffac" name="ffac" required>
+                                </td>
+                                <td>
+                                    <select id="letrafac" name="lfac">
+                                        <option value="a">A</option>
+                                        <option value="b">B</option>
+                                        <option value="c">C</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" id="npvent" name="npvent" min="0" max="99999" step="1">
+                                </td>
+                                <td>
+                                    <input type="number" id="nfac" name="nfac" min="0" max="99999999" step="1" required>
+                                </td>
+                                <td>
+                                    <input type="number" id="totfaca" name="totfaca" step="0.01">
+                                </td>
+                                <td>
+                                    <input type="number" id="pagfaca" name="pagfaca" step="0.01">
+                                </td>
+                                <td>
+                                    <input type="number" id="salfaca" name="salfaca" step="0.01">
+                                </td>
+                                <td class="bot">
+                                    <button class="bGua" type="submit">Guardar</button>
+                                    <button class="bMod" type="submit">Modificar</button>
+                                    <button class="bEli" type="submit">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+           
         </main>
+         <a class="bVol" href="panel.html">←</a>
         <footer>
             <table>
                 <caption>Resumen financiero</caption>

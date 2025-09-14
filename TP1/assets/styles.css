@@ -5,21 +5,6 @@
 
 @import url(panel.css);
 
-/*Pagina Compras*/
-@import url(compras.css);
-
-/*Pagina Estadisticas*/
-@import url(estadisticas.css);
-
-/*Pagina Ventas*/
-@import url(ventas.css);
-
-/*Pagina Ventas*/
-@import url(mayor.css);
-
-
-
-
 /* Pagina Completa*/
 
 * {
@@ -219,12 +204,13 @@ footer {
 
 /*Tablas*/
 .tCCVeCo {
- max-width: 95%;
+  width: 95%;
+  max-width: 95%;
   margin: 0 2vh 2vh 2vh;
   background-color: #E0E0E0;
   border: 2px solid black;
   border-radius: 6px;
-  
+
 }
 
 .tCCVeCo caption {
@@ -319,9 +305,14 @@ select {
 
 /*Scroll CC*/
 .scroll {
-  max-height: 19vh;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.scrollv {
+  max-height: 19vh;
+}
+.scrollc {
+  max-height: 50vh;
 }
 
 .scroll table {
