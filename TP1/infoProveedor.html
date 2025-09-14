@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="/TP1/assets/styles.css">
+   <title>Nuevo Proveedor</title>
+</head>
+
+<body>
+
+   <header class="heaNo">
+      <h1>Administracion Edificio</h1>
+      <nav>
+         <ul>
+            <li><a href="panel.html">Inicio</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="compras.html">Compras</a></li>
+            <li><a href="estadisticas.html">Estadisticas</a></li>
+            <li><a href="mayor.html">Mayor</a></li>
+         </ul>
+      </nav>
+   </header>
+
+   <aside>
+      <h3>Saldos</h3>
+      <dt>Efectivo Pesos Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo USD Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo Pesos Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo USD Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Saldo Pesos</dt>
+      <dd>$0</dd>
+      <dt>Saldo USD</dt>
+      <dd>$0</dd>
+      <dt>Saldo CA Pesos</dt>
+      <dd>$0</dd>
+      <dt>Saldo CA USD</dt>
+      <dd>$0</dd>
+      <dt>Cheques</dt>
+      <dd>$0</dd>
+   </aside>
+   <main>
+      <h2>Nuevo Cliente</h2>
+
+      <form class="nueClPr">
+<table class="nueClPr">
+                                    <tr>
+                                        <td><label for="nfan">Nombre Fantasía</label></td>
+                                        <td><input type="text" id="nfan" name="nfan" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="rsoper">Razón Social/Persona</label></td>
+                                        <td><input type="text" id="rsoper" name="rsoper" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="cuit">CUIT</label></td>
+                                        <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="dcom">Domicilio comercial</label></td>
+                                        <td><input type="text" id="dcom" name="dcom"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="cIVA">Condición IVA</label></td>
+                                        <td>
+                                            <select id="cIVA" name="cIVA">
+                                                <option value="responsable">Responsable Inscripto</option>
+                                                <option value="monotributo">Monotributista</option>
+                                                <option value="exento">Exento</option>
+                                                <option value="consumidor">Consumidor Final</option>
+                                                <option value="noResponsable">No Responsable</option>
+                                                <option value="noAlcanzado">No Alcanzado</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="tel">Teléfono</label></td>
+                                        <td><input type="tel" id="tel" name="tel" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="mail">Mail</label></td>
+                                        <td><input type="email" id="mail" name="mail" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="bot" colspan="2">
+                                            <button class="bGua" type="submit">Confirmar</button>
+                                            <button class="bMod" type="submit">Cancelar</button>
+                                        </td>
+                                    </tr>
+                                </table>
+      </form>
+   </main>
+   <a class="bVol" href="ventas.html">←</a>
+   <footer>
+      <table>
+         <caption>Resumen financiero</caption>
+         <thead>
+            <tr>
+               <th scope="col">Morosidad (ARS)</th>
+               <th scope="col">% Morosidad</th>
+               <th scope="col">Gastos sin cancelar (ARS)</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>$5000000</td>
+               <td>20%</td>
+               <td>$1000000</td>
+            </tr>
+         </tbody>
+      </table>
+   </footer>
+</body>

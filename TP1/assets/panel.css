@@ -25,9 +25,12 @@ div.fila{
   color: white;
   border: 2px solid black;
   border-radius: 8px;
+  transition: transform 0.3s ease;
+  background-color: #233a7a;;
 }
 
-.bVentas  { background-color: #28C76F; }
-.bCompras { background-color: #FF9F43; }
-.bEsta    { background-color: #00CFE8; }
-.bIma     { background-color: #9C27B0; }
+/*Zoom botones y cambio color letra*/
+.bVentas:hover, .bCompras:hover, .bEsta:hover, .bIma:hover {
+  transform: scale(1.08); 
+  color: #E0E0E0;
+}

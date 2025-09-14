@@ -6,11 +6,145 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="/TP1/assets/styles.css">
-   <title>Informacion Ventas</title>
+   <title>Nuevo Cliente</title>
 </head>
+
 <body>
-                     <th scope="col">1era vivienda</th>
-                  <th scope="col">Certificado</th>
-                  <th scope="col">Sellado o N3</th>
-                  <th scope="col">Opciones</th> 
+
+   <header class="heaNo">
+      <h1>Administracion Edificio</h1>
+      <nav>
+         <ul>
+            <li><a href="panel.html">Inicio</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="compras.html">Compras</a></li>
+            <li><a href="estadisticas.html">Estadisticas</a></li>
+            <li><a href="mayor.html">Mayor</a></li>
+         </ul>
+      </nav>
+   </header>
+
+   <aside>
+      <h3>Saldos</h3>
+      <dt>Efectivo Pesos Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo USD Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo Pesos Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo USD Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Saldo Pesos</dt>
+      <dd>$0</dd>
+      <dt>Saldo USD</dt>
+      <dd>$0</dd>
+      <dt>Saldo CA Pesos</dt>
+      <dd>$0</dd>
+      <dt>Saldo CA USD</dt>
+      <dd>$0</dd>
+      <dt>Cheques</dt>
+      <dd>$0</dd>
+   </aside>
+   <main>
+      <h2>Nuevo Cliente</h2>
+
+      <form class="nueClPr">
+         <table>
+            <tr>
+               <td><label for="nleg">N° de Legajo</label></td>
+               <td><input type="number" id="nleg" name="nleg"></td>
+            </tr>
+            <tr>
+               <td><label for="comp">Comprador</label></td>
+               <td><input type="text" id="comp" name="comp"></td>
+            </tr>
+            <tr>
+               <td><label for="dni">DNI</label></td>
+               <td><input type="text" id="dni" name="dni"></td>
+            </tr>
+            <tr>
+               <td><label for="tel">Tel</label></td>
+               <td><input type="number" id="tel" name="tel"></td>
+            </tr>
+            <tr>
+               <td><label for="mail">Mail</label></td>
+               <td><input type="email" id="mail" name="mail"></td>
+            </tr>
+            <tr>
+               <td><label for="direccion">Dirección</label></td>
+               <td><input type="text" id="direccion" name="direccion"></td>
+            </tr>
+            <tr>
+               <td><label for="feccomp">Fecha Liquidacion</label></td>
+               <td><input type="date" id="feccomp" name="feccomp"></td>
+            </tr>
+            <tr>
+               <td><label for="cuotas">Cuotas</label></td>
+               <td><input type="number" id="cuotas" name="cuotas"></td>
+            </tr>
+            <tr>
+               <td><label for="primera_vivienda">1era vivienda</label></td>
+               <td>
+                  <select id="primera_vivienda" name="primera_vivienda">
+                     <option value="">Seleccione...</option>
+                     <option value="si">Sí</option>
+                     <option value="no">No</option>
+                  </select>
+               </td>
+            </tr>
+         </table>
+         <table>
+            <tr>
+               <td><label for="certificados">Certificados</label></td>
+               <td><input type="text" id="certificados" name="certificados"></td>
+            </tr>
+            <tr>
+               <td><label for="doc_certificados">Doc certificados</label></td>
+               <td><input type="text" id="doc_certificados" name="doc_certificados"></td>
+            </tr>
+            <tr>
+               <td><label for="sellado_n3">Sellado o N3</label></td>
+               <td><input type="text" id="sellado_n3" name="sellado_n3"></td>
+            </tr>
+            <tr>
+               <td><label for="depto">Depto U/F</label></td>
+               <td><input type="number" id="depto" name="depto"></td>
+            </tr>
+            <tr>
+               <td><label for="cochera">Cochera U/F</label></td>
+               <td><input type="number" id="cochera" name="cochera"></td>
+            </tr>
+            <tr>
+               <td><label for="baulera">Baulera U/F</label></td>
+               <td><input type="number" id="baulera" name="baulera"></td>
+            </tr>
+            <tr>
+               <td colspan="2" style="text-align:center">
+                  <button class="bGua" type="submit">Confirmar</button>
+                  <button class="bMod" type="submit">Cancelar</button>
+               </td>
+            </tr>
+         </table>
+      </form>
+   </main>
+   <a class="bVol" href="ventas.html">←</a>
+   <footer>
+      <table>
+         <caption>Resumen financiero</caption>
+         <thead>
+            <tr>
+               <th scope="col">Morosidad (ARS)</th>
+               <th scope="col">% Morosidad</th>
+               <th scope="col">Gastos sin cancelar (ARS)</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>$5000000</td>
+               <td>20%</td>
+               <td>$1000000</td>
+            </tr>
+         </tbody>
+      </table>
+   </footer>
 </body>

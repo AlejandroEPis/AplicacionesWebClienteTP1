@@ -2,8 +2,11 @@
 @import url(index.css);
 
 /*Pagina Panel*/
-
 @import url(panel.css);
+
+/*Pagina Nuevo Cliente/Proveedor*/
+@import url(nuevoClPr.css);
+
 
 /* Pagina Completa*/
 
@@ -65,6 +68,9 @@ header.heaNo {
   color: white;
   text-decoration: none;
   font-weight: bold;
+}
+.heaNo nav a:hover{
+  color: #E0E0E0;
 }
 
 h1 {
@@ -160,7 +166,11 @@ footer {
   background-color: #28C76F;
   border-radius: 5px;
   padding: 5px;
-  cursor: pointer;
+}
+
+.bGua:hover {
+  background-color: #06be59;
+  cursor: pointer
 }
 
 .bMod {
@@ -168,7 +178,12 @@ footer {
   background-color: #FF9F43;
   border-radius: 5px;
   padding: 5px;
-  cursor: pointer;
+
+}
+
+.bMod:hover {
+  background-color: #ff7700;
+  cursor: pointer
 }
 
 .bEli {
@@ -176,7 +191,11 @@ footer {
   background-color: #FF4D4F;
   border-radius: 5px;
   padding: 5px;
-  cursor: pointer;
+}
+
+.bEli:hover {
+  background-color: #fd0004;
+  cursor: pointer
 }
 
 /*Boton Volver*/
@@ -185,11 +204,11 @@ footer {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: violet;
-  color: white;
+  background:white;
+  color:  #233a7a;;
   padding: 15px 25px;
   border-radius: 50px;
-  font-size: 2vh;
+  font-size: 4vh;
   font-weight: bold;
   z-index: 1000;
   text-decoration: none;
@@ -200,6 +219,7 @@ footer {
 .bVol:hover {
   transform: scale(1.1);
   background: rgb(235, 194, 211);
+  cursor: pointer;
 }
 
 /*Tablas*/
@@ -276,13 +296,20 @@ select {
   width: 100%;
   text-align: center;
   font-size: 1.1rem;
-  background-color: #3A6FF7;
+  background-color: #233a7a;
   color: white;
   font-weight: bold;
   cursor: pointer;
   border: 1px solid black;
   box-sizing: border-box;
+  text-decoration: none;
+  
 }
+.bNuPr:hover{
+  color: #E0E0E0;
+}
+
+
 
 .buschor {
   background-color: #233a7a;
@@ -298,19 +325,16 @@ select {
   border: none;
 }
 
-.nueClPr {
-  background-color: #233a7a;
-  color: white;
-}
-
 /*Scroll CC*/
 .scroll {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
 .scrollv {
   max-height: 19vh;
 }
+
 .scrollc {
   max-height: 50vh;
 }

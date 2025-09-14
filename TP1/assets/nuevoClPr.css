@@ -1,0 +1,34 @@
+.nueClPr {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1%;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.nueClPr table {
+  background: #E0E0E0;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 1rem;
+  background-color: #233a7a;
+
+}
+
+.nueClPr label {
+  font-size: 2vh;
+  font-weight: bold;
+  color:  white;;
+}
+
+.nueClPr input,
+.nueClPr select {
+  font-size: 2vh;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #233a7a;
+  padding: 0.4rem;
+  width: 100%;
+}
