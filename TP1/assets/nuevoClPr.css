@@ -8,7 +8,7 @@
 }
 
 .nueClPr table {
-  background: #E0E0E0;
+ /* background: #E0E0E0;*/
   border: 1px solid black;
   border-radius: 6px;
   padding: 1rem;
@@ -19,11 +19,11 @@
 .nueClPr label {
   font-size: 2vh;
   font-weight: bold;
-  color:  white;;
+  color:  white;
 }
 
 .nueClPr input,
-.nueClPr select {
+.nueClPr select{
   font-size: 2vh;
   border: 1px solid black;
   border-radius: 4px;
@@ -31,4 +31,8 @@
   color: #233a7a;
   padding: 0.4rem;
   width: 100%;
+}
+.nueClPr td{
+  padding: 1.5vh;
+  color:  white;
 }

@@ -69,7 +69,8 @@ header.heaNo {
   text-decoration: none;
   font-weight: bold;
 }
-.heaNo nav a:hover{
+
+.heaNo nav a:hover {
   color: #E0E0E0;
 }
 
@@ -131,8 +132,6 @@ main {
   align-items: stretch;
   background: #E0E0E0;
   border: 2px groove black;
-  border-radius: 5px;
-
 }
 
 h2 {
@@ -204,8 +203,9 @@ footer {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background:white;
-  color:  #233a7a;;
+  background: white;
+  color: #233a7a;
+  ;
   padding: 15px 25px;
   border-radius: 50px;
   font-size: 4vh;
@@ -220,6 +220,31 @@ footer {
   transform: scale(1.1);
   background: rgb(235, 194, 211);
   cursor: pointer;
+}
+
+/*Boton Informacion Adiciona*/
+.tCCVeCo td.maIn {
+  padding: 0;
+  background: #233a7a;
+}
+
+.bInAd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #42a5f5;
+  text-align: center;
+  min-height: 23px;
+  color: white;
+  font-size: 2.5vh;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+.bInAd:hover {
+  background-color: #1e88e5;
 }
 
 /*Tablas*/
@@ -303,9 +328,10 @@ select {
   border: 1px solid black;
   box-sizing: border-box;
   text-decoration: none;
-  
+
 }
-.bNuPr:hover{
+
+.bNuPr:hover {
   color: #E0E0E0;
 }
 
