@@ -10,10 +10,12 @@
 </head>
 
 <body>
-
    <header class="heaNo">
       <h1>Administracion Edificio</h1>
       <nav>
+
+         <input type="checkbox" id="menu-toggle">
+         <label for="menu-toggle" class="meHam">☰</label>
          <ul>
             <li><a href="panel.html">Inicio</a></li>
             <li><a href="ventas.html">Ventas</a></li>
@@ -48,55 +50,55 @@
    <main>
       <h2>Nuevo Cliente</h2>
 
-      <form class="nueClPr">
-<table class="nueClPr">
-                                    <tr>
-                                        <td><label for="nfan">Nombre Fantasía</label></td>
-                                        <td><input type="text" id="nfan" name="nfan" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="rsoper">Razón Social/Persona</label></td>
-                                        <td><input type="text" id="rsoper" name="rsoper" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="cuit">CUIT</label></td>
-                                        <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="dcom">Domicilio comercial</label></td>
-                                        <td><input type="text" id="dcom" name="dcom"></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="cIVA">Condición IVA</label></td>
-                                        <td>
-                                            <select id="cIVA" name="cIVA">
-                                                <option value="responsable">Responsable Inscripto</option>
-                                                <option value="monotributo">Monotributista</option>
-                                                <option value="exento">Exento</option>
-                                                <option value="consumidor">Consumidor Final</option>
-                                                <option value="noResponsable">No Responsable</option>
-                                                <option value="noAlcanzado">No Alcanzado</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="tel">Teléfono</label></td>
-                                        <td><input type="tel" id="tel" name="tel" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="mail">Mail</label></td>
-                                        <td><input type="email" id="mail" name="mail" required></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bot" colspan="2">
-                                            <button class="bGua" type="submit">Confirmar</button>
-                                            <button class="bMod" type="submit">Cancelar</button>
-                                        </td>
-                                    </tr>
-                                </table>
+      <form class="nuePr">
+         <table>
+            <tr>
+               <td><label for="nfan">Nombre Fantasía</label></td>
+               <td><input type="text" id="nfan" name="nfan" required></td>
+            </tr>
+            <tr>
+               <td><label for="rsoper">Razón Social/Persona</label></td>
+               <td><input type="text" id="rsoper" name="rsoper" required></td>
+            </tr>
+            <tr>
+               <td><label for="cuit">CUIT</label></td>
+               <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
+            </tr>
+            <tr>
+               <td><label for="dcom">Domicilio comercial</label></td>
+               <td><input type="text" id="dcom" name="dcom"></td>
+            </tr>
+            <tr>
+               <td><label for="cIVA">Condición IVA</label></td>
+               <td>
+                  <select id="cIVA" name="cIVA">
+                     <option value="responsable">Responsable Inscripto</option>
+                     <option value="monotributo">Monotributista</option>
+                     <option value="exento">Exento</option>
+                     <option value="consumidor">Consumidor Final</option>
+                     <option value="noResponsable">No Responsable</option>
+                     <option value="noAlcanzado">No Alcanzado</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td><label for="tel">Teléfono</label></td>
+               <td><input type="tel" id="tel" name="tel" required></td>
+            </tr>
+            <tr>
+               <td><label for="mail">Mail</label></td>
+               <td><input type="email" id="mail" name="mail" required></td>
+            </tr>
+            <tr>
+               <td class="bot" colspan="2">
+                  <button class="bGua" type="submit">Confirmar</button>
+                  <button class="bMod" type="submit">Cancelar</button>
+               </td>
+            </tr>
+         </table>
       </form>
    </main>
-   <a class="bVol" href="ventas.html">←</a>
+   <a class="bVol" href="compras.html">←</a>
    <footer>
       <table>
          <caption>Resumen financiero</caption>

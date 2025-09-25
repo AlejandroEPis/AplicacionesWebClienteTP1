@@ -1,38 +1,65 @@
-.nueClPr {
+/*Nuevo Cliente*/
+.nueCl {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin: 1%;
-  padding: 1rem;
-  border-radius: 6px;
-}
-
-.nueClPr table {
- /* background: #E0E0E0;*/
   border: 1px solid black;
   border-radius: 6px;
-  padding: 1rem;
+
+  width: 50%;
+  margin-left: 25%;
   background-color: #233a7a;
-
 }
 
-.nueClPr label {
-  font-size: 2vh;
+.nueCl label {
+  font-size: 0.85rem;
   font-weight: bold;
-  color:  white;
+  color: white;
+  height: 10%;
 }
 
-.nueClPr input,
-.nueClPr select{
-  font-size: 2vh;
+.nueCl input,
+.nueCl select {
+  font-size: 0.85rem;
   border: 1px solid black;
   border-radius: 4px;
-  box-sizing: border-box;
+  padding: 0.5rem;
+  width: 100%;
   color: #233a7a;
-  padding: 0.4rem;
+}
+
+.nueCl td {
+  color: white;
+  padding: 0.2rem;
+}
+
+/*Nuevo Proveedor*/
+.nuePr {
+  width: 50%;
+  background-color: #233a7a;
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 6px;
+  margin-left: 25%;
+}
+
+.nuePr label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: white;
+}
+
+.nuePr input,
+.nuePr select {
+  font-size: 0.85rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  color: #233a7a;
+  padding: 0.5rem;
   width: 100%;
 }
-.nueClPr td{
-  padding: 1.5vh;
-  color:  white;
+
+.nuePr td {
+  color: white;
+  padding: 0.5rem;
 }

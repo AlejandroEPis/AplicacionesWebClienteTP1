@@ -1,11 +1,9 @@
-/*Pagina Index*/
-@import url(index.css);
-
-/*Pagina Panel*/
-@import url(panel.css);
-
-/*Pagina Nuevo Cliente/Proveedor*/
-@import url(nuevoClPr.css);
+/*Estilo Panel*/
+@import url("panel.css");
+/*Estilo Login*/
+@import url("index.css");
+/*Estilo Tabla*/
+@import url("nuevoClPr.css");
 
 
 /* Pagina Completa*/
@@ -64,7 +62,7 @@ header.heaNo {
 }
 
 .heaNo nav a {
-  font-size: 2.5vh;
+  font-size: 1.3rem;
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -75,9 +73,21 @@ header.heaNo {
 }
 
 h1 {
-  font-size: 3.5vh;
+  font-size: 2.4rem;
   margin: 0;
   padding: 0;
+}
+
+/*Menu Hamburgesa*/
+.meHam {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+}
+
+#menu-toggle {
+  display: none;
 }
 
 /* Aside*/
@@ -98,7 +108,7 @@ aside {
 }
 
 aside h3 {
-  font-size: 2.5vh;
+  font-size: 1.6rem;
   text-decoration: underline;
 }
 
@@ -110,12 +120,12 @@ dl {
 
 dt {
   font-weight: bolder;
-  font-size: 2vh;
+  font-size: 1rem;
 }
 
 dd {
   text-align: center;
-  font-size: 2vh;
+  font-size: 1rem;
 }
 
 
@@ -137,7 +147,7 @@ main {
 h2 {
   display: flex;
   justify-content: center;
-  font-size: 3vh;
+  font-size: 2rem;
   color: #233a7a;
   text-decoration: underline;
   padding: 2.0vh 0vh 0 2.0vh;
@@ -151,7 +161,7 @@ footer {
   width: calc(100% - 12.5%);
   height: 12vh;
   background-color: #233a7a;
-  font-size: 2vh;
+  font-size: 1.2rem;
   color: white;
   display: flex;
   justify-content: center;
@@ -165,6 +175,7 @@ footer {
   background-color: #28C76F;
   border-radius: 5px;
   padding: 5px;
+  height: 100%;
 }
 
 .bGua:hover {
@@ -205,10 +216,9 @@ footer {
   right: 20px;
   background: white;
   color: #233a7a;
-  ;
   padding: 15px 25px;
   border-radius: 50px;
-  font-size: 4vh;
+  font-size: 1.8rem;
   font-weight: bold;
   z-index: 1000;
   text-decoration: none;
@@ -224,8 +234,10 @@ footer {
 
 /*Boton Informacion Adiciona*/
 .tCCVeCo td.maIn {
-  padding: 0;
+
   background: #233a7a;
+  max-width: 195px;
+  max-height: 29px;
 }
 
 .bInAd {
@@ -236,7 +248,7 @@ footer {
   text-align: center;
   min-height: 23px;
   color: white;
-  font-size: 2.5vh;
+  font-size: 0.8rem;
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
@@ -258,8 +270,16 @@ footer {
 
 }
 
+h4 {
+  font-size: 1.2rem;
+  caption-side: top;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 2vh;
+}
+
 .tCCVeCo caption {
-  font-size: 2.8vh;
+  font-size: 1.2rem;
   caption-side: top;
   font-weight: bold;
   text-align: left;
@@ -269,8 +289,9 @@ footer {
 .tCCVeCo td {
   border: 1px solid black;
   text-align: center;
-  font-size: 2vh;
-  padding: 0.2%;
+  font-size: 0.8rem;
+
+
 }
 
 .tCCVeCo thead th {
@@ -291,14 +312,14 @@ footer {
 input {
   width: 95%;
   height: 100%;
-  font-size: 2vh;
+  font-size: 0.8rem;
 
 }
 
 select {
   width: 95%;
   height: 100%;
-  font-size: 2vh;
+  font-size: 0.8rem;
 }
 
 .bot {
@@ -306,21 +327,19 @@ select {
   justify-content: space-around;
   align-items: center;
   background: #233a7a;
-  width: 195px;
-  height: 29px;
   margin: 0 auto;
   padding: 0.5rem;
 }
 
 .botopc {
-  width: 195px;
+  width: 220px;
 }
 
 .bNuPr {
   display: block;
   width: 100%;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   background-color: #233a7a;
   color: white;
   font-weight: bold;
@@ -334,8 +353,6 @@ select {
 .bNuPr:hover {
   color: #E0E0E0;
 }
-
-
 
 .buschor {
   background-color: #233a7a;
@@ -380,4 +397,217 @@ select {
 
 .scroll::-webkit-scrollbar {
   display: none;
+}
+
+/*Monitor mas chico que Full HD*/
+@media (max-width: 1919px) {
+
+  header.heaNo {
+    width: 100%;
+    left: 0;
+  }
+
+  aside {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+    left: 0;
+    border: none;
+  }
+
+  footer {
+    height: 7%;
+    width: 100%;
+    left: 0;
+  }
+
+  footer table {
+    display: none;
+  }
+}
+
+
+/*Resposive Tablet Horizontal*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  aside {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+    height: 100%;
+    left: 0;
+  }
+
+  header.heaNo {
+    width: 100%;
+    left: 0;
+  }
+
+  nav.mPan {
+    margin: 2%;
+  }
+
+  footer {
+    left: 0;
+    width: 100%;
+    border: 2px solid black;
+  }
+
+}
+
+@media (max-width: 767px) {
+  aside {
+    display: none;
+  }
+}
+
+/*Resposive Tablet Vertical*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+
+  aside {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+    height: 100%;
+    left: 0;
+
+  }
+
+  /*Menu Hamburguesa*/
+  .meHam {
+    display: block;
+  }
+
+  header.heaNo {
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .heaNo nav ul {
+    display: none;
+    flex-direction: column;
+    background: #233a7a;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .heaNo h1 {
+    order: 1;
+  }
+
+  #menu-toggle:checked+.meHam+ul {
+    display: flex;
+  }
+
+
+  nav.mPan {
+    margin: 2%;
+  }
+
+  footer {
+    left: 0;
+    width: 100%;
+    border: 2px solid black;
+  }
+
+  .nueCl {
+
+    margin-top: 25%;
+  }
+
+  .scroll {
+    max-height: 40vh;
+  }
+}
+/*Responsive Celular*/
+@media (max-width: 767px) {
+
+  aside {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+    height: 100%;
+    left: 0;
+
+  }
+
+  /*Menu Hamburguesa*/
+  .meHam {
+    display: block;
+  }
+
+  header.heaNo {
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .heaNo nav ul {
+    display: none;
+    flex-direction: column;
+    background: #233a7a;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .heaNo h1 {
+    order: 1;
+    font-size: 1.3rem;
+  }
+
+  #menu-toggle:checked+.meHam+ul {
+    display: flex;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+  h4{
+     font-size: 1.1rem;
+  }
+
+  nav.mPan {
+    margin: 2%;
+  }
+  .bVentas,
+.bCompras, 
+.bEsta, 
+.bIma
+{
+ font-size: 1rem;
+}
+
+  footer {
+    left: 0;
+    width: 100%;
+    border: 2px solid black;
+  }
+
+  .nueCl {
+    margin-top: 25%;
+  }
+
+  .scroll {
+    max-height: 40vh;
+  }
+
+
 }

@@ -10,18 +10,21 @@
 </head>
 
 <body>
-    <header class="heaNo">
-        <h1>Administracion Edificio</h1>
-        <nav>
-            <ul>
-                <li><a href="panel.html">Inicio</a></li>
-                <li><a href="ventas.html">Ventas</a></li>
-                <li><a href="compras.html">Compras</a></li>
-                <li><a href="estadisticas.html">Estadisticas</a></li>
-                <li><a href="mayor.html">Mayor</a></li>
-            </ul>
-        </nav>
-    </header>
+   <header class="heaNo">
+      <h1>Administracion Edificio</h1>
+      <nav>
+
+         <input type="checkbox" id="menu-toggle">
+         <label for="menu-toggle" class="meHam">☰</label>
+         <ul>
+            <li><a href="panel.html">Inicio</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="compras.html">Compras</a></li>
+            <li><a href="estadisticas.html">Estadisticas</a></li>
+            <li><a href="mayor.html">Mayor</a></li>
+         </ul>
+      </nav>
+   </header>
 
     <aside>
         <h3>Saldos</h3>
@@ -48,7 +51,6 @@
         <h2>Compras</h2>
 
         <table class="tCCVeCo">
-
             <caption>Datos del Proveedor</caption>
             <thead>
                 <tr>
@@ -61,9 +63,9 @@
                     <th scope="col">Nombre Fantasia</th>
                     <th scope="col">Razon Social/Persona</th>
                     <th scope="col">CUIT</th>
-                    <th scope="col">Domicilio comercial</th>
-                    <th scope="col">Condicion IVA</th>
-                    <th scope="col">Telefo</th>
+                    <th scope="col">Domicilio</th>
+                    <th scope="col">Cond. IVA</th>
+                    <th scope="col">Tel</th>
                     <th scope="col">MAIL</th>
                     <th class="botopc" scope="col">Opciones</th>
                 </tr>
@@ -74,7 +76,7 @@
                     <td>Ejemplo</td>
                     <td>20328006082</td>
                     <td>Ejemplo 1234</td>
-                    <td>Consumidor Final</td>
+                    <td>11-0000-0000</td>
                     <td>11-0000-0000</td>
                     <td>ejemplo@ejemplo.com.ar</td>
                     <td class="bot">
@@ -93,11 +95,10 @@
             </tfoot>
         </table>
 
-
+        <h4>Cuenta Corriente</h4>
         <form action="" method="post">
             <div class="scroll scrollc">
                 <table class="tCCVeCo">
-                    <caption>Cuenta Corriente</caption>
                     <thead class="ccHead">
 
                         <tr>

@@ -10,10 +10,12 @@
 </head>
 
 <body>
-
    <header class="heaNo">
       <h1>Administracion Edificio</h1>
       <nav>
+
+         <input type="checkbox" id="menu-toggle">
+         <label for="menu-toggle" class="meHam">☰</label>
          <ul>
             <li><a href="panel.html">Inicio</a></li>
             <li><a href="ventas.html">Ventas</a></li>
@@ -48,7 +50,7 @@
    <main>
       <h2>Informacion Cliente</h2>
 
-      <div class="nueClPr">
+      <div class="nueCl">
          <table>
             <tr>
                <td><label for="nleg">N° de Legajo</label></td>
@@ -82,12 +84,12 @@
                <td><label for="cuotas">Cuotas</label></td>
                <td>ej</td>
             </tr>
+         </table>
+         <table>
             <tr>
                <td><label for="primera_vivienda">1era vivienda</label></td>
                <td>ej</td>
             </tr>
-         </table>
-         <table>
             <tr>
                <td><label for="certificados">Certificados</label></td>
                <td>ej</td>
@@ -111,6 +113,16 @@
             <tr>
                <td><label for="baulera">Baulera U/F</label></td>
                <td>ej</td>
+            </tr>
+            <tr>
+               <td><label for="vend">Vendedor</label></td>
+               <td>ej</td>
+            </tr>
+            <td class="bot" colspan="2">
+               <button class="bGua" type="submit">Confirmar</button>
+               <button class="bMod" type="submit">Modificar</button>
+               <button class="bEli" type="submit">Cancelar</button>
+            </td>
             </tr>
          </table>
       </div>
