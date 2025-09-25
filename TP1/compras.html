@@ -10,21 +10,21 @@
 </head>
 
 <body>
-   <header class="heaNo">
-      <h1>Administracion Edificio</h1>
-      <nav>
+    <header class="heaNo">
+        <h1>Administracion Edificio</h1>
+        <nav>
 
-         <input type="checkbox" id="menu-toggle">
-         <label for="menu-toggle" class="meHam">☰</label>
-         <ul>
-            <li><a href="panel.html">Inicio</a></li>
-            <li><a href="ventas.html">Ventas</a></li>
-            <li><a href="compras.html">Compras</a></li>
-            <li><a href="estadisticas.html">Estadisticas</a></li>
-            <li><a href="mayor.html">Mayor</a></li>
-         </ul>
-      </nav>
-   </header>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="meHam">☰</label>
+            <ul>
+                <li><a href="panel.html">Inicio</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="compras.html">Compras</a></li>
+                <li><a href="estadisticas.html">Estadisticas</a></li>
+                <li><a href="mayor.html">Mayor</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <aside>
         <h3>Saldos</h3>
@@ -60,25 +60,25 @@
                     </th>
                 </tr>
                 <tr>
-                    <th scope="col">Nombre Fantasia</th>
-                    <th scope="col">Razon Social/Persona</th>
+                    <th class="nomCo" scope="col">Nombre Fantasia</th>
+                    <th class="raPe" scope="col">Razon Social/Persona</th>
                     <th scope="col">CUIT</th>
                     <th scope="col">Domicilio</th>
                     <th scope="col">Cond. IVA</th>
                     <th scope="col">Tel</th>
-                    <th scope="col">MAIL</th>
+                    <th class="mail" scope="col">MAIL</th>
                     <th class="botopc" scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Ejemplo</td>
-                    <td>Ejemplo</td>
+                    <td class="nomCo">Ejemplo</td>
+                    <td class="raPe">Ejemplo</td>
                     <td>20328006082</td>
                     <td>Ejemplo 1234</td>
                     <td>11-0000-0000</td>
                     <td>11-0000-0000</td>
-                    <td>ejemplo@ejemplo.com.ar</td>
+                    <td class="mail">ejemplo@ejemplo.com.ar</td>
                     <td class="bot">
                         <button class="bGua" type="submit">Guardar</button>
                         <button class="bMod" type="submit">Modificar</button>
@@ -103,9 +103,8 @@
 
                         <tr>
                             <th scope="col">Fecha</th>
-                            <th scope="col">Letra</th>
-                            <th scope="col">Pto Venta</th>
-                            <th scope="col">N° de Factura</th>
+                            <th class="letr" scope="col">Letra</th>
+                            <th class="nFac" scope="col">N° de Factura</th>
                             <th scope="col">Debe</th>
                             <th scope="col">Pago</th>
                             <th scope="col">Saldo</th>
@@ -116,8 +115,7 @@
                         <tr>
                             <td>11/11/2020</td>
                             <td>C</td>
-                            <td>3</td>
-                            <td>505</td>
+                            <td>0000000000000</td>
                             <td>5</td>
                             <td>3</td>
                             <td>2</td>
@@ -129,22 +127,7 @@
                         <tr>
                             <td>11/11/2020</td>
                             <td>C</td>
-                            <td>3</td>
-                            <td>505</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td class="bot">
-                                <button class="bGua" type="submit">Guardar</button>
-                                <button class="bMod" type="submit">Modificar</button>
-                                <button class="bEli" type="submit">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>11/11/2020</td>
-                            <td>C</td>
-                            <td>3</td>
-                            <td>505</td>
+                            <td >0000000000000</td>
                             <td>5</td>
                             <td>3</td>
                             <td>2</td>
@@ -157,8 +140,20 @@
                         <tr>
                             <td>11/11/2020</td>
                             <td>C</td>
+                            <td >0000000000000</td>
+                            <td>5</td>
                             <td>3</td>
-                            <td>505</td>
+                            <td>2</td>
+                            <td class="bot">
+                                <button class="bGua" type="submit">Guardar</button>
+                                <button class="bMod" type="submit">Modificar</button>
+                                <button class="bEli" type="submit">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>11/11/2020</td>
+                            <td>C</td>
+                            <td >0000000000000</td>
                             <td>5</td>
                             <td>3</td>
                             <td>2</td>
@@ -172,18 +167,15 @@
                             <td>
                                 <input type="date" id="ffac" name="ffac" required>
                             </td>
-                            <td>
-                                <select id="letrafac" name="lfac">
+                            <td >
+                                <select class="letr" id="letrafac" name="lfac">
                                     <option value="a">A</option>
                                     <option value="b">B</option>
                                     <option value="c">C</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="number" id="npvent" name="npvent" min="0" max="99999" step="1">
-                            </td>
-                            <td>
-                                <input type="number" id="nfac" name="nfac" min="0" max="99999999" step="1" required>
+                                <input type="number" id="npvent" name="npvent" min="0" max="9999999999999" step="1">
                             </td>
                             <td>
                                 <input type="number" id="totfaca" name="totfaca" step="0.01">

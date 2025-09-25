@@ -633,12 +633,15 @@ select {
     width: 100%;
     font-size: 0.5rem;
   }
-.tCCVeCo caption{
-  font-size: 0.8rem;
-}
-h4 {
-  font-size: 0.8rem;
-}
+
+  .tCCVeCo caption {
+    font-size: 0.8rem;
+  }
+
+  h4 {
+    font-size: 0.8rem;
+  }
+
   footer {
     left: 0;
     width: 100%;
@@ -648,13 +651,31 @@ h4 {
   .nueCl {
     margin-top: 25%;
   }
-  .bInAd{
+
+  .bInAd {
     font-size: 0.6rem;
   }
-td.mail, th.mail {
-  word-break: break-word;
-  overflow-wrap: anywhere;
+
+  td.nomCo,
+  th.nomCo,
+  td.raPE,
+  th.raPE,
+  td.mail,
+  th.mail {
+    word-break: break-word;
   }
+
+  .letr{
+    width: 6ch;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+
+  }
+  .nFac{
+    width: 13ch;
+  }
+
   .scroll {
     max-height: 40vh;
   }
