@@ -201,6 +201,7 @@ h3 {
 }
 
 /*Monitor mas chico que Full HD*/
+
 @media (max-width: 1366px) {
   header.heaLo {
     width: 100%;

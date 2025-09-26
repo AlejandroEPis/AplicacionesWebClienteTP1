@@ -416,7 +416,7 @@ select {
 
 /*Resposive Tablet Horizontal*/
 
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+@media (min-width: 768px) and (max-width: 1366px) and (orientation: landscape) {
   aside {
     display: none;
   }
@@ -425,6 +425,7 @@ select {
     width: 100%;
     height: 100%;
     left: 0;
+    border: 1px solid black;
   }
 
   header.heaNo {
@@ -462,8 +463,9 @@ select {
     width: 100%;
     height: 100%;
     left: 0;
-
+    border: 1px solid black;
   }
+
 
   /*Menu Hamburguesa*/
   .meHam {
@@ -528,7 +530,7 @@ select {
     width: 100%;
     height: 100%;
     left: 0;
-
+    border: 1px solid black;
   }
 
   /*Menu Hamburguesa*/
@@ -673,6 +675,12 @@ width: 11ch;
 
 /*Celulare Horizontal*/
 @media (max-width: 915px) and (orientation: landscape) {
+   main {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    border: 1px solid black;
+  }
 
   /*Menu Hamburguesa*/
   .meHam {
