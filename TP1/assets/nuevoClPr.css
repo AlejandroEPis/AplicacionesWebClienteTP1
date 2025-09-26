@@ -45,7 +45,6 @@ header.heaLo {
   font-size: 0.85rem;
   font-weight: bold;
   color: white;
-  height: 10%;
 }
 
 .nueCl input,
@@ -151,7 +150,6 @@ h3 {
   color: #233a7a;
   padding: 0.5rem;
   width: 80%;
-  height: 10%;
   margin: 10%;
 
 }
@@ -170,9 +168,7 @@ h3 {
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
-  padding: 0.5rem;
   width: 80%;
-  height: 10%;
   margin: 10%;
 }
 
@@ -182,9 +178,7 @@ h3 {
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
-  padding: 0.5rem;
   width: 80%;
-  height: 10%;
   margin: 10%;
 }
 
@@ -262,10 +256,6 @@ h3 {
 
   header.heaLo h1 {
     font-size: 1.3rem;
-  }
-
-  .usua {
-   
   }
   .didos h3,
   .diuno h3{
