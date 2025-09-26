@@ -1,7 +1,7 @@
-/*Pagina Index*/
+/*/*Pagina Index*/
 
 /*Login*/
-
+/*
 section.tlog {
   display: flex;
   justify-content: center;
@@ -23,6 +23,7 @@ div.login {
 }
 
 .login form {
+  background-color: #233a7a;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -34,7 +35,7 @@ div.login {
 
 
 /*Botones Login*/
-
+/*
 .bIng {
   color: white;
   background-color: #28C76F;
@@ -50,4 +51,4 @@ div.login {
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
-}
+}*/

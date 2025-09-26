@@ -20,21 +20,7 @@ body {
   background-color: #E0E0E0;
 }
 
-/* Header N°1*/
-header.heaLo {
-  position: fixed;
-  top: 0;
-  left: 12.5%;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: calc(100% - 12.5%);
-  height: 10vh;
-  color: white;
-  background: #233a7a;
 
-}
 
 /* Header N°2*/
 header.heaNo {
@@ -531,7 +517,7 @@ select {
   }
 }
 
-/*Responsive Celular*/
+/*Responsive Celular Vertical*/
 @media (max-width: 767px) {
 
   aside {
@@ -684,6 +670,8 @@ select {
 width: 11ch;
   }
 }
+
+/*Celulare Horizontal*/
 @media (max-width: 915px) and (orientation: landscape) {
 
   /*Menu Hamburguesa*/
