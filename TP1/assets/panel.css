@@ -1,8 +1,8 @@
-.mPan{
+.mPan {
   height: 100%;
 }
 
-div.fila{
+div.fila {
   display: flex;
   justify-content: space-around;
   gap: 1vh;
@@ -10,28 +10,40 @@ div.fila{
 }
 
 .bVentas,
-.bCompras, 
-.bEsta, 
-.bIma
-{
+.bCompras,
+.bEsta,
+.bIma {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 40vh;
-  height: 25vh;  
+  height: 25vh;
   font-weight: bold;
- font-size: 2.5rem;
+  font-size: 2.5rem;
   text-decoration: none;
   color: white;
   border: 2px solid black;
   border-radius: 8px;
   transition: transform 0.3s ease;
-  background-color: #233a7a;;
+  background-color: #233a7a;
+  ;
 }
 
 /*Zoom botones y cambio color letra*/
-.bVentas:hover, .bCompras:hover, .bEsta:hover, .bIma:hover {
-  transform: scale(1.08); 
+.bVentas:hover,
+.bCompras:hover,
+.bEsta:hover,
+.bIma:hover {
+  transform: scale(1.08);
   color: #E0E0E0;
 }
 
+/*Monitor mas chico que Full HD*/
+@media (max-width: 1366px) {
+
+  .bVentas,
+  .bCompras,
+  .bEsta,
+  .bIma {
+    font-size: 1.5rem;
+  }  }

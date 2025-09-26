@@ -398,7 +398,7 @@ select {
 }
 
 /*Monitor mas chico que Full HD*/
-@media (max-width: 1919px) {
+@media (max-width: 1366px) {
 
   header.heaNo {
     width: 100%;
@@ -414,6 +414,7 @@ select {
     left: 0;
     border: none;
   }
+  
 
   footer {
     height: 7%;
@@ -679,6 +680,113 @@ select {
   .scroll {
     max-height: 40vh;
   }
+  .feMay{
+width: 11ch;
+  }
+}
+@media (max-width: 915px) and (orientation: landscape) {
+
+  /*Menu Hamburguesa*/
+  .meHam {
+    display: block;
+  }
+
+  header.heaNo {
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .heaNo nav ul {
+    display: none;
+    flex-direction: column;
+    background: #233a7a;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .heaNo h1 {
+    order: 1;
+    font-size: 1.3rem;
+  }
+
+  #menu-toggle:checked+.meHam+ul {
+    display: flex;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h4 {
+    font-size: 0.8rem;
+  }
+
+ .tCCVeCo caption {
+    font-size: 0.8rem;
+  }
+
+.botopc {
+    width: 15%;
+  }
+
+  .bot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+  .bInAd{
+    font-size: 0.7rem ;
+    min-height: 0;
+  }
+
+  .bGua,
+  .bMod,
+  .bEli {
+    width: 100%;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
+    gap: 0;
+    margin: 0;
+  }
+
+  .bVentas,
+  .bCompras,
+  .bEsta,
+  .bIma {
+    font-size: 1rem;
+  }
+
+  .tCCVeCo th,
+  .tCCVeCo td {
+    flex-direction: row;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 0.6rem;
+  }
+
+  input {
+    width: 95%;
+    font-size: 0.5rem;
+  }
+
+  select {
+    width: 100%;
+    font-size: 0.5rem;
+  }
+
+  .tCCVeCo caption {
+    font-size: 0.8rem;
+  }
 
 
+
+
+  
 }

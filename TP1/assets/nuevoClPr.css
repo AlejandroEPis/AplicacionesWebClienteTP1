@@ -1,15 +1,31 @@
 /*Nuevo Cliente*/
+
+
+
 .nueCl {
   display: flex;
   justify-content: center;
-  border: 1px solid black;
-  border-radius: 6px;
-
-  width: 50%;
-  margin-left: 25%;
-  background-color: #233a7a;
+  margin: 3%;
 }
 
+.tauno {
+  border: 1px solid black;
+   border-right: none;
+  border-radius: 6px 0 0 6px;
+  background-color: #233a7a;
+  margin: 0;
+  width: auto;
+}
+
+
+.tados {
+  border: 1px solid black;
+  border-left: none;                 
+  border-radius: 0 6px 6px 0;       
+  background-color: #233a7a;
+  margin: 0;
+  width: auto;
+}
 .nueCl label {
   font-size: 0.85rem;
   font-weight: bold;
@@ -33,14 +49,17 @@
 }
 
 /*Nuevo Proveedor*/
-.nuePr {
-  width: 50%;
-  background-color: #233a7a;
+.nuePr{
   display: flex;
-  justify-content: center;
+   justify-content: center;
+   align-items: flex-start;
+   margin-top: 5%;
+}
+
+.nuePr table{
+  background-color: #233a7a;
   border: 1px solid black;
   border-radius: 6px;
-  margin-left: 25%;
 }
 
 .nuePr label {
@@ -53,13 +72,21 @@
 .nuePr select {
   font-size: 0.85rem;
   border: 1px solid black;
-  border-radius: 4px;
+  border-radius: 6px;
   color: #233a7a;
   padding: 0.5rem;
+  width: 100%;
+}
+.nuePr input{
   width: 100%;
 }
 
 .nuePr td {
   color: white;
   padding: 0.5rem;
+}
+.nuePr td.bot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
