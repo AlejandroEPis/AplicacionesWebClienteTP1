@@ -90,3 +90,42 @@
   justify-content: center;
   align-items: center;
 }
+
+/*Celular Horizontal*/
+@media (max-width: 915px) and (orientation: landscape) {
+.nuePr{
+  margin: 5%;
+}
+.nuePr label,
+.nuePr input,
+.nuePr select {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+  }
+  .nuePr td{
+    padding: 0;
+  }
+
+
+.tados label,
+.tados input,
+.tados select,
+.tauno label,
+.tauno input,
+.tauno select {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+  }
+  .tados td,
+  .tauno td{
+    padding: 0;
+  }
+
+
+
+
+
+
+  }

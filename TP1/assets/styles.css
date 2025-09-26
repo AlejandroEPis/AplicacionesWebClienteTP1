@@ -731,7 +731,7 @@ width: 11ch;
   }
 
 .botopc {
-    width: 15%;
+    width: 20%;
   }
 
   .bot {
@@ -743,6 +743,9 @@ width: 11ch;
   .bInAd{
     font-size: 0.7rem ;
     min-height: 0;
+  }
+  .bNuPr{
+    font-size: 0.7rem;
   }
 
   .bGua,
@@ -772,20 +775,21 @@ width: 11ch;
   }
 
   input {
-    width: 95%;
+    width: 85%;
     font-size: 0.5rem;
   }
 
   select {
-    width: 100%;
+    width: 85%;
     font-size: 0.5rem;
   }
 
   .tCCVeCo caption {
     font-size: 0.8rem;
   }
-
-
+.cuoCue{
+  width: 7%;
+}
 
 
   
