@@ -6,49 +6,81 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="assets/styles.css">
-   <title>Administración</title>
+   <title>Opciones</title>
 </head>
 
 <body>
-   <header class="heaLo">
+   <header class="heaNo">
+      <h1>Administracion Edificio</h1>
       <nav>
-         <h1>Administracion Edificio</h1>
+
+         <input type="checkbox" id="menu-toggle">
+         <label for="menu-toggle" class="meHam">☰</label>
+         <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="ventas.html">Ventas</a></li>
+            <li><a href="compras.html">Compras</a></li>
+            <li><a href="newClienProve.html">Nuevo Cliente/Provedor</a></li>
+            <li><a href="caja.html">Caja</a></li>
+         </ul>
       </nav>
    </header>
 
    <aside>
-      <div class="infAs">
-
-      </div>
+      <h3>Saldos</h3>
+      <dt>Efectivo Pesos Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo USD Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo Pesos Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Efectivo USD Usuario…</dt>
+      <dd>$0</dd>
+      <dt>Saldo Pesos</dt>
+      <dd>$0</dd>
+      <dt>Saldo USD</dt>
+      <dd>$0</dd>
+      <dt>Saldo CA Pesos</dt>
+      <dd>$0</dd>
+      <dt>Saldo CA USD</dt>
+      <dd>$0</dd>
+      <dt>Cheques</dt>
+      <dd>$0</dd>
    </aside>
+
    <main>
-      <h2>Ingrese Usuario</h2>
-
-
-      <form class="usua" action="" method="post">
-         <div class="diuno">
-            <h3>Ingresar</h3>
-            <label for="usuario">Usuario</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Ingresá tu usuario" required>
-            <label for="clave">Clave</label>
-            <input type="password" id="clave" name="clave" placeholder="Ingresá tu clave" required>
-            <button class="bIng" type="submit" value="Ingresar">Ingresar</button>
+      <h2>Opciones</h2>
+      <nav class="mPan">
+         <div class="fila">
+            <a class="bVentas" href="ventas.html">Ventas</a>
+            <a class="bCompras" href="compras.html">Compras</a>
          </div>
-         <div class="didos">
-            <h3>Crear nuevo usuario</h3>
-            <label for="nuevoUsuario">Usuario</label>
-            <input type="text" id="nuevoUsuario" name="nuevoUsuario" placeholder="Elegí un usuario" required>
-            <label for="nuevaClave">Clave</label>
-            <input type="password" id="nuevaClave" name="nuevaClave" placeholder="Elegí una clave" required>
-            <button class="bCrea" type="submit" value="Crear cuenta">Crear Cuenta</button>
+         <div class="fila">
+            <a class="bEsta" href="newClienProve.html">Nuevo Cliente/Proveedor</a>
+            <a class="bIma" href="caja.html">Caja</a>
          </div>
-      </form>
-
+      </nav>
    </main>
-   <footer>
 
+   <footer>
+      <table>
+         <caption>Resumen financiero</caption>
+         <thead>
+            <tr>
+               <th scope="col">Morosidad (ARS)</th>
+               <th scope="col">% Morosidad</th>
+               <th scope="col">Gastos sin cancelar (ARS)</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>$5000000</td>
+               <td>20%</td>
+               <td>$1000000</td>
+            </tr>
+         </tbody>
+      </table>
    </footer>
 </body>
-
 
 </html>

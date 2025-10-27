@@ -1,21 +1,5 @@
 /*Nuevo Cliente*/
 
-/* Header N°1*/
-header.heaLo {
-  position: fixed;
-  top: 0;
-  left: 12.5%;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: calc(100% - 12.5%);
-  height: 10vh;
-  color: white;
-  background: #233a7a;
-
-}
-
 .nueCl {
   display: flex;
   justify-content: center;
@@ -107,118 +91,6 @@ header.heaLo {
   align-items: center;
 }
 
-/*Index*/
-.usua {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 5%;
-}
-
-.diuno,
-.didos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-  border: 1px solid black;
-  background-color: #233a7a;
-  border-radius: 6px;
-  color: #E0E0E0;
-}
-
-h3 {
-  margin: 6% 0 6% 0;
-  font-weight: bold;
-}
-
-.diuno {
-  border-right: none;
-  border-radius: 6px 0 0 6px;
-}
-
-.didos {
-  border-left: none;
-  border-radius: 0 6px 6px 0;
-}
-
-.didos input,
-.diuno input {
-  font-size: 0.85rem;
-  border: 1px solid black;
-  border-radius: 6px;
-  color: #233a7a;
-  padding: 0.5rem;
-  width: 80%;
-  margin: 10%;
-
-}
-
-.diuno h3,
-.didos h3 {
-  text-decoration: underline
-}
-
-
-/*Botones Login*/
-
-.bIng {
-  color: white;
-  background-color: #28C76F;
-  border-radius: 5px;
-  padding: 5px;
-  cursor: pointer;
-  width: 80%;
-  margin: 10%;
-}
-
-.bCrea {
-  color: white;
-  background-color: #3A6FF7;
-  border-radius: 5px;
-  padding: 5px;
-  cursor: pointer;
-  width: 80%;
-  margin: 10%;
-}
-
-.bIng:hover {
-  background-color: #009e47;
-  cursor: pointer;
-  color: #E0E0E0;
-}
-
-.bCrea:hover {
-  background-color: #0030a1;
-  cursor: pointer;
-  color: #E0E0E0;
-}
-
-/*Monitor mas chico que Full HD*/
-
-@media (max-width: 1366px) {
-  header.heaLo {
-    width: 100%;
-    left: 0;
-  }
-}
-
-/*Celular Vertical*/
-@media (max-width: 767px) {
-
-  header.heaLo h1 {
-    font-size: 1.3rem;
-  }
-
-  .usua {
-    margin-top: 25%;
-  }
-  .didos h3,
-  .diuno h3{
-    font-size: 1rem;
-  }
-}
-
 /*Celular Horizontal*/
 @media (max-width: 932px) and (orientation: landscape) {
   .nuePr {
@@ -236,33 +108,6 @@ h3 {
   .nuePr td {
     padding: 0;
   }
-
-
-  .didos label,
-  .didos input,
-  .didos select,
-  .diuno label,
-  .diuno input,
-  .diuno select {
-    font-size: 0.8rem;
-    margin: 0;
-    padding: 0;
-  }
-
-  .tados td,
-  .tauno td {
-    padding: 0;
-  }
-
-  header.heaLo h1 {
-    font-size: 1.3rem;
-  }
-  .didos h3,
-  .diuno h3{
-    font-size: 1rem;
-  }
-
-
 
 
 }

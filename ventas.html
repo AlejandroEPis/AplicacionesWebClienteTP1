@@ -17,7 +17,7 @@
          <input type="checkbox" id="menu-toggle">
          <label for="menu-toggle" class="meHam">☰</label>
          <ul>
-            <li><a href="panel.html">Inicio</a></li>
+         <li><a href="index.html">Inicio</a></li>
             <li><a href="ventas.html">Ventas</a></li>
             <li><a href="compras.html">Compras</a></li>
             <li><a href="estadisticas.html">Estadisticas</a></li>
@@ -95,43 +95,6 @@
          </table>
       </form>
 
-      <form action="" method="post">
-         <table class="tCCVeCo">
-            <caption>Informacion Venta</caption>
-            <thead>
-               <tr>
-                  <th scope="col">Depto U/F</th>
-                  <th scope="col">Cochera U/F</th>
-                  <th scope="col">Baulera U/F</th>
-                  <th class="botopc" scope="col">Opciones</th>
-               </tr>
-            </thead>
-
-            <tbody>
-               <tr>
-                  <td>ej</td>
-                  <td>ej</td>
-                  <td>ej</td>
-                  <td class="bot">
-                     <button class="bGua" type="submit">Guardar</button>
-                     <button class="bMod" type="submit">Modificar</button>
-                     <button class="bEli" type="submit">Eliminar</button>
-                  </td>
-               </tr>
-               <tr>
-                  <td><input type="number" id="depto" name="depto" placeholder="Depto U/F"></td>
-                  <td><input type="number" id="cochera" name="cochera" placeholder="Cochera U/F"></td>
-                  <td><input type="number" id="baulera" name="baulera" placeholder="Baulera U/F"></td>
-                  <td class="bot">
-                     <button class="bGua" type="submit">Guardar</button>
-                     <button class="bMod" type="submit">Modificar</button>
-                     <button class="bEli" type="submit">Eliminar</button>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </form>
-
       <h4>Cuenta Corriente</h4>
       <form action="" method="post">
          <div class="scroll scrollv">
@@ -139,9 +102,8 @@
                <thead class="ccHead">
                   <tr>
                      <th scope="col">Fecha</th>
-                     <th class="cuoCue" scope="col">Cuota</th>
+                     <th class="cuoCue" scope="col">Facura</th>
                      <th scope="col">Tipo de pago</th>
-                     <th scope="col">Destino</th>
                      <th scope="col">Ingreso</th>
                      <th scope="col">Egreso</th>
                      <th scope="col">Saldo</th>
@@ -156,75 +118,22 @@
                      <td>ej</td>
                      <td>ej</td>
                      <td>ej</td>
-                     <td>ej</td>
                      <td class="bot">
                         <button class="bGua" type="submit">Guardar</button>
                         <button class="bMod" type="submit">Modificar</button>
                         <button class="bEli" type="submit">Eliminar</button>
                      </td>
                   <tr>
-                  <tr>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td class="bot">
-                        <button class="bGua" type="submit">Guardar</button>
-                        <button class="bMod" type="submit">Modificar</button>
-                        <button class="bEli" type="submit">Eliminar</button>
-                     </td>
-                  <tr>
-                  <tr>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td class="bot">
-                        <button class="bGua" type="submit">Guardar</button>
-                        <button class="bMod" type="submit">Modificar</button>
-                        <button class="bEli" type="submit">Eliminar</button>
-                     </td>
-                  <tr>
-                  <tr>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td class="bot">
-                        <button class="bGua" type="submit">Guardar</button>
-                        <button class="bMod" type="submit">Modificar</button>
-                        <button class="bEli" type="submit">Eliminar</button>
-                     </td>
-                  <tr>
+
                      <td><input type="date" name="fec"></td>
-                     <td><input type="number" name="cuo" placeholder="N° Cuota"></td>
+                     <td><input type="number" name="cuo" placeholder="Factura"></td>
                      <td>
                         <select id="tpago" name="tpago">
                            <option value="">Seleccione</option>
-                           <option value="a">Pesos</option>
-                           <option value="b">USD</option>
-                           <option value="c">Transferencia Pesos</option>
-                           <option value="d">Transferencia USD</option>
-                           <option value="e">Cheque</option>
-                        </select>
-                     </td>
-                     <td>
-                        <select id="dpago" name="dpago">
-                           <option value="">Seleccione</option>
-                           <option value="">Usuario x</option>
-                           <option value="a">Usuario x</option>
-                           <option value="b">Caja de Ahorro</option>
-                           <option value="c">Cuenta Corriente</option>
-                           <option value="d">Cheque</option>
+                           <option value="a">Efectivo</option>
+                           <option value="b">Debito</option>
+                           <option value="c">Credito</option>
+                           <option value="d">Transferencia</option>
                         </select>
                      </td>
                      <td><input type="number" name="ing" placeholder="Ingreso"></td>
