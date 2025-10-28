@@ -6,7 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="assets/styles.css">
-   <title>Mayor</title>
+   <title>Caja</title>
 </head>
 
 <body>
@@ -48,31 +48,43 @@
       <dd>$0</dd>
    </aside>
    <main>
-      
+
       <h2>Caja</h2>
       <form>
          <table class="tCCVeCo">
             <thead>
                <tr>
-                  <th scope="col">Fecha</th>
-                  <th scope="col">Descripción</th>
-                  <th scope="col">Ingreso</th>
-                  <th scope="col">Egreso</th>
-                  <th scope="col">Saldo</th>
+               <tr>
+                  <th class="buschor" colspan="6">
+                     <input class="busc" type="date" id="fecha" name="fecha">
+                     <button class="lupa" type="submit">🔍</button>
+                  </th>
+               </tr>
+               <th scope="col">Fecha</th>
+               <th scope="col">Descripción</th>
+               <th scope="col">Ingreso</th>
+               <th scope="col">Egreso</th>
+               <th scope="col">Saldo</th>
+               <th class="botopc" scope="col">Opciones</th>
                </tr>
             </thead>
             <tbody>
                <tr>
-                  <td contenteditable="true">2025-10-28</td>
-                  <td contenteditable="true">Apertura de caja</td>
-                  <td contenteditable="true">100000.00</td>
-                  <td contenteditable="true">0.00</td>
-                  <td contenteditable="true">100000.00</td>
+                  <td>2025-10-28</td>
+                  <td>Apertura de caja</td>
+                  <td>100000.00</td>
+                  <td>0.00</td>
+                  <td>100000.00</td>
+                  <td class="bot">
+                     <button class="bGua" type="submit">Guardar</button>
+                     <button class="bMod" type="submit">Modificar</button>
+                     <button class="bEli" type="submit">Eliminar</button>
+                  </td>
                </tr>
             </tbody>
             <tfoot>
                <tr>
-                  <th scope="row" colspan="4">Saldo final</th>
+                  <th scope="row" colspan="5">Saldo final</th>
                   <td>87500.00</td>
                </tr>
             </tfoot>

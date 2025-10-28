@@ -204,33 +204,6 @@ footer {
   cursor: pointer;
 }
 
-/*Boton Informacion Adiciona*/
-.tCCVeCo td.maIn {
-
-  background: #233a7a;
-  max-width: 195px;
-  max-height: 29px;
-}
-
-.bInAd {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #42a5f5;
-  text-align: center;
-  min-height: 23px;
-  color: white;
-  font-size: 0.8rem;
-  border-radius: 5px;
-  text-decoration: none;
-  cursor: pointer;
-
-}
-
-.bInAd:hover {
-  background-color: #1e88e5;
-}
-
 /*Tablas*/
 .tCCVeCo {
   width: 95%;
@@ -279,10 +252,6 @@ input {
 .tCCVeCo tfoot {
   background-color: #ccc;
   text-align: center;
-}
-
-.cuotas {
-  min-width: 7ch;
 }
 
 select {
@@ -343,7 +312,7 @@ select {
 }
 
 .scrollv {
-  max-height: 19vh;
+  max-height: 50vh;
 }
 
 .scrollc {
@@ -575,11 +544,6 @@ margin: 2%;
     border: 2px solid black;
   }
 
-  .nueCl {
-
-    margin-top: 25%;
-  }
-
   .scroll {
     max-height: 40vh;
   }
@@ -703,23 +667,6 @@ margin: 2%;
     border: 2px solid black;
   }
 
-  .nueCl {
-    margin-top: 25%;
-  }
-
-  .bInAd {
-    font-size: 0.6rem;
-  }
-
-  td.nomCo,
-  th.nomCo,
-  td.raPE,
-  th.raPE,
-  td.mail,
-  th.mail {
-    word-break: break-word;
-  }
-
   .letr{
     width: 6ch;
     margin: 0;
@@ -733,9 +680,6 @@ margin: 2%;
 
   .scroll {
     max-height: 40vh;
-  }
-  .feMay{
-width: 11ch;
   }
 }
 
@@ -802,10 +746,7 @@ width: 11ch;
     align-items: center;
     padding: 0;
   }
-  .bInAd{
-    font-size: 0.7rem ;
-    min-height: 0;
-  }
+
   .bNuPr{
     font-size: 0.7rem;
   }
