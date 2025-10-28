@@ -50,18 +50,68 @@
    <main>
       <h2>Nuevo Cliente/Provedor</h2>
 
-      <form class="nueCl">
-         <table class="tauno">
-            <tr>
-               <td><label for="nfan">Nombre y Apellido/Razón Social</label></td>
-               <td><input type="text" id="nfan" name="nfan" required></td>
-            </tr>
 
-            <tr>
-               <td><label for="cuit">CUIT/CUIL/DNI</label></td>
-               <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
-            </tr>
-            <tr>
+
+      <div class="nuevoCP">
+         <form class="taClPr">
+            <table>
+               <caption>Nuevo Cliente</caption>
+               <tr>
+                  <td class="rzPro"><label for="nfan">Nombre y Apellido/Razón Social</label></td>
+                  <td><input type="text" id="nfan" name="nfan" required></td>
+               </tr>
+
+               <tr>
+                  <td><label for="cuit">CUIT/CUIL/DNI</label></td>
+                  <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
+               </tr>
+               <tr>
+                  <td><label for="cIVA">Condición IVA</label></td>
+                  <td>
+                     <select id="cIVA" name="cIVA">
+                        <option value="responsable">Seleccionar</option>
+                        <option value="responsable">Responsable Inscripto</option>
+                        <option value="monotributo">Monotributista</option>
+                        <option value="exento">Exento</option>
+                        <option value="consumidor">Consumidor Final</option>
+                        <option value="noResponsable">No Responsable</option>
+                        <option value="noAlcanzado">No Alcanzado</option>
+                     </select>
+                  </td>
+               </tr>
+               <tr>
+                  <td><label for="dcom">Domicilio comercial</label></td>
+                  <td><input type="text" id="dcom" name="dcom"></td>
+               </tr>
+               <tr>
+                  <td><label for="tel">Teléfono</label></td>
+                  <td><input type="tel" id="tel" name="tel" required></td>
+               </tr>
+               <tr>
+                  <td><label for="mail">Mail</label></td>
+                  <td><input type="email" id="mail" name="mail" required></td>
+               </tr>
+               <td>
+                  <button class="bGua" type="submit">Confirmar</button>
+                  <button class="bMod" type="submit">Cancelar</button>
+               </td>
+               </tr>
+            </table>
+
+         </form>
+
+         <form class="taClPr">
+            <table>
+               <caption>Nuevo Proveedor</caption>
+               <tr>
+                  <td class="rzPro"><label for="rsoper">Razón Social</label></td>
+                  <td><input type="text" id="rsoper" name="rsoper" required></td>
+               </tr>
+               <tr>
+                  <td><label for="cuit">CUIT</label></td>
+                  <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
+               </tr>
+
                <td><label for="cIVA">Condición IVA</label></td>
                <td>
                   <select id="cIVA" name="cIVA">
@@ -74,74 +124,29 @@
                      <option value="noAlcanzado">No Alcanzado</option>
                   </select>
                </td>
-            </tr>
-            <tr>
-               <td><label for="dcom">Domicilio comercial</label></td>
-               <td><input type="text" id="dcom" name="dcom"></td>
-            </tr>
-            <tr>
-               <td><label for="tel">Teléfono</label></td>
-               <td><input type="tel" id="tel" name="tel" required></td>
-            </tr>
-            <tr>
-               <td><label for="mail">Mail</label></td>
-               <td><input type="email" id="mail" name="mail" required></td>
-            </tr>
-            <td class="bot" colspan="2">
-               <button class="bGua" type="submit">Confirmar</button>
-               <button class="bMod" type="submit">Cancelar</button>
-            </td>
-            </tr>
-         </table>
-
-      </form>
-
-      <form class="nueCl">
-         <table class="tauno">
-            <tr>
-               <td><label for="rsoper">Razón Social</label></td>
-               <td><input type="text" id="rsoper" name="rsoper" required></td>
-            </tr>
-            <tr>
-               <td><label for="cuit">CUIT</label></td>
-               <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
-            </tr>
-
-            <td><label for="cIVA">Condición IVA</label></td>
-            <td>
-               <select id="cIVA" name="cIVA">
-                  <option value="responsable">Seleccionar</option>
-                  <option value="responsable">Responsable Inscripto</option>
-                  <option value="monotributo">Monotributista</option>
-                  <option value="exento">Exento</option>
-                  <option value="consumidor">Consumidor Final</option>
-                  <option value="noResponsable">No Responsable</option>
-                  <option value="noAlcanzado">No Alcanzado</option>
-               </select>
-            </td>
-            </tr>
-            <tr>
-               <td><label for="dcom">Domicilio comercial</label></td>
-               <td><input type="text" id="dcom" name="dcom"></td>
-            </tr>
-            <tr>
-            <tr>
-               <td><label for="tel">Teléfono</label></td>
-               <td><input type="tel" id="tel" name="tel" required></td>
-            </tr>
-            <tr>
-               <td><label for="mail">Mail</label></td>
-               <td><input type="email" id="mail" name="mail" required></td>
-            </tr>
-            <tr>
-               <td class="bot" colspan="2">
-                  <button class="bGua" type="submit">Confirmar</button>
-                  <button class="bMod" type="submit">Cancelar</button>
-               </td>
-            </tr>
-         </table>
-      </form>
-
+               </tr>
+               <tr>
+                  <td><label for="dcom">Domicilio comercial</label></td>
+                  <td><input type="text" id="dcom" name="dcom"></td>
+               </tr>
+               <tr>
+               <tr>
+                  <td><label for="tel">Teléfono</label></td>
+                  <td><input type="tel" id="tel" name="tel" required></td>
+               </tr>
+               <tr>
+                  <td><label for="mail">Mail</label></td>
+                  <td><input type="email" id="mail" name="mail" required></td>
+               </tr>
+               <tr>
+                  <td>
+                     <button class="bGua" type="submit">Confirmar</button>
+                     <button class="bMod" type="submit">Cancelar</button>
+                  </td>
+               </tr>
+            </table>
+         </form>
+      </div>
       <footer>
          <table>
             <caption>Resumen financiero</caption>

@@ -1,8 +1,3 @@
-/*Estilo Panel*/
-@import url("panel.css");
-/*Estilo Tabla*/
-@import url("nuevoClPr.css");
-
 
 /* Pagina Completa*/
 
@@ -18,9 +13,7 @@ body {
   background-color: #E0E0E0;
 }
 
-
-
-/* Header N°2*/
+/* Header*/
 header.heaNo {
   position: fixed;
   top: 0;
@@ -374,6 +367,81 @@ select {
   display: none;
 }
 
+
+/*Panel Inedex*/
+.mPan {
+  height: 100%;
+}
+
+div.fila {
+  display: flex;
+  justify-content: space-around;
+  gap: 1vh;
+  margin-top: 5vh;
+}
+
+.bVentas,
+.bCompras,
+.bEsta,
+.bIma {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40vh;
+  height: 25vh;
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  background-color: #233a7a;
+  ;
+}
+
+/*Zoom botones y cambio color letra*/
+.bVentas:hover,
+.bCompras:hover,
+.bEsta:hover,
+.bIma:hover {
+  transform: scale(1.08);
+  color: #E0E0E0;
+}
+
+/*Hoja Nuevo Cliente/Proveedor*/
+
+.nuevoCP{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top:7%;
+}
+
+.taClPr{
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: #233a7a;
+}
+
+.taClPr input,select{
+    font-weight: bold;
+  text-decoration: none;
+  color: #233a7a;
+}
+
+.nuevoCP table{
+margin: 2%;
+}
+
+.rzPro{
+  width: 30ch;
+}
+
+
 /*Monitor mas chico que Full HD*/
 @media (max-width: 1366px) {
 
@@ -403,7 +471,14 @@ select {
     display: none;
   }
 }
+@media (max-width: 1366px) {
 
+  .bVentas,
+  .bCompras,
+  .bEsta,
+  .bIma {
+    font-size: 1.5rem;
+  }  }
 
 /*Resposive Tablet Horizontal*/
 
