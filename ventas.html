@@ -10,18 +10,18 @@
 </head>
 
 <body>
-    <header class="heaNo">
+   <header class="heaNo">
       <h1>Administracion Edificio</h1>
       <nav>
 
          <input type="checkbox" id="menu-toggle">
          <label for="menu-toggle" class="meHam">☰</label>
          <ul>
-         <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="ventas.html">Ventas</a></li>
             <li><a href="compras.html">Compras</a></li>
-            <li><a href="estadisticas.html">Estadisticas</a></li>
-            <li><a href="mayor.html">Mayor</a></li>
+            <li><a href="newClienProve.html">Cliente/Provedor</a></li>
+            <li><a href="caja.html">Caja</a></li>
          </ul>
       </nav>
    </header>
@@ -55,31 +55,29 @@
             <caption>Datos del comprador</caption>
             <thead>
                <tr>
-                  <th class="buschor" colspan="8">
-                     <input class="busc" type="search" id="q" name="q" placeholder="Nombre o DNI">
+                  <th class="buschor" colspan="7">
+                     <input class="busc" type="search" id="q" name="q" placeholder="Nombre y Apellido/Razón Social">
                      <button class="lupa" submit>🔍</button>
                   </th>
                </tr>
                <tr>
-                  <th scope="col">Comprador</th>
-                  <th scope="col">DNI</th>
-                  <th scope="col">Tel</th>
-                  <th class="mail" scope="col">MAIL</th>
-                  <th scope="col">Cuotas</th>
-                  <th scope="col">Informacion Adic.</th>
+                  <th scope="col">Nombre y Apellido/Razón Social</th>
+                  <th scope="col">CUIT/CUIL/DNI</th>
+                  <th scope="col">Condición IVA</th>
+                  <th scope="col">Domicilio comercial</th>
+                  <th scope="col">Teléfono</th>
+                  <th scope="col">MAIL</th>
                   <th class="botopc" scope="col">Opciones</th>
                </tr>
             </thead>
             <tbody>
                <tr>
                   <td>parlamento maria celeste</td>
-                  <td>501110101</td>
-                  <td>1100000000</td>
+                  <td>xxxxxxxxxxx</td>
+                  <td>Responsable Inscripto</td>
+                  <td>Aristobitulo del valle 792</td>
+                  <td>xxxxxxxxxx</td>
                   <td class="mail">parlamentomaria@hotmail.com</td>
-                  <td class="cuotas">2</td>
-                  <td class="maIn">
-                     <a class="bInAd" href="infoComp.html">Mas Informacion</a>
-                  </td>
                   <td class="bot">
                      <button class="bGua" type="submit">Guardar</button>
                      <button class="bMod" type="submit">Modificar</button>
@@ -87,8 +85,8 @@
                   </td>
                </tr>
                <tr>
-                  <td colspan="15">
-                     <a class="bNuPr" href="infoVenta.html">Nuevo Comprador</a>
+                  <td colspan="7">
+                     <a class="bNuPr" href="newClienProve.html">Nuevo Comprador</a>
                   </td>
                </tr>
             </tbody>
@@ -151,7 +149,7 @@
       </form>
 
    </main>
-   <a class="bVol" href="panel.html">←</a>
+   <a class="bVol" href="index.html">←</a>
    <footer>
       <table>
          <caption>Resumen financiero</caption>

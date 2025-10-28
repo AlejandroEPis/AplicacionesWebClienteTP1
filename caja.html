@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css">
+   <link rel="stylesheet" href="assets/styles.css">
    <title>Mayor</title>
 </head>
 
@@ -20,8 +20,8 @@
             <li><a href="index.html">Inicio</a></li>
             <li><a href="ventas.html">Ventas</a></li>
             <li><a href="compras.html">Compras</a></li>
-            <li><a href="estadisticas.html">Estadisticas</a></li>
-            <li><a href="mayor.html">Mayor</a></li>
+            <li><a href="newClienProve.html">Cliente/Provedor</a></li>
+            <li><a href="caja.html">Caja</a></li>
          </ul>
       </nav>
    </header>
@@ -48,110 +48,39 @@
       <dd>$0</dd>
    </aside>
    <main>
-      <h2>Mayor</h2>
-
-      <table class="tCCVeCo">
-         <caption>Carga de Movimientos</caption>
-
-         <thead>
-            <tr>
-               <th scope="col">N° Movimiento</th>
-               <th scope="col">Fecha</th>
-               <th scope="col">Medio de Pago</th>
-               <th scope="col">Destino</th>
-               <th scope="col">Egreso</th>
-               <th scope="col">Medio de Pago</th>
-               <th scope="col">Destino</th>
-               <th scope="col">Ingreso</th>
-               <th class="botopc" scope="col">Opciones</th>
-            </tr>
-         </thead>
-         <tr>
-            <td><input type="number" name="ing" placeholder="Ingreso"></td>
-            <td><input type="date" name="fec"></td>
-            <td>
-               <select id="mpago" name="mpago">
-                  <option value="">Seleccione</option>
-                  <option value="a">Usuario x</option>
-                  <option value="b">Usuario x</option>
-                  <option value="c">C. Ahorro</option>
-                  <option value="d">C. Corriente</option>
-                  <option value="e">Cheque</option>
-               </select>
-            </td>
-            <td>
-               <select id="dpago" name="dpago">
-                  <option value="">Seleccione</option>
-                  <option value="a">Usuario x</option>
-                  <option value="b">Usuario x</option>
-                  <option value="c">C. Ahorro</option>
-                  <option value="d">C. Corriente</option>
-                  <option value="e">Cheque</option>
-               </select>
-            </td>
-            <td><input type="number" name="egr" placeholder="Egreso"></td>
-
-            <td>
-               <select id="mpago" name="mpago">
-                  <option value="">Seleccione</option>
-                  <option value="a">Usuario x</option>
-                  <option value="b">Usuario x</option>
-                  <option value="c">C. Ahorro</option>
-                  <option value="d">C.Corriente</option>
-                  <option value="e">Cheque</option>
-               </select>
-            </td>
-            <td>
-               <select id="dpago" name="dpago">
-                  <option value="">Seleccione</option>
-                  <option value="a">Usuario x</option>
-                  <option value="b">Usuario x</option>
-                  <option value="c">C. Ahorro</option>
-                  <option value="d">C.Corriente</option>
-                  <option value="e">Cheque</option>
-               </select>
-            </td>
-            <td><input type="number" name="ing"></td>
-            <td class="bot">
-               <button class="bGua" type="submit">Guardar</button>
-               <button class="bMod" type="reset">Cancelar</button>
-            </td>
-         </tr>
-      </table>
-      <h4>Historial movimientos</h4>
-      <div class="scroll">
+      
+      <h2>Caja</h2>
+      <form>
          <table class="tCCVeCo">
             <thead>
                <tr>
-                  <th scope="col">N° Movimiento</th>
-                  <th  class="feMay"  scope="col">Fecha</th>
-                  <th scope="col">Medio de Pago</th>
-                  <th scope="col">Destino</th>
-                  <th scope="col">Salida</th>
-                  <th scope="col">Medio de Pago</th>
-                  <th scope="col">Destino</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Descripción</th>
                   <th scope="col">Ingreso</th>
+                  <th scope="col">Egreso</th>
+                  <th scope="col">Saldo</th>
                </tr>
             </thead>
             <tbody>
                <tr>
-                  <td>001</td>
-                  <td>06/09/2025</td>
-                  <td>Efectivo</td>
-                  <td>Proveedor</td>
-                  <td>$10.000</td>
-                  <td>Trans.</td>
-                  <td>Cuenta Corriente</td>
-                  <td>$15.000</td>
+                  <td contenteditable="true">2025-10-28</td>
+                  <td contenteditable="true">Apertura de caja</td>
+                  <td contenteditable="true">100000.00</td>
+                  <td contenteditable="true">0.00</td>
+                  <td contenteditable="true">100000.00</td>
                </tr>
             </tbody>
+            <tfoot>
+               <tr>
+                  <th scope="row" colspan="4">Saldo final</th>
+                  <td>87500.00</td>
+               </tr>
+            </tfoot>
          </table>
-      </div>
-
-
+      </form>
 
    </main>
-   <a class="bVol" href="panel.html">←</a>
+   <a class="bVol" href="index.html">←</a>
 
    <footer>
 
