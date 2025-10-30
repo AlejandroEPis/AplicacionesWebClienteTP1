@@ -5,35 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css">
     <title>Compras</title>
 </head>
 
 <body>
-   <header class="heaNo">
-      <h1>Administracion Edificio</h1>
-      <nav>
+    <header class="heaNo">
+        <h1>Administracion Edificio</h1>
+        <nav>
 
-         <input type="checkbox" id="menu-toggle">
-         <label for="menu-toggle" class="meHam">☰</label>
-         <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="ventas.html">Ventas</a></li>
-            <li><a href="compras.html">Compras</a></li>
-            <li><a href="newClienProve.html">Cliente/Provedor</a></li>
-            <li><a href="caja.html">Caja</a></li>
-         </ul>
-      </nav>
-   </header>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="meHam">☰</label>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="compras.html">Compras</a></li>
+                <li><a href="newClienProve.html">Cliente/Provedor</a></li>
+                <li><a href="caja.html">Caja</a></li>
+            </ul>
+        </nav>
+    </header>
 
-   <aside>
-         <h3>Ultima Venta:</h3>
-         <p>Garcia Pedro</p>
-         <p>$15.000,00</p>
-         <h3>Ultima Compra:</h3>
-         <p>Pintureria Rex SA </p>
-         <p>$7.000,00</p>
-   </aside>
+    <aside>
+        <h3>Ultima Venta:</h3>
+        <p>Garcia Pedro</p>
+        <p>$15.000,00</p>
+        <h3>Ultima Compra:</h3>
+        <p>Pintureria Rex SA </p>
+        <p>$7.000,00</p>
+    </aside>
     <main>
         <h2>Compras</h2>
 
@@ -80,15 +80,15 @@
         </table>
 
         <h4>Cuenta Corriente</h4>
-        <form action="" method="post">
+        <form>
             <div class="scroll scrollc">
                 <table class="tCCVeCo">
                     <thead class="ccHead">
 
                         <tr>
                             <th scope="col">Fecha</th>
-                            <th class="letr" scope="col">Letra</th>
                             <th class="nFac" scope="col">N° de Factura</th>
+                            <th class="mPA" scope="col">Medio de Pago</th>
                             <th scope="col">Debe</th>
                             <th scope="col">Pago</th>
                             <th scope="col">Saldo</th>
@@ -111,7 +111,7 @@
                         <tr>
                             <td>11/11/2020</td>
                             <td>C</td>
-                            <td >0000000000000</td>
+                            <td>0000000000000</td>
                             <td>5</td>
                             <td>3</td>
                             <td>2</td>
@@ -124,7 +124,7 @@
                         <tr>
                             <td>11/11/2020</td>
                             <td>C</td>
-                            <td >0000000000000</td>
+                            <td>0000000000000</td>
                             <td>5</td>
                             <td>3</td>
                             <td>2</td>
@@ -137,7 +137,7 @@
                         <tr>
                             <td>11/11/2020</td>
                             <td>C</td>
-                            <td >0000000000000</td>
+                            <td>0000000000000</td>
                             <td>5</td>
                             <td>3</td>
                             <td>2</td>
@@ -151,7 +151,7 @@
                             <td>
                                 <input type="date" id="ffac" name="ffac" required>
                             </td>
-                            <td >
+                            <td>
                                 <select class="letr" id="letrafac" name="lfac">
                                     <option value="a">A</option>
                                     <option value="b">B</option>
@@ -182,15 +182,17 @@
         </form>
 
     </main>
-    <a class="bVol" href="idex.html">←</a>
-   <footer>
-      <table>
-         <tr>
-            <td>Saldo actual</td>
-            <td>$ 15.000,00</td>
-         </tr>
-      </table>
-   </footer>
+    <a class="bVol" href="index.html">←</a>
+    <footer>
+        <table>
+            <tr>
+                <td>Saldo actual</td>
+                <td>$ 15.000,00</td>
+            </tr>
+        </table>
+    </footer>
 </body>
+<script src="js/main.js"></script>
+<script src="js/anim.js"></script>
 
 </html>

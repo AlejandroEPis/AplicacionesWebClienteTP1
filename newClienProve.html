@@ -9,6 +9,10 @@
    <title>Cliente/Provedor</title>
 </head>
 
+
+
+
+
 <body>
    <header class="heaNo">
       <h1>Administracion Edificio</h1>
@@ -40,6 +44,7 @@
 
 
       <div class="nuevoCP">
+
          <form class="taClPr">
             <table>
                <caption>Nuevo Cliente</caption>
@@ -50,12 +55,12 @@
 
                <tr>
                   <td><label for="cuit">CUIT/CUIL/DNI</label></td>
-                  <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
+                  <td><input type="number" id="cuit" name="cuit" inputmode="numeric" required></td>
                </tr>
                <tr>
                   <td><label for="cIVA">Condición IVA</label></td>
                   <td>
-                     <select id="cIVA" name="cIVA">
+                     <select id="cIVA" name="cIVA" required>
                         <option value="responsable">Seleccionar</option>
                         <option value="responsable">Responsable Inscripto</option>
                         <option value="monotributo">Monotributista</option>
@@ -68,7 +73,7 @@
                </tr>
                <tr>
                   <td><label for="dcom">Domicilio comercial</label></td>
-                  <td><input type="text" id="dcom" name="dcom"></td>
+                  <td><input type="text" id="dcom" name="dcom" required></td>
                </tr>
                <tr>
                   <td><label for="tel">Teléfono</label></td>
@@ -80,28 +85,27 @@
                </tr>
                <td>
                   <button class="bGua" type="submit">Confirmar</button>
-                  <button class="bMod" type="submit">Cancelar</button>
                </td>
                </tr>
             </table>
 
          </form>
 
-         <form class="taClPr">
+         <form class="taClPro">
             <table>
-               <caption>Nuevo Proveedor</caption>
+               <caption>Nuevo Provedor</caption>
                <tr>
                   <td class="rzPro"><label for="rsoper">Razón Social</label></td>
                   <td><input type="text" id="rsoper" name="rsoper" required></td>
                </tr>
                <tr>
                   <td><label for="cuit">CUIT</label></td>
-                  <td><input type="text" id="cuit" name="cuit" inputmode="numeric"></td>
+                  <td><input type="number" id="cuit" name="cuit" inputmode="numeric" required></td>
                </tr>
 
                <td><label for="cIVA">Condición IVA</label></td>
                <td>
-                  <select id="cIVA" name="cIVA">
+                  <select id="cIVA" name="cIVA" required>
                      <option value="responsable">Seleccionar</option>
                      <option value="responsable">Responsable Inscripto</option>
                      <option value="monotributo">Monotributista</option>
@@ -114,7 +118,7 @@
                </tr>
                <tr>
                   <td><label for="dcom">Domicilio comercial</label></td>
-                  <td><input type="text" id="dcom" name="dcom"></td>
+                  <td><input type="text" id="dcom" name="dcom" required></td>
                </tr>
                <tr>
                <tr>
@@ -128,7 +132,6 @@
                <tr>
                   <td>
                      <button class="bGua" type="submit">Confirmar</button>
-                     <button class="bMod" type="submit">Cancelar</button>
                   </td>
                </tr>
             </table>
@@ -144,6 +147,13 @@
          </table>
       </footer>
 
+
+
+
 </body>
 
+</script>
+<script src="js/main.js"></script>
+<script src="js/cliPro.js"></script>
+<script src="js/anim.js"></script>
 </html>

@@ -53,6 +53,11 @@ h1 {
   margin: 0;
   padding: 0;
 }
+nav ul li a.activo {
+  color: rgb(235, 194, 211);
+  text-decoration: underline;
+  font-weight: bold;
+}
 
 /*Menu Hamburgesa*/
 .meHam {
@@ -377,6 +382,18 @@ div.fila {
   color: #E0E0E0;
 }
 
+/*Animacion panel*/
+.mPan a {
+  opacity: 0;                       
+  transform: translateY(20px);  
+  transition: all 0.6s ease; 
+}
+
+.mPan a.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /*Hoja Nuevo Cliente/Proveedor*/
 
 .nuevoCP {
@@ -386,7 +403,7 @@ div.fila {
   margin-top: 7%;
 }
 
-.taClPr {
+.taClPr, .taClPro  {
   font-weight: bold;
   text-decoration: none;
   color: white;
@@ -394,7 +411,7 @@ div.fila {
   border-radius: 8px;
   background-color: #233a7a;
 }
-
+.taClPro input,
 .taClPr input,
 select {
   font-weight: bold;
@@ -443,8 +460,6 @@ select {
   color: #E0E0E0;
   ;
 }
-
-
 
 /*Monitor mas chico que Full HD*/
 @media (max-width: 1366px) {
@@ -538,33 +553,29 @@ select {
     display: block;
   }
 
-  header.heaNo {
-    width: 100%;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-  }
+.heaNo nav ul {
+  display: none;
+  flex-direction: column;
+  background: #233a7a;
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  width: 100%;
+  padding-left: 0.5;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
 
-  .heaNo nav ul {
-    display: none;
-    flex-direction: column;
-    background: #233a7a;
-    position: absolute;
-    top: 10vh;
-    left: 0;
-    width: 100%;
-    padding: 1rem;
-  }
+.heaNo nav ul.abierto {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
 
   .heaNo h1 {
     order: 1;
   }
-
-  #menu-toggle:checked+.meHam+ul {
-    display: flex;
-  }
-
-
   nav.mPan {
     margin: 2%;
   }
@@ -594,7 +605,7 @@ select {
     align-items: center;
   }
 
-  .taClPr {
+  .taClPr, .taClPro  {
     margin-bottom: 10%;
   }
 
@@ -629,24 +640,29 @@ select {
     justify-content: space-between;
   }
 
-  .heaNo nav ul {
-    display: none;
-    flex-direction: column;
-    background: #233a7a;
-    position: absolute;
-    top: 10vh;
-    left: 0;
-    width: 100%;
-    padding: 1rem;
-  }
+ .heaNo nav ul {
+  display: none;
+  flex-direction: column;
+  background: #233a7a;
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.heaNo nav ul.abierto {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
 
   .heaNo h1 {
     order: 1;
     font-size: 1.3rem;
-  }
-
-  #menu-toggle:checked+.meHam+ul {
-    display: flex;
   }
 
   h2 {
@@ -760,7 +776,7 @@ select {
     align-items: center;
   }
 
-  .taClPr {
+  .taClPr, .taClPro  {
     margin-bottom: 10%;
   }
 
@@ -788,30 +804,34 @@ select {
     justify-content: space-between;
   }
 
-  .heaNo nav ul {
-    display: none;
-    flex-direction: column;
-    background: #233a7a;
-    position: absolute;
-    top: 10vh;
-    left: 0;
-    width: 100%;
-    gap: 0.5rem;
-  }
+.heaNo nav ul {
+  display: none;
+  flex-direction: column;
+  background: #233a7a;
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+.heaNo nav ul.abierto {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
   .heaNo li a{
      font-size: 0.8rem;
      margin: 0;
   }
 
-  .heaNo h1 {
+ .heaNo h1 {
     order: 1;
     font-size: 1.1rem;
   }
-
-  #menu-toggle:checked+.meHam+ul {
-    display: flex;
-  }
-
   h2 {
     font-size: 1.2rem;
   }
