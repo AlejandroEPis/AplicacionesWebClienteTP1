@@ -27,12 +27,12 @@
    </header>
 
    <aside>
-         <h3>Ultima Venta:</h3>
-         <p>Garcia Pedro</p>
-         <p>$15.000,00</p>
-         <h3>Ultima Compra:</h3>
-         <p>Pintureria Rex SA </p>
-         <p>$7.000,00</p>
+      <h3>Ultima Venta:</h3>
+      <p>Garcia Pedro</p>
+      <p>$15.000,00</p>
+      <h3>Ultima Compra:</h3>
+      <p>Pintureria Rex SA </p>
+      <p>$7.000,00</p>
    </aside>
    <main>
       <h2>Ventas</h2>
@@ -44,7 +44,7 @@
                <tr>
                   <th class="buschor" colspan="7">
                      <input class="busc" type="search" id="q" name="q" placeholder="Nombre y Apellido/Razón Social">
-                     <button class="lupa" submit>🔍</button>
+                     <button class="lupa" type="button">🔍</button>
                   </th>
                </tr>
                <tr>
@@ -59,15 +59,15 @@
             </thead>
             <tbody>
                <tr>
-                  <td>parlamento maria celeste</td>
-                  <td>xxxxxxxxxxx</td>
-                  <td>Responsable Inscripto</td>
-                  <td>Aristobitulo del valle 792</td>
-                  <td>xxxxxxxxxx</td>
-                  <td class="mail">parlamentomaria@hotmail.com</td>
+                  <td class="cli-nombre"></td>
+                  <td class="cli-cuit"></td>
+                  <td class="cli-iva"></td>
+                  <td class="cli-dom"></td>
+                  <td class="cli-tel"></td>
+                  <td class="cli-mail"></td>
                   <td class="bot">
                      <button class="bGua" type="submit">Guardar</button>
-                     <button class="bMod" type="submit">Modificar</button>              
+                     <button class="bMod" type="submit">Modificar</button>
                   </td>
                </tr>
                <tr>
@@ -88,47 +88,14 @@
                      <th scope="col">Fecha</th>
                      <th class="cuoCue" scope="col">Facura</th>
                      <th scope="col">Tipo de pago</th>
-                            <th scope="col">Debe</th>
-                            <th scope="col">Pago</th>
-                            <th scope="col">Saldo</th>
+                     <th scope="col">Debe</th>
+                     <th scope="col">Pago</th>
+                     <th scope="col">Saldo</th>
                      <th class="botopc" scope="col">Opciones</th>
                   </tr>
                </thead>
                <tbody class="ccBody">
-                  <tr>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td>ej</td>
-                     <td class="bot">
-                        <button class="bGua" type="submit">Guardar</button>
-                        <button class="bMod" type="submit">Modificar</button>
-                        <button class="bEli" type="submit">Eliminar</button>
-                     </td>
-                  <tr>
 
-                     <td><input type="date" name="fec"></td>
-                     <td><input type="number" name="cuo" placeholder="Factura"></td>
-                     <td>
-                        <select id="tpago" name="tpago">
-                           <option value="">Seleccione</option>
-                           <option value="a">Efectivo</option>
-                           <option value="b">Debito</option>
-                           <option value="c">Credito</option>
-                           <option value="d">Transferencia</option>
-                        </select>
-                     </td>
-                     <td><input type="number" name="ing" placeholder="Ingreso"></td>
-                     <td><input type="number" name="egr" placeholder="Egreso"></td>
-                     <td><input type="number" name="saldo" placeholder="Saldo"></td>
-                     <td class="bot">
-                        <button class="bGua" type="submit">Guardar</button>
-                        <button class="bMod" type="submit">Modificar</button>
-                        <button class="bEli" type="submit">Eliminar</button>
-                     </td>
-                  </tr>
                </tbody>
             </table>
          </div>
@@ -145,6 +112,8 @@
       </table>
    </footer>
 </body>
-<script src="js/main.js"></script>
+<script type="module" src="js/main.js"></script>
 <script src="js/anim.js"></script>
+<script type="module" src="js/ventas.js"></script>
+
 </html>
