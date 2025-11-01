@@ -1,4 +1,4 @@
-/* Buscado de clientes y cuenta corriente */
+/* Buscador de clientes y cuenta corriente */
 import { BASE_ID, API_TOKEN } from "./environment.js";
 import { TABLE_CLIENTES, TABLE_CCVENTAS } from "./config.js";
 
@@ -170,6 +170,7 @@ cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
 
+  /* ✏️ MODIFICAR */
   if (e.target.classList.contains("bMod")) {
     const celdas = fila.querySelectorAll("td:not(.bot)");
     const valores = [...celdas].map((td) => td.textContent.trim());
@@ -195,14 +196,21 @@ cuerpoCC.addEventListener("click", async (e) => {
     `;
   }
 
+  /* 💾 GUARDAR */
   if (e.target.classList.contains("bGua")) {
+    const clienteNombre = campos.nombre.textContent.trim();
+    if (!clienteNombre) {
+      alert("⚠️ Debe seleccionar un cliente antes de cargar movimientos.");
+      return;
+    }
+
     const datos = {
       Fecha: fila.querySelector('[name="fec"]').value,
       Factura: fila.querySelector('[name="factura"]').value,
       TipoPago: fila.querySelector('[name="tpago"]').value || null,
       Ingreso: Number(fila.querySelector('[name="debe"]').value),
       Egreso: Number(fila.querySelector('[name="pago"]').value),
-      Cliente: campos.nombre.textContent,
+      Cliente: clienteNombre,
     };
 
     const id = fila.dataset.id;
@@ -219,14 +227,14 @@ cuerpoCC.addEventListener("click", async (e) => {
     });
 
     if (res.ok) {
-      const cliente = campos.nombre.textContent;
-      const ventas = await getVentasPorCliente(cliente);
+      const ventas = await getVentasPorCliente(clienteNombre);
       mostrarVentas(ventas);
     } else {
       alert("Error al guardar los datos.");
     }
   }
 
+  /* ❌ ELIMINAR */
   if (e.target.classList.contains("bEli")) {
     if (confirm("¿Eliminar este registro?")) {
       const id = fila.dataset.id;

@@ -187,6 +187,7 @@ cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
 
+  /* ✏️ MODIFICAR */
   if (e.target.classList.contains("bMod")) {
     const celdas = fila.querySelectorAll("td:not(.bot)");
     const valores = [...celdas].map((td) => td.textContent.trim());
@@ -212,9 +213,15 @@ cuerpoCC.addEventListener("click", async (e) => {
     `;
   }
 
+  /* 💾 GUARDAR */
   if (e.target.classList.contains("bGua")) {
-    const nombreProveedor = campos.nombre.textContent;
-    const proveedorIdArray = await obtenerIdProveedor(nombreProveedor);
+    const proveedorNombre = campos.nombre.textContent.trim();
+    if (!proveedorNombre) {
+      alert("⚠️ Debe seleccionar un proveedor antes de cargar movimientos.");
+      return;
+    }
+
+    const proveedorIdArray = await obtenerIdProveedor(proveedorNombre);
 
     const datos = {
       Fecha: fila.querySelector('[name="fec"]').value,
@@ -239,13 +246,14 @@ cuerpoCC.addEventListener("click", async (e) => {
     });
 
     if (res.ok) {
-      const compras = await getComprasPorProveedor(nombreProveedor);
+      const compras = await getComprasPorProveedor(proveedorNombre);
       mostrarCompras(compras);
     } else {
       alert("Error al guardar los datos.");
     }
   }
 
+  /* ❌ ELIMINAR */
   if (e.target.classList.contains("bEli")) {
     if (confirm("¿Eliminar este registro?")) {
       const id = fila.dataset.id;
@@ -259,3 +267,4 @@ cuerpoCC.addEventListener("click", async (e) => {
     }
   }
 });
+
