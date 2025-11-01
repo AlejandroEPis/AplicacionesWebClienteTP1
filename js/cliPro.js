@@ -1,4 +1,4 @@
-import { addCliente, addProveedor } from "./main.js";
+import { addCliente, addProveedor } from "./api.js";
 import { TABLE_CLIENTES, TABLE_PROVEEDORES } from "./config.js";
 
 /*Tabla cliente*/

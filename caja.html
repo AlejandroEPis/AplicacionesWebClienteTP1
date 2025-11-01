@@ -25,57 +25,45 @@
          </ul>
       </nav>
    </header>
-<aside>
-  <h3>Última Venta:</h3>
-  <p id="ultimo-cliente">—</p>
-  <p id="ultimo-importe">—</p>
-  <h3>Última Compra:</h3>
-  <p id="ultima-compra-nombre">—</p>
-  <p id="ultima-compra-importe">—</p>
-</aside>
+   <aside>
+      <h3>Última Venta:</h3>
+      <p id="ultimo-cliente">—</p>
+      <p id="ultimo-importe">—</p>
+      <h3>Última Compra:</h3>
+      <p id="ultima-compra-nombre">—</p>
+      <p id="ultima-compra-importe">—</p>
+   </aside>
    <main>
 
       <h2>Caja</h2>
       <form>
          <div class="scroll scrollc">
-         <table class="tCaja">
-            <thead>
-               <tr>
-               <tr>
-                  <th class="buschor" colspan="6">
-                     <input class="busc" type="date" id="fecha" name="fecha">
-                     <button class="lupa" type="submit">🔍</button>
-                  </th>
-               </tr>
-               <th scope="col">Fecha</th>
-               <th scope="col">Descripción</th>
-               <th scope="col">Ingreso</th>
-               <th scope="col">Egreso</th>
-               <th scope="col">Saldo</th>
-               <th class="botopc" scope="col">Opciones</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>2025-10-28</td>
-                  <td>Apertura de caja</td>
-                  <td>100000.00</td>
-                  <td>0.00</td>
-                  <td>100000.00</td>
-                  <td class="bot">
-                     <button class="bGua" type="submit">Guardar</button>
-                     <button class="bMod" type="submit">Modificar</button>
-                     <button class="bEli" type="submit">Eliminar</button>
-                  </td>
-               </tr>
-            </tbody>
-            <tfoot>
-               <tr>
-                  <th scope="row" colspan="5">Saldo final</th>
-                  <td>87500.00</td>
-               </tr>
-            </tfoot>
-         </table>
+            <table class="tCaja">
+               <thead>
+                  <tr>
+                  <tr>
+                     <th class="buschor" colspan="6">
+                        <input class="busc" type="date" id="fecha" name="fecha">
+                     </th>
+                  </tr>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Ingreso</th>
+                  <th scope="col">Egreso</th>
+                  <th scope="col">Saldo</th>
+                  <th class="botopc" scope="col">Opciones</th>
+                  </tr>
+               </thead>
+               <tbody>
+
+               </tbody>
+               <tfoot>
+                  <tr>
+                     <th scope="row" colspan="5">Saldo final</th>
+                     <td id="saldo-final">—</td>
+                  </tr>
+               </tfoot>
+            </table>
          </div>
       </form>
 
@@ -86,12 +74,13 @@
       <table>
          <tr>
             <td>Saldo actual</td>
-            <td>$ 15.000,00</td>
+            <td id="saldo-footer">—</td>
          </tr>
       </table>
    </footer>
 </body>
 <script type="module" src="js/api.js"></script>
-<script type="module"src="js/main.js"></script>
-<script type="module" src=""></script>
+<script type="module" src="js/main.js"></script>
+<script type="module" src="js/caja.js"></script>
+
 </html>
