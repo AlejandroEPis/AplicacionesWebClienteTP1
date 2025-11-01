@@ -25,7 +25,6 @@ async function getMovimientos() {
     fetchAirtable(urlCaja),
   ]);
 
-  // Normalizamos los 3 tipos al mismo formato
   const mapVenta = ventas.map((v) => ({
     id: v.id,
     Fecha: v.Fecha,
@@ -55,11 +54,32 @@ async function getMovimientos() {
   return todos;
 }
 
-// ==================== MOSTRAR EN TABLA ====================
-function mostrarMovimientos(lista) {
+// ==================== MOSTRAR MOVIMIENTOS ====================
+function mostrarMovimientosConSaldoInicial(lista, saldoAnterior, fechaSeleccionada) {
   tablaBody.innerHTML = "";
-  let saldo = 0;
+  let saldo = saldoAnterior;
 
+  // Fila de saldo inicial
+  if (fechaSeleccionada && !isNaN(saldoAnterior)) {
+    const esPositivo = saldoAnterior >= 0;
+    const ingreso = esPositivo ? saldoAnterior.toFixed(2) : 0;
+    const egreso = esPositivo ? 0 : Math.abs(saldoAnterior).toFixed(2);
+    tablaBody.insertAdjacentHTML(
+      "beforeend",
+      `
+      <tr>
+        <td>${fechaSeleccionada}</td>
+        <td>Saldo inicial</td>
+        <td>${ingreso}</td>
+        <td>${egreso}</td>
+        <td>${saldoAnterior.toFixed(2)}</td>
+        <td></td>
+      </tr>
+      `
+    );
+  }
+
+  // Filas de movimientos del día
   lista.forEach((mov) => {
     saldo += (Number(mov.Ingreso) || 0) - (Number(mov.Egreso) || 0);
     tablaBody.insertAdjacentHTML(
@@ -70,8 +90,8 @@ function mostrarMovimientos(lista) {
         <td>${mov.Descripcion || ""}</td>
         <td>${mov.Ingreso || 0}</td>
         <td>${mov.Egreso || 0}</td>
-        <td>${saldo}</td>
-        <td class="bot">
+        <td>${saldo.toFixed(2)}</td>
+        <td>
           <button class="bMod" type="button">Modificar</button>
           <button class="bEli" type="button">Eliminar</button>
         </td>
@@ -85,27 +105,42 @@ function mostrarMovimientos(lista) {
     "beforeend",
     `
     <tr>
-      <td><input type="date" name="Fecha"></td>
-      <td><input type="text" name="Descripcion" placeholder="Descripción"></td>
+      <td><input type="date" name="Fecha" value="${fechaSeleccionada || ""}"></td>
+      <td><input type="text" name="Descripcion"></td>
       <td><input type="number" name="Ingreso" value="0"></td>
       <td><input type="number" name="Egreso" value="0"></td>
-      <td>—</td>
-      <td class="bot">
+      <td></td>
+      <td>
         <button class="bGua" type="button">Guardar</button>
       </td>
     </tr>
   `
   );
+
+  // Actualizar saldo final y footer
+  const saldoFinal = saldo.toFixed(2);
+  const celdaFinal = document.getElementById("saldo-final");
+  const celdaFooter = document.getElementById("saldo-footer");
+  if (celdaFinal) celdaFinal.textContent = saldoFinal;
+  if (celdaFooter) celdaFooter.textContent = `$ ${saldoFinal}`;
 }
 
-// ==================== FILTRO POR FECHA ====================
+// ==================== EVENTO: CAMBIO DE FECHA ====================
 inputFecha.addEventListener("change", async () => {
   const todos = await getMovimientos();
-  const seleccionada = inputFecha.value;
-  if (!seleccionada) return mostrarMovimientos(todos);
+  const fechaSeleccionada = inputFecha.value;
 
-  const filtrados = todos.filter((m) => m.Fecha?.startsWith(seleccionada));
-  mostrarMovimientos(filtrados);
+  if (!fechaSeleccionada) return;
+
+  const anteriores = todos.filter((m) => new Date(m.Fecha) < new Date(fechaSeleccionada));
+  const saldoAnterior = anteriores.reduce(
+    (acc, m) => acc + (Number(m.Ingreso) || 0) - (Number(m.Egreso) || 0),
+    0
+  );
+
+  const movimientosDelDia = todos.filter((m) => m.Fecha === fechaSeleccionada);
+
+  mostrarMovimientosConSaldoInicial(movimientosDelDia, saldoAnterior, fechaSeleccionada);
 });
 
 // ==================== CRUD MANUAL ====================
@@ -113,7 +148,7 @@ tablaBody.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
 
-  // 💾 GUARDAR NUEVO
+  // Guardar nuevo
   if (e.target.classList.contains("bGua")) {
     const datos = {
       Fecha: fila.querySelector('[name="Fecha"]').value,
@@ -121,6 +156,11 @@ tablaBody.addEventListener("click", async (e) => {
       Ingreso: Number(fila.querySelector('[name="Ingreso"]').value),
       Egreso: Number(fila.querySelector('[name="Egreso"]').value),
     };
+
+    if (!datos.Fecha || !datos.Descripcion.trim()) {
+      alert("Completá la fecha y la descripción.");
+      return;
+    }
 
     const res = await fetch(urlCaja, {
       method: "POST",
@@ -132,17 +172,15 @@ tablaBody.addEventListener("click", async (e) => {
     });
 
     if (res.ok) {
-      alert("Movimiento agregado a Caja");
-      const todos = await getMovimientos();
-      mostrarMovimientos(todos);
+      inputFecha.dispatchEvent(new Event("change"));
     } else {
-      alert("Error al guardar el movimiento");
+      alert("Error al guardar el movimiento.");
     }
   }
 
-  // ✏️ MODIFICAR
+  // Modificar
   if (e.target.classList.contains("bMod")) {
-    const celdas = fila.querySelectorAll("td:not(.bot)");
+    const celdas = fila.querySelectorAll("td:not(:last-child)");
     const valores = [...celdas].map((td) => td.textContent.trim());
     fila.innerHTML = `
       <td><input type="date" name="Fecha" value="${valores[0]}"></td>
@@ -150,14 +188,14 @@ tablaBody.addEventListener("click", async (e) => {
       <td><input type="number" name="Ingreso" value="${valores[2]}"></td>
       <td><input type="number" name="Egreso" value="${valores[3]}"></td>
       <td>${valores[4]}</td>
-      <td class="bot">
+      <td>
         <button class="bGuaMod" type="button">Guardar</button>
         <button class="bEli" type="button">Eliminar</button>
       </td>
     `;
   }
 
-  // 💾 GUARDAR MODIFICACIÓN
+  // Guardar modificación
   if (e.target.classList.contains("bGuaMod")) {
     const id = fila.dataset.id;
     const datos = {
@@ -177,15 +215,13 @@ tablaBody.addEventListener("click", async (e) => {
     });
 
     if (res.ok) {
-      alert("Movimiento actualizado");
-      const todos = await getMovimientos();
-      mostrarMovimientos(todos);
+      inputFecha.dispatchEvent(new Event("change"));
     } else {
-      alert("Error al modificar el movimiento");
+      alert("Error al modificar el movimiento.");
     }
   }
 
-  // ❌ ELIMINAR
+  // Eliminar
   if (e.target.classList.contains("bEli")) {
     if (confirm("¿Eliminar este registro?")) {
       const id = fila.dataset.id;
@@ -195,13 +231,13 @@ tablaBody.addEventListener("click", async (e) => {
           headers: { Authorization: `Bearer ${API_TOKEN}` },
         });
       }
-      fila.remove();
+      inputFecha.dispatchEvent(new Event("change"));
     }
   }
 });
 
 // ==================== INICIO ====================
-(async function init() {
-  const movimientos = await getMovimientos();
-  mostrarMovimientos(movimientos);
+// Arranca vacío hasta que se seleccione una fecha
+(function init() {
+  tablaBody.innerHTML = "";
 })();

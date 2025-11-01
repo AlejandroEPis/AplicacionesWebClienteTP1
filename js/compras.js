@@ -32,7 +32,7 @@ async function buscarProveedor(texto) {
   });
 
   const data = await res.json();
-  return data.records.length > 0 ? data.records[0] : null; // devolvemos todo el record (id + fields)
+  return data.records.length > 0 ? data.records[0] : null;
 }
 
 /* ==================== OBTENER ID DEL PROVEEDOR ==================== */
@@ -43,7 +43,7 @@ async function obtenerIdProveedor(nombreProveedor) {
   });
   const data = await res.json();
   if (data.records.length > 0) {
-    return [data.records[0].id]; // Airtable espera un array con el ID
+    return [data.records[0].id];
   }
   return [];
 }
@@ -145,14 +145,20 @@ async function mostrarProveedor(record) {
   mostrarCompras(compras);
 }
 
-/* ==================== BUSCADOR EN VIVO ==================== */
+/* ==================== BUSCADOR EN VIVO + LOCALSTORAGE ==================== */
 async function manejarBusqueda() {
   const texto = buscadorInput.value.trim();
+
   if (!texto) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
     cuerpoCC.innerHTML = filaEditableHTML();
+    localStorage.removeItem("ultimoProveedor");
     return;
   }
+
+  // 🔹 Guardar el último proveedor buscado
+  localStorage.setItem("ultimoProveedor", texto);
+
   const record = await buscarProveedor(texto);
   await mostrarProveedor(record);
 }
@@ -167,12 +173,20 @@ buscadorInput.addEventListener("input", () => {
   }, 500);
 });
 
+// 🔹 Al cargar la página, restaurar el último proveedor buscado
+window.addEventListener("DOMContentLoaded", async () => {
+  const ultimo = localStorage.getItem("ultimoProveedor");
+  if (ultimo) {
+    buscadorInput.value = ultimo;
+    await manejarBusqueda();
+  }
+});
+
 /* ==================== CRUD ==================== */
 cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
 
-  /* ✏️ MODIFICAR */
   if (e.target.classList.contains("bMod")) {
     const celdas = fila.querySelectorAll("td:not(.bot)");
     const valores = [...celdas].map((td) => td.textContent.trim());
@@ -198,7 +212,6 @@ cuerpoCC.addEventListener("click", async (e) => {
     `;
   }
 
-  /* 💾 GUARDAR */
   if (e.target.classList.contains("bGua")) {
     const nombreProveedor = campos.nombre.textContent;
     const proveedorIdArray = await obtenerIdProveedor(nombreProveedor);
@@ -209,7 +222,7 @@ cuerpoCC.addEventListener("click", async (e) => {
       TipoPago: fila.querySelector('[name="tpago"]').value || null,
       Ingreso: Number(fila.querySelector('[name="debe"]').value),
       Egreso: Number(fila.querySelector('[name="pago"]').value),
-      Proveedor: proveedorIdArray, // ahora usa el ID real
+      Proveedor: proveedorIdArray,
     };
 
     const id = fila.dataset.id;
@@ -233,7 +246,6 @@ cuerpoCC.addEventListener("click", async (e) => {
     }
   }
 
-  /* ❌ ELIMINAR */
   if (e.target.classList.contains("bEli")) {
     if (confirm("¿Eliminar este registro?")) {
       const id = fila.dataset.id;

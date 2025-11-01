@@ -7,7 +7,6 @@ const urlClientes = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_CLIE
 const urlVentas = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCVENTAS}`;
 
 const buscadorInput = document.querySelector("#q");
-const botonBuscar = document.querySelector(".lupa");
 
 const campos = {
   nombre: document.querySelector(".cli-nombre"),
@@ -129,14 +128,20 @@ async function mostrarCliente(cliente) {
   mostrarVentas(ventas);
 }
 
-/* ==================== BUSCADOR EN VIVO ==================== */
+/* ==================== BUSCADOR EN VIVO + LOCALSTORAGE ==================== */
 async function manejarBusqueda() {
   const texto = buscadorInput.value.trim();
+
   if (!texto) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
     cuerpoCC.innerHTML = filaEditableHTML();
+    localStorage.removeItem("ultimoCliente");
     return;
   }
+
+  // 🔹 Guardar el último cliente buscado
+  localStorage.setItem("ultimoCliente", texto);
+
   const cliente = await buscarCliente(texto);
   await mostrarCliente(cliente);
 }
@@ -151,12 +156,20 @@ buscadorInput.addEventListener("input", () => {
   }, 500);
 });
 
+// 🔹 Al cargar la página, restaurar el último cliente buscado
+window.addEventListener("DOMContentLoaded", async () => {
+  const ultimo = localStorage.getItem("ultimoCliente");
+  if (ultimo) {
+    buscadorInput.value = ultimo;
+    await manejarBusqueda();
+  }
+});
+
 /* ==================== CRUD ==================== */
 cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
 
-  /* ✏️ MODIFICAR */
   if (e.target.classList.contains("bMod")) {
     const celdas = fila.querySelectorAll("td:not(.bot)");
     const valores = [...celdas].map((td) => td.textContent.trim());
@@ -182,7 +195,6 @@ cuerpoCC.addEventListener("click", async (e) => {
     `;
   }
 
-  /* 💾 GUARDAR */
   if (e.target.classList.contains("bGua")) {
     const datos = {
       Fecha: fila.querySelector('[name="fec"]').value,
@@ -190,7 +202,7 @@ cuerpoCC.addEventListener("click", async (e) => {
       TipoPago: fila.querySelector('[name="tpago"]').value || null,
       Ingreso: Number(fila.querySelector('[name="debe"]').value),
       Egreso: Number(fila.querySelector('[name="pago"]').value),
-      Cliente: campos.nombre.textContent
+      Cliente: campos.nombre.textContent,
     };
 
     const id = fila.dataset.id;
@@ -215,7 +227,6 @@ cuerpoCC.addEventListener("click", async (e) => {
     }
   }
 
-  /* ❌ ELIMINAR */
   if (e.target.classList.contains("bEli")) {
     if (confirm("¿Eliminar este registro?")) {
       const id = fila.dataset.id;
@@ -229,4 +240,3 @@ cuerpoCC.addEventListener("click", async (e) => {
     }
   }
 });
-

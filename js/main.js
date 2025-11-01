@@ -1,49 +1,35 @@
-/*Animacion Menu Hamburgesa */
+/* ==================== ANIMACIÓN MENÚ HAMBURGUESA ==================== */
 const botonMenu = document.querySelector(".meHam");
 const menu = document.querySelector("nav ul");
-botonMenu.addEventListener("click", toggleMenu)
-
-function toggleMenu(){
-    menu.classList.toggle("abierto")
-}
 botonMenu.addEventListener("click", toggleMenu);
 
-/*Detector de pagina activa */
-const indicadorPagina = document.querySelectorAll("nav ul li a");
-const paginaActual =window.location.pathname;
+function toggleMenu() {
+  menu.classList.toggle("abierto");
+}
 
-indicadorPagina.forEach(link=> {
-    if (paginaActual.includes(link.getAttribute("href"))){
-        link.classList.add("activo")
-    }
+/* ==================== DETECTOR DE PÁGINA ACTIVA ==================== */
+const indicadorPagina = document.querySelectorAll("nav ul li a");
+const paginaActual = window.location.pathname;
+
+indicadorPagina.forEach((link) => {
+  if (paginaActual.includes(link.getAttribute("href"))) {
+    link.classList.add("activo");
+  }
 });
 
-/*Panel animacion*/
-const panelBotones = document.querySelectorAll(".mPan a")
-
+/* ==================== ANIMACIÓN PANEL PRINCIPAL (INDEX) ==================== */
+const panelBotones = document.querySelectorAll(".mPan a");
 panelBotones.forEach((boton, index) => {
   setTimeout(() => {
     boton.classList.add("visible");
   }, index * 200);
 });
 
-/*Muestra aside*/
-import { BASE_ID, API_TOKEN } from "./environment.js";
+/* ==================== DATOS DINÁMICOS: ASIDE Y FOOTER ==================== */
+import { getUltimoRegistro, getSaldoActual } from "./api.js";
 import { TABLE_CCVENTAS, TABLE_CCCOMPRAS } from "./config.js";
 
-const proxy = "https://cors-anywhere.herokuapp.com/";
-
-
-async function getUltimoRegistro(tabla) {
-  const url = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${tabla}?sort[0][field]=Fecha&sort[0][direction]=desc&maxRecords=1`;
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${API_TOKEN}` },
-  });
-  if (!res.ok) throw new Error(`Error ${res.status}`);
-  const data = await res.json();
-  return data.records.length > 0 ? data.records[0].fields : null;
-}
-
+/* ==================== MOSTRAR ÚLTIMA VENTA Y COMPRA (ASIDE) ==================== */
 async function mostrarUltimosMovimientos() {
   try {
     const ultimaVenta = await getUltimoRegistro(TABLE_CCVENTAS);
@@ -56,9 +42,12 @@ async function mostrarUltimosMovimientos() {
     if (ultimaVenta) {
       ventaNombre.textContent = ultimaVenta.Cliente || "—";
       ventaImporte.textContent = `$${ultimaVenta.Ingreso || 0}`;
-    } else {
-      ventaNombre.textContent = "Sin ventas registradas";
-      ventaImporte.textContent = "";
+
+      // ✅ Guardar en localStorage
+      localStorage.setItem("ultimaVenta", JSON.stringify({
+        cliente: ultimaVenta.Cliente || "—",
+        importe: ultimaVenta.Ingreso || 0,
+      }));
     }
 
     // 🔹 Compra
@@ -68,44 +57,58 @@ async function mostrarUltimosMovimientos() {
     if (ultimaCompra) {
       compraNombre.textContent = ultimaCompra.Proveedor || "—";
       compraImporte.textContent = `$${ultimaCompra.Egreso || 0}`;
-    } else {
-      compraNombre.textContent = "Sin compras registradas";
-      compraImporte.textContent = "";
-    }
 
+      // ✅ Guardar en localStorage
+      localStorage.setItem("ultimaCompra", JSON.stringify({
+        proveedor: ultimaCompra.Proveedor || "—",
+        importe: ultimaCompra.Egreso || 0,
+      }));
+    }
   } catch (error) {
     console.error("Error al cargar el aside:", error);
+
+    // ⚙️ Si hay error, mostrar lo último guardado
+    const ventaGuardada = JSON.parse(localStorage.getItem("ultimaVenta") || "{}");
+    const compraGuardada = JSON.parse(localStorage.getItem("ultimaCompra") || "{}");
+
+    const ventaNombre = document.querySelector("aside h3:nth-of-type(1) + p");
+    const ventaImporte = document.querySelector("aside h3:nth-of-type(1) + p + p");
+    const compraNombre = document.querySelector("aside h3:nth-of-type(2) + p");
+    const compraImporte = document.querySelector("aside h3:nth-of-type(2) + p + p");
+
+    if (ventaGuardada.cliente) {
+      ventaNombre.textContent = ventaGuardada.cliente;
+      ventaImporte.textContent = `$${ventaGuardada.importe}`;
+    }
+    if (compraGuardada.proveedor) {
+      compraNombre.textContent = compraGuardada.proveedor;
+      compraImporte.textContent = `$${compraGuardada.importe}`;
+    }
   }
 }
 
-mostrarUltimosMovimientos();
-
-/*Saldo en footer*/
-import { BASE_ID, API_TOKEN } from "./environment.js";
-import { TABLE_CAJA } from "./config.js";
-
-async function getSaldoActual() {
-  const proxy = "https://cors-anywhere.herokuapp.com/";
-  const url = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}?sort[0][field]=Fecha&sort[0][direction]=asc`;
-
+/* ==================== MOSTRAR SALDO ACTUAL EN FOOTER ==================== */
+async function mostrarSaldoFooter() {
+  const celdaFooter = document.getElementById("saldo-footer");
   try {
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
-    });
-    if (!res.ok) throw new Error(`Error ${res.status}`);
-    const data = await res.json();
-
-    let saldo = 0;
-    data.records.forEach((r) => {
-      const mov = r.fields;
-      saldo += (Number(mov.Ingreso) || 0) - (Number(mov.Egreso) || 0);
-    });
-
-    const celdaFooter = document.getElementById("saldo-footer");
+    const saldo = await getSaldoActual();
     if (celdaFooter) celdaFooter.textContent = `$ ${saldo.toFixed(2)}`;
+
+    // ✅ Guardar saldo en localStorage
+    localStorage.setItem("saldoActual", saldo.toFixed(2));
   } catch (err) {
     console.error("Error al obtener saldo:", err);
+
+    // ⚙️ Mostrar último saldo guardado si hay
+    const saldoGuardado = localStorage.getItem("saldoActual");
+    if (saldoGuardado && celdaFooter) {
+      celdaFooter.textContent = `$ ${parseFloat(saldoGuardado).toFixed(2)} (último valor)`;
+    }
   }
 }
 
-getSaldoActual();
+/* ==================== INICIALIZAR ==================== */
+window.addEventListener("DOMContentLoaded", () => {
+  mostrarUltimosMovimientos();
+  mostrarSaldoFooter();
+});
