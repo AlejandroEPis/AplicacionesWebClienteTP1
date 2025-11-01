@@ -26,14 +26,14 @@
       </nav>
    </header>
 
-   <aside>
-      <h3>Ultima Venta:</h3>
-      <p>Garcia Pedro</p>
-      <p>$15.000,00</p>
-      <h3>Ultima Compra:</h3>
-      <p>Pintureria Rex SA </p>
-      <p>$7.000,00</p>
-   </aside>
+<aside>
+  <h3>Última Venta:</h3>
+  <p id="ultimo-cliente">—</p>
+  <p id="ultimo-importe">—</p>
+  <h3>Última Compra:</h3>
+  <p id="ultima-compra-nombre">—</p>
+  <p id="ultima-compra-importe">—</p>
+</aside>
    <main>
       <h2>Ventas</h2>
 
@@ -44,7 +44,6 @@
                <tr>
                   <th class="buschor" colspan="7">
                      <input class="busc" type="search" id="q" name="q" placeholder="Nombre y Apellido/Razón Social">
-                     <button class="lupa" type="button">🔍</button>
                   </th>
                </tr>
                <tr>
@@ -54,7 +53,6 @@
                   <th scope="col">Domicilio comercial</th>
                   <th scope="col">Teléfono</th>
                   <th scope="col">MAIL</th>
-                  <th class="botopc" scope="col">Opciones</th>
                </tr>
             </thead>
             <tbody>
@@ -65,10 +63,6 @@
                   <td class="cli-dom"></td>
                   <td class="cli-tel"></td>
                   <td class="cli-mail"></td>
-                  <td class="bot">
-                     <button class="bGua" type="submit">Guardar</button>
-                     <button class="bMod" type="submit">Modificar</button>
-                  </td>
                </tr>
                <tr>
                   <td colspan="7">
@@ -112,8 +106,8 @@
       </table>
    </footer>
 </body>
-<script type="module" src="js/main.js"></script>
-<script src="js/anim.js"></script>
+<script type="module" src="js/api.js"></script>
+<script type="module"src="js/main.js"></script>
 <script type="module" src="js/ventas.js"></script>
 
 </html>

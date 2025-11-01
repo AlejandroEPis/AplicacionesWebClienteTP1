@@ -1,45 +1,28 @@
-import { API_TOKEN, BASE_ID } from "./environment.js";
-import {
-  TABLE_CLIENTES,
-  TABLE_PROVEEDORES,
-  TABLE_CCVENTAS,
-  TABLE_CCCOMPRAS,
-  TABLE_CAJA
-} from "./config.js";
+/*Animacion Menu Hamburgesa */
+const botonMenu = document.querySelector(".meHam");
+const menu = document.querySelector("nav ul");
+botonMenu.addEventListener("click", toggleMenu)
 
-async function airtableRequest(tabla, method = "GET", data = null, recordId = "") {
-  const proxy = "https://cors-anywhere.herokuapp.com/"; // evita error CORS
-  const url = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${tabla}${recordId ? "/" + recordId : ""}`;
-
-  const options = {
-    method,
-    headers: {
-      "Authorization": `Bearer ${API_TOKEN}`,
-      "Content-Type": "application/json"
-    }
-  };
-
-  if (data) options.body = JSON.stringify({ fields: data });
-
-  const res = await fetch(url, options);
-  if (!res.ok) throw new Error(`Error ${res.status}`);
-  return await res.json();
+function toggleMenu(){
+    menu.classList.toggle("abierto")
 }
+botonMenu.addEventListener("click", toggleMenu);
 
-// Funciones específicas
-const mapRecords = (data) => data.records.map(r => ({ id: r.id, ...r.fields }));
+/*Detector de pagina activa */
+const indicadorPagina = document.querySelectorAll("nav ul li a");
+const paginaActual =window.location.pathname;
 
-export const getClientes = async () => mapRecords(await airtableRequest(TABLE_CLIENTES));
-export const addCliente = async (data) => airtableRequest(TABLE_CLIENTES, "POST", data);
+indicadorPagina.forEach(link=> {
+    if (paginaActual.includes(link.getAttribute("href"))){
+        link.classList.add("activo")
+    }
+});
 
-export const getProveedores = async () => mapRecords(await airtableRequest(TABLE_PROVEEDORES));
-export const addProveedor = async (data) => airtableRequest(TABLE_PROVEEDORES, "POST", data);
+/*Panel animacion*/
+const panelBotones = document.querySelectorAll(".mPan a")
 
-export const getCCVentas = async () => mapRecords(await airtableRequest(TABLE_CCVENTAS));
-export const addCCVenta = async (data) => airtableRequest(TABLE_CCVENTAS, "POST", data);
-
-export const getCCCompras = async () => mapRecords(await airtableRequest(TABLE_CCCOMPRAS));
-export const addCCCompra = async (data) => airtableRequest(TABLE_CCCOMPRAS, "POST", data);
-
-export const getCaja = async () => mapRecords(await airtableRequest(TABLE_CAJA));
-export const addCaja = async (data) => airtableRequest(TABLE_CAJA, "POST", data);
+panelBotones.forEach((boton, index) => {
+  setTimeout(() => {
+    boton.classList.add("visible");
+  }, index * 200);
+});

@@ -1,13 +1,12 @@
-/* Buscado de clientes y cuenta corriente */
+/* Buscador de proveedores y cuenta corriente de compras */
 import { BASE_ID, API_TOKEN } from "./environment.js";
-import { TABLE_CLIENTES, TABLE_CCVENTAS } from "./config.js";
+import { TABLE_PROVEEDORES, TABLE_CCCOMPRAS } from "./config.js";
 
 const proxy = "https://cors-anywhere.herokuapp.com/";
-const urlClientes = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_CLIENTES}`;
-const urlVentas = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCVENTAS}`;
+const urlProveedores = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_PROVEEDORES}`;
+const urlCompras = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCCOMPRAS}`;
 
 const buscadorInput = document.querySelector("#q");
-const botonBuscar = document.querySelector(".lupa");
 
 const campos = {
   nombre: document.querySelector(".cli-nombre"),
@@ -20,25 +19,40 @@ const campos = {
 
 const cuerpoCC = document.querySelector(".ccBody");
 
-/* ==================== BUSCAR CLIENTE ==================== */
-async function buscarCliente(texto) {
+/* ==================== BUSCAR PROVEEDOR ==================== */
+async function buscarProveedor(texto) {
   const filtro = `OR(
-    FIND(LOWER("${texto}"), LOWER({Nombre})),
+    FIND(LOWER("${texto}"), LOWER({RazonSocial})),
     FIND(LOWER("${texto}"), LOWER({CUIT})),
     FIND(LOWER("${texto}"), LOWER({Mail}))
   )`;
-  const res = await fetch(`${urlClientes}?filterByFormula=${encodeURIComponent(filtro)}`, {
+
+  const res = await fetch(`${urlProveedores}?filterByFormula=${encodeURIComponent(filtro)}`, {
+    headers: { Authorization: `Bearer ${API_TOKEN}` },
+  });
+
+  const data = await res.json();
+  return data.records.length > 0 ? data.records[0] : null; // devolvemos todo el record (id + fields)
+}
+
+/* ==================== OBTENER ID DEL PROVEEDOR ==================== */
+async function obtenerIdProveedor(nombreProveedor) {
+  const filtro = `LOWER({RazonSocial}) = LOWER("${nombreProveedor}")`;
+  const res = await fetch(`${urlProveedores}?filterByFormula=${encodeURIComponent(filtro)}`, {
     headers: { Authorization: `Bearer ${API_TOKEN}` },
   });
   const data = await res.json();
-  return data.records.length > 0 ? data.records[0].fields : null;
+  if (data.records.length > 0) {
+    return [data.records[0].id]; // Airtable espera un array con el ID
+  }
+  return [];
 }
 
 /* ==================== TRAER MOVIMIENTOS ==================== */
-async function getVentasPorCliente(nombreCliente) {
-  const filtro = `FIND(LOWER("${nombreCliente}"), LOWER({Cliente}))`;
+async function getComprasPorProveedor(nombreProveedor) {
+  const filtro = `FIND(LOWER("${nombreProveedor}"), LOWER({Proveedor}))`;
   const res = await fetch(
-    `${urlVentas}?filterByFormula=${encodeURIComponent(filtro)}&view=Grid%20view`,
+    `${urlCompras}?filterByFormula=${encodeURIComponent(filtro)}&view=Grid%20view`,
     {
       headers: { Authorization: `Bearer ${API_TOKEN}` },
     }
@@ -92,7 +106,7 @@ function filaConDatosHTML(v, saldoAcumulado) {
 }
 
 /* ==================== MOSTRAR MOVIMIENTOS ==================== */
-function mostrarVentas(lista) {
+function mostrarCompras(lista) {
   cuerpoCC.innerHTML = "";
   if (!lista || lista.length === 0) {
     cuerpoCC.innerHTML = filaEditableHTML();
@@ -110,23 +124,25 @@ function mostrarVentas(lista) {
   cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
 }
 
-/* ==================== MOSTRAR CLIENTE ==================== */
-async function mostrarCliente(cliente) {
-  if (!cliente) {
+/* ==================== MOSTRAR PROVEEDOR ==================== */
+async function mostrarProveedor(record) {
+  if (!record) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
     cuerpoCC.innerHTML = filaEditableHTML();
     return;
   }
 
-  campos.nombre.textContent = cliente.Nombre || "";
-  campos.cuit.textContent = cliente.CUIT || "";
-  campos.iva.textContent = cliente.CondicionIVA || "";
-  campos.domicilio.textContent = cliente.Domicilio || "";
-  campos.telefono.textContent = cliente.Telefono || "";
-  campos.mail.textContent = cliente.Mail || "";
+  const proveedor = record.fields;
 
-  const ventas = await getVentasPorCliente(cliente.Nombre);
-  mostrarVentas(ventas);
+  campos.nombre.textContent = proveedor.RazonSocial || "";
+  campos.cuit.textContent = proveedor.CUIT || "";
+  campos.iva.textContent = proveedor.CondicionIVA || "";
+  campos.domicilio.textContent = proveedor.Domicilio || "";
+  campos.telefono.textContent = proveedor.Telefono || "";
+  campos.mail.textContent = proveedor.Mail || "";
+
+  const compras = await getComprasPorProveedor(proveedor.RazonSocial);
+  mostrarCompras(compras);
 }
 
 /* ==================== BUSCADOR EN VIVO ==================== */
@@ -137,8 +153,8 @@ async function manejarBusqueda() {
     cuerpoCC.innerHTML = filaEditableHTML();
     return;
   }
-  const cliente = await buscarCliente(texto);
-  await mostrarCliente(cliente);
+  const record = await buscarProveedor(texto);
+  await mostrarProveedor(record);
 }
 
 // 🔹 Búsqueda automática mientras escribe (con delay)
@@ -184,17 +200,20 @@ cuerpoCC.addEventListener("click", async (e) => {
 
   /* 💾 GUARDAR */
   if (e.target.classList.contains("bGua")) {
+    const nombreProveedor = campos.nombre.textContent;
+    const proveedorIdArray = await obtenerIdProveedor(nombreProveedor);
+
     const datos = {
       Fecha: fila.querySelector('[name="fec"]').value,
       Factura: fila.querySelector('[name="factura"]').value,
       TipoPago: fila.querySelector('[name="tpago"]').value || null,
       Ingreso: Number(fila.querySelector('[name="debe"]').value),
       Egreso: Number(fila.querySelector('[name="pago"]').value),
-      Cliente: campos.nombre.textContent
+      Proveedor: proveedorIdArray, // ahora usa el ID real
     };
 
     const id = fila.dataset.id;
-    const url = id ? `${urlVentas}/${id}` : urlVentas;
+    const url = id ? `${urlCompras}/${id}` : urlCompras;
     const method = id ? "PATCH" : "POST";
 
     const res = await fetch(url, {
@@ -207,9 +226,8 @@ cuerpoCC.addEventListener("click", async (e) => {
     });
 
     if (res.ok) {
-      const cliente = campos.nombre.textContent;
-      const ventas = await getVentasPorCliente(cliente);
-      mostrarVentas(ventas);
+      const compras = await getComprasPorProveedor(nombreProveedor);
+      mostrarCompras(compras);
     } else {
       alert("Error al guardar los datos.");
     }
@@ -220,7 +238,7 @@ cuerpoCC.addEventListener("click", async (e) => {
     if (confirm("¿Eliminar este registro?")) {
       const id = fila.dataset.id;
       if (id) {
-        await fetch(`${urlVentas}/${id}`, {
+        await fetch(`${urlCompras}/${id}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${API_TOKEN}` },
         });
@@ -229,4 +247,3 @@ cuerpoCC.addEventListener("click", async (e) => {
     }
   }
 });
-
