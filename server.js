@@ -4,34 +4,41 @@ const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fet
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 app.get("/proxy", async (req, res) => {
   const { url } = req.query;
-
+  const response = await fetch(url, {
+    headers: {
+      Authorization: req.headers.authorization || "",
+      "Content-Type": "application/json",
+    },
+  });
+  const text = await response.text();
   try {
-    // Pedir a Airtable correctamente con cabecera de autorización
-    const response = await fetch(url, {
-      headers: {
-        Authorization: req.headers.authorization || "",
-        "Content-Type": "application/json"
-      }
-    });
+    const data = JSON.parse(text);
+    res.json(data);
+  } catch {
+    res.status(response.status).send(text);
+  }
+});
 
-    // Obtener el contenido como texto
-    const text = await response.text();
-
-    // Si la respuesta es JSON válido, la enviamos así
-    try {
-      const data = JSON.parse(text);
-      res.json(data);
-    } catch {
-      // Si no es JSON (por ejemplo, error de Airtable), la devolvemos como texto
-      console.error("⚠️ Respuesta de Airtable no es JSON:", text);
-      res.status(response.status).send(text);
-    }
-  } catch (err) {
-    console.error("❌ Error en el proxy:", err);
-    res.status(500).send("Error al conectar con Airtable");
+app.post("/proxy", async (req, res) => {
+  const { url } = req.query;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: req.headers.authorization || "",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req.body),
+  });
+  const text = await response.text();
+  try {
+    const data = JSON.parse(text);
+    res.json(data);
+  } catch {
+    res.status(response.status).send(text);
   }
 });
 

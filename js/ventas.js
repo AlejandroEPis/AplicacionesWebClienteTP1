@@ -1,11 +1,3 @@
-/* Buscador de clientes y cuenta corriente */
-import { BASE_ID, API_TOKEN } from "./environment.js";
-import { TABLE_CLIENTES, TABLE_CCVENTAS } from "./config.js";
-
-const proxy = "https://cors-anywhere.herokuapp.com/";
-const urlClientes = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_CLIENTES}`;
-const urlVentas = `${proxy}https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCVENTAS}`;
-
 const buscadorInput = document.querySelector("#q");
 
 const campos = {
@@ -19,34 +11,42 @@ const campos = {
 
 const cuerpoCC = document.querySelector(".ccBody");
 
-/* ==================== BUSCAR CLIENTE ==================== */
-async function buscarCliente(texto) {
-  const filtro = `OR(
-    FIND(LOWER("${texto}"), LOWER({Nombre})),
-    FIND(LOWER("${texto}"), LOWER({CUIT})),
-    FIND(LOWER("${texto}"), LOWER({Mail}))
-  )`;
-  const res = await fetch(`${urlClientes}?filterByFormula=${encodeURIComponent(filtro)}`, {
-    headers: { Authorization: `Bearer ${API_TOKEN}` },
-  });
-  const data = await res.json();
-  return data.records.length > 0 ? data.records[0].fields : null;
-}
-
-/* ==================== TRAER MOVIMIENTOS ==================== */
-async function getVentasPorCliente(nombreCliente) {
-  const filtro = `FIND(LOWER("${nombreCliente}"), LOWER({Cliente}))`;
-  const res = await fetch(
-    `${urlVentas}?filterByFormula=${encodeURIComponent(filtro)}&view=Grid%20view`,
-    {
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
-    }
+function buscarClienteLocal(texto) {
+  const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+  const t = texto.toLowerCase();
+  return (
+    clientes.find(
+      (c) =>
+        c.Nombre.toLowerCase().includes(t) ||
+        c.CUIT.toLowerCase().includes(t) ||
+        c.Mail.toLowerCase().includes(t)
+    ) || null
   );
-  const data = await res.json();
-  return data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
 
-/* ==================== FILAS HTML ==================== */
+function getVentasPorClienteLocal(nombreCliente) {
+  const ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+  return ventas.filter((v) => v.Cliente === nombreCliente);
+}
+
+function guardarVentaLocal(venta) {
+  const ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+  ventas.push(venta);
+  localStorage.setItem("ventas", JSON.stringify(ventas));
+}
+
+function eliminarVentaLocal(id) {
+  let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+  ventas = ventas.filter((v) => v.id !== id);
+  localStorage.setItem("ventas", JSON.stringify(ventas));
+}
+
+function actualizarVentaLocal(id, nuevosDatos) {
+  let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+  ventas = ventas.map((v) => (v.id === id ? { ...v, ...nuevosDatos } : v));
+  localStorage.setItem("ventas", JSON.stringify(ventas));
+}
+
 function filaEditableHTML(v = {}) {
   return `
     <tr ${v.id ? `data-id="${v.id}"` : ""}>
@@ -55,10 +55,10 @@ function filaEditableHTML(v = {}) {
       <td>
         <select name="tpago">
           <option value="">Seleccione</option>
-          <option value="efectivo">Efectivo</option>
-          <option value="debito">Débito</option>
-          <option value="credito">Crédito</option>
-          <option value="transferencia">Transferencia</option>
+          <option value="efectivo" ${v.TipoPago === "efectivo" ? "selected" : ""}>Efectivo</option>
+          <option value="debito" ${v.TipoPago === "debito" ? "selected" : ""}>Débito</option>
+          <option value="credito" ${v.TipoPago === "credito" ? "selected" : ""}>Crédito</option>
+          <option value="transferencia" ${v.TipoPago === "transferencia" ? "selected" : ""}>Transferencia</option>
         </select>
       </td>
       <td><input type="number" name="debe" value="${v.Ingreso || 0}"></td>
@@ -90,14 +90,12 @@ function filaConDatosHTML(v, saldoAcumulado) {
   `;
 }
 
-/* ==================== MOSTRAR MOVIMIENTOS ==================== */
 function mostrarVentas(lista) {
   cuerpoCC.innerHTML = "";
   if (!lista || lista.length === 0) {
     cuerpoCC.innerHTML = filaEditableHTML();
     return;
   }
-
   let saldoAcumulado = 0;
   lista.forEach((v) => {
     const ingreso = Number(v.Ingreso) || 0;
@@ -105,18 +103,15 @@ function mostrarVentas(lista) {
     saldoAcumulado += ingreso - egreso;
     cuerpoCC.insertAdjacentHTML("beforeend", filaConDatosHTML(v, saldoAcumulado));
   });
-
   cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
 }
 
-/* ==================== MOSTRAR CLIENTE ==================== */
 async function mostrarCliente(cliente) {
   if (!cliente) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
     cuerpoCC.innerHTML = filaEditableHTML();
     return;
   }
-
   campos.nombre.textContent = cliente.Nombre || "";
   campos.cuit.textContent = cliente.CUIT || "";
   campos.iva.textContent = cliente.CondicionIVA || "";
@@ -124,29 +119,23 @@ async function mostrarCliente(cliente) {
   campos.telefono.textContent = cliente.Telefono || "";
   campos.mail.textContent = cliente.Mail || "";
 
-  const ventas = await getVentasPorCliente(cliente.Nombre);
+  const ventas = getVentasPorClienteLocal(cliente.Nombre);
   mostrarVentas(ventas);
 }
 
-/* ==================== BUSCADOR EN VIVO + LOCALSTORAGE ==================== */
 async function manejarBusqueda() {
   const texto = buscadorInput.value.trim();
-
   if (!texto) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
     cuerpoCC.innerHTML = filaEditableHTML();
     localStorage.removeItem("ultimoCliente");
     return;
   }
-
-  // 🔹 Guardar el último cliente buscado
   localStorage.setItem("ultimoCliente", texto);
-
-  const cliente = await buscarCliente(texto);
+  const cliente = buscarClienteLocal(texto);
   await mostrarCliente(cliente);
 }
 
-// 🔹 Búsqueda automática mientras escribe (con delay)
 let timeoutBusqueda;
 buscadorInput.addEventListener("input", () => {
   clearTimeout(timeoutBusqueda);
@@ -156,7 +145,6 @@ buscadorInput.addEventListener("input", () => {
   }, 500);
 });
 
-// 🔹 Al cargar la página, restaurar el último cliente buscado
 window.addEventListener("DOMContentLoaded", async () => {
   const ultimo = localStorage.getItem("ultimoCliente");
   if (ultimo) {
@@ -165,12 +153,10 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-/* ==================== CRUD ==================== */
-cuerpoCC.addEventListener("click", async (e) => {
+cuerpoCC.addEventListener("click", (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
 
-  /* ✏️ MODIFICAR */
   if (e.target.classList.contains("bMod")) {
     const celdas = fila.querySelectorAll("td:not(.bot)");
     const valores = [...celdas].map((td) => td.textContent.trim());
@@ -196,55 +182,47 @@ cuerpoCC.addEventListener("click", async (e) => {
     `;
   }
 
-  /* 💾 GUARDAR */
   if (e.target.classList.contains("bGua")) {
     const clienteNombre = campos.nombre.textContent.trim();
     if (!clienteNombre) {
-      alert("⚠️ Debe seleccionar un cliente antes de cargar movimientos.");
+      alert("⚠️ Debe seleccionar un cliente antes de guardar movimientos.");
       return;
     }
 
+    const id = fila.dataset.id || crypto.randomUUID();
+    const ventasPrevias = getVentasPorClienteLocal(clienteNombre);
+    const ultimoSaldo = ventasPrevias.length
+      ? Number(ventasPrevias[ventasPrevias.length - 1].Saldo)
+      : 0;
+
+    const ingreso = Number(fila.querySelector('[name="debe"]').value);
+    const egreso = Number(fila.querySelector('[name="pago"]').value);
+    const nuevoSaldo = ultimoSaldo + ingreso - egreso;
+
     const datos = {
+      id,
       Fecha: fila.querySelector('[name="fec"]').value,
       Factura: fila.querySelector('[name="factura"]').value,
-      TipoPago: fila.querySelector('[name="tpago"]').value || null,
-      Ingreso: Number(fila.querySelector('[name="debe"]').value),
-      Egreso: Number(fila.querySelector('[name="pago"]').value),
+      TipoPago: fila.querySelector('[name="tpago"]').value || "",
+      Ingreso: ingreso,
+      Egreso: egreso,
+      Saldo: nuevoSaldo,
       Cliente: clienteNombre,
     };
 
-    const id = fila.dataset.id;
-    const url = id ? `${urlVentas}/${id}` : urlVentas;
-    const method = id ? "PATCH" : "POST";
+    if (fila.dataset.id) actualizarVentaLocal(id, datos);
+    else guardarVentaLocal(datos);
 
-    const res = await fetch(url, {
-      method,
-      headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ fields: datos }),
-    });
-
-    if (res.ok) {
-      const ventas = await getVentasPorCliente(clienteNombre);
-      mostrarVentas(ventas);
-    } else {
-      alert("Error al guardar los datos.");
-    }
+    mostrarVentas(getVentasPorClienteLocal(clienteNombre));
   }
 
-  /* ❌ ELIMINAR */
   if (e.target.classList.contains("bEli")) {
     if (confirm("¿Eliminar este registro?")) {
       const id = fila.dataset.id;
-      if (id) {
-        await fetch(`${urlVentas}/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${API_TOKEN}` },
-        });
-      }
+      eliminarVentaLocal(id);
       fila.remove();
+      const clienteNombre = campos.nombre.textContent.trim();
+      mostrarVentas(getVentasPorClienteLocal(clienteNombre));
     }
   }
 });
