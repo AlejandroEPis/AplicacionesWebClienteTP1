@@ -41,3 +41,20 @@ window.addEventListener("DOMContentLoaded", () => {
   mostrarTotales();
   mostrarSaldoFooter();
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+  const dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+  const fecha = new Date();
+  const diaTexto = dias[fecha.getDay()];
+  const fechaTexto = fecha.toLocaleDateString("es-AR");
+
+  let texto = localStorage.getItem("diaGuardado");
+
+  if (!texto || texto !== `${diaTexto}, ${fechaTexto}`) {
+    texto = `${diaTexto.charAt(0).toUpperCase() + diaTexto.slice(1)}, ${fechaTexto}`;
+    localStorage.setItem("diaGuardado", texto);
+  }
+
+  const el = document.getElementById("dia-hoy");
+  if (el) el.textContent = `Hoy es ${texto}`;
+});
