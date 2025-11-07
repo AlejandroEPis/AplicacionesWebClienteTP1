@@ -86,7 +86,27 @@ formProveedor.addEventListener("submit", async (e) => {
   formProveedor.reset();
 });
 
-(async function init() {
-  await sincronizarDesdeBackend("Clientes");
-  await sincronizarDesdeBackend("Proveedores");
-})();
+document.addEventListener("submit", (e) => {
+  if (e.target.classList.contains("taClPr")) {
+    setTimeout(() => {
+      mostrarMensaje("✅ Cliente guardado correctamente", "#27ae60");
+    }, 500);
+  }
+
+  if (e.target.classList.contains("taClPro")) {
+    setTimeout(() => {
+      mostrarMensaje("✅ Proveedor guardado correctamente", "#27ae60");
+    }, 500);
+  }
+});
+function mostrarMensaje(texto, color = "#333", tiempo = 2000) {
+  const noti = document.getElementById("noti");
+  if (!noti) return;
+
+  noti.textContent = texto;
+  noti.style.background = color;
+  noti.classList.add("visible");
+
+  setTimeout(() => noti.classList.remove("visible"), tiempo);
+}
+

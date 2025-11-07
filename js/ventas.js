@@ -157,10 +157,6 @@ cuerpoCC.addEventListener("click", async (e) => {
   const clienteNombre = campos.nombre.textContent.trim() || buscadorInput.value.trim();
 
   if (e.target.classList.contains("bGua")) {
-    if (!clienteNombre) {
-      alert("Primero debe seleccionar o buscar un comprador antes de guardar.");
-      return;
-    }
     const datos = {
       Fecha: fila.querySelector('[name="fec"]').value,
       Factura: fila.querySelector('[name="factura"]').value,
@@ -193,4 +189,10 @@ window.addEventListener("DOMContentLoaded", async () => {
   await traerClientes();
   await traerVentas();
   mostrarVentas([], false);
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const filas = document.querySelectorAll("table tr");
+  filas.forEach((fila, i) => {
+    setTimeout(() => fila.classList.add("visible"), i * 50);
+  });
 });

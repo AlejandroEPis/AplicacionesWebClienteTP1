@@ -58,3 +58,4 @@ window.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("dia-hoy");
   if (el) el.textContent = `Hoy es ${texto}`;
 });
+

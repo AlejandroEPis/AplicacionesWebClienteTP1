@@ -210,3 +210,9 @@ tablaBody.addEventListener("click", async (e) => {
   inputFecha.value = hoy;
   await traerDesdeAirtable();
 })();
+document.addEventListener("DOMContentLoaded", () => {
+  const filas = document.querySelectorAll("table tr");
+  filas.forEach((fila, i) => {
+    setTimeout(() => fila.classList.add("visible"), i * 50);
+  });
+});

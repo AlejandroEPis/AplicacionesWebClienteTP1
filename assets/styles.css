@@ -397,6 +397,18 @@ div.fila {
   transform: translateY(0);
 }
 
+/*Animacion Tablas*/
+table tr {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+table tr.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /*Hoja Nuevo Cliente/Proveedor*/
 
 .nuevoCP {
@@ -428,6 +440,25 @@ select {
 
 .rzPro {
   width: 30ch;
+}
+.noti {
+  position: fixed;
+  bottom: 30px;
+  left: 30px; 
+  background: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s, transform 0.4s;
+  transform: translateY(20px);
+  font-family: sans-serif;
+  z-index: 9999;
+}
+.noti.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /*Caja*/
@@ -497,6 +528,7 @@ select {
     font-size: 1.5rem;
   }
 }
+
 
 /*Resposive Tablet Horizontal*/
 
