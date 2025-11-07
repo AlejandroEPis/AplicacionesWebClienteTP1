@@ -241,9 +241,12 @@ h4 {
   font-size: 0.8rem;
 }
 
+select,
 input {
   width: 95%;
   font-size: 0.8rem;
+  background-color: #E0E0E0;;
+  color: #233a7a; ;
 
 }
 

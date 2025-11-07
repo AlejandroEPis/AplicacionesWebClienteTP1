@@ -1,3 +1,10 @@
+import { BASE_ID, API_TOKEN } from "./environment.js";
+import { TABLE_CCVENTAS, TABLE_CLIENTES } from "./config.js";
+
+const proxy = "http://127.0.0.1:8080/proxy?url=";
+const urlVentas = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCVENTAS}`)}`;
+const urlClientes = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_CLIENTES}`)}`;
+
 const buscadorInput = document.querySelector("#q");
 
 const campos = {
@@ -11,45 +18,57 @@ const campos = {
 
 const cuerpoCC = document.querySelector(".ccBody");
 
-function buscarClienteLocal(texto) {
-  const clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+let clientes = [];
+let ventas = [];
+
+async function traerClientes() {
+  const res = await fetch(urlClientes, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
+  const data = await res.json();
+  clientes = data.records.map((r) => ({ id: r.id, ...r.fields }));
+}
+
+async function traerVentas() {
+  const res = await fetch(`${urlVentas}?sort[0][field]=Fecha&sort[0][direction]=asc`, {
+    headers: { Authorization: `Bearer ${API_TOKEN}` },
+  });
+  const data = await res.json();
+  ventas = data.records.map((r) => ({ id: r.id, ...r.fields }));
+}
+
+async function enviarVentaAlBackend(data, id = null) {
+  const metodo = id ? "PATCH" : "POST";
+  const url = id ? `${urlVentas}/${id}` : urlVentas;
+  const res = await fetch(url, {
+    method: metodo,
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ fields: data }),
+  });
+  return res.ok;
+}
+
+async function eliminarVentaDelBackend(id) {
+  const res = await fetch(`${urlVentas}/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${API_TOKEN}` },
+  });
+  return res.ok;
+}
+
+function buscarCliente(texto) {
   const t = texto.toLowerCase();
-  return (
-    clientes.find(
-      (c) =>
-        c.Nombre.toLowerCase().includes(t) ||
-        c.CUIT.toLowerCase().includes(t) ||
-        c.Mail.toLowerCase().includes(t)
-    ) || null
-  );
+  return clientes.find((c) => (c.Nombre || "").toLowerCase().includes(t)) || null;
 }
 
-function getVentasPorClienteLocal(nombreCliente) {
-  const ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+function getVentasPorCliente(nombreCliente) {
   return ventas.filter((v) => v.Cliente === nombreCliente);
-}
-
-function guardarVentaLocal(venta) {
-  const ventas = JSON.parse(localStorage.getItem("ventas")) || [];
-  ventas.push(venta);
-  localStorage.setItem("ventas", JSON.stringify(ventas));
-}
-
-function eliminarVentaLocal(id) {
-  let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
-  ventas = ventas.filter((v) => v.id !== id);
-  localStorage.setItem("ventas", JSON.stringify(ventas));
-}
-
-function actualizarVentaLocal(id, nuevosDatos) {
-  let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
-  ventas = ventas.map((v) => (v.id === id ? { ...v, ...nuevosDatos } : v));
-  localStorage.setItem("ventas", JSON.stringify(ventas));
 }
 
 function filaEditableHTML(v = {}) {
   return `
-    <tr ${v.id ? `data-id="${v.id}"` : ""}>
+    <tr data-id="${v.id || ""}">
       <td><input type="date" name="fec" value="${v.Fecha || ""}"></td>
       <td><input type="text" name="factura" value="${v.Factura || ""}"></td>
       <td>
@@ -63,55 +82,53 @@ function filaEditableHTML(v = {}) {
       </td>
       <td><input type="number" name="debe" value="${v.Ingreso || 0}"></td>
       <td><input type="number" name="pago" value="${v.Egreso || 0}"></td>
-      <td><input type="number" name="saldo" value="${v.Saldo || 0}" readonly></td>
+      <td>${v.Saldo ? v.Saldo.toFixed(2) : ""}</td>
       <td class="bot">
         <button class="bGua" type="button">Guardar</button>
-        <button class="bMod" type="button">Modificar</button>
-        <button class="bEli" type="button">Eliminar</button>
       </td>
     </tr>
   `;
 }
 
-function filaConDatosHTML(v, saldoAcumulado) {
-  return `
-    <tr data-id="${v.id}">
-      <td>${v.Fecha || ""}</td>
-      <td>${v.Factura || ""}</td>
-      <td>${v.TipoPago || ""}</td>
-      <td>${v.Ingreso || 0}</td>
-      <td>${v.Egreso || 0}</td>
-      <td>${saldoAcumulado}</td>
-      <td class="bot">
-        <button class="bMod" type="button">Modificar</button>
-        <button class="bEli" type="button">Eliminar</button>
-      </td>
-    </tr>
-  `;
-}
-
-function mostrarVentas(lista) {
+function mostrarVentas(lista, habilitarEdicion = true) {
   cuerpoCC.innerHTML = "";
+  let saldo = 0;
   if (!lista || lista.length === 0) {
-    cuerpoCC.innerHTML = filaEditableHTML();
+    if (habilitarEdicion) {
+      cuerpoCC.innerHTML = filaEditableHTML();
+    }
     return;
   }
-  let saldoAcumulado = 0;
   lista.forEach((v) => {
-    const ingreso = Number(v.Ingreso) || 0;
-    const egreso = Number(v.Egreso) || 0;
-    saldoAcumulado += ingreso - egreso;
-    cuerpoCC.insertAdjacentHTML("beforeend", filaConDatosHTML(v, saldoAcumulado));
+    saldo += (Number(v.Ingreso) || 0) - (Number(v.Egreso) || 0);
+    v.Saldo = saldo;
+    cuerpoCC.insertAdjacentHTML(
+      "beforeend",
+      `
+      <tr data-id="${v.id}">
+        <td>${v.Fecha || ""}</td>
+        <td>${v.Factura || ""}</td>
+        <td>${v.TipoPago || ""}</td>
+        <td>${v.Ingreso?.toFixed(2) || "0.00"}</td>
+        <td>${v.Egreso?.toFixed(2) || "0.00"}</td>
+        <td>${saldo.toFixed(2)}</td>
+        <td class="bot">
+          <button class="bMod" type="button">Modificar</button>
+          <button class="bEli" type="button">Eliminar</button>
+        </td>
+      </tr>`
+    );
   });
-  cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
+  if (habilitarEdicion) cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
 }
 
-async function mostrarCliente(cliente) {
+function mostrarCliente(cliente) {
   if (!cliente) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
-    cuerpoCC.innerHTML = filaEditableHTML();
+    mostrarVentas([], false);
     return;
   }
+
   campos.nombre.textContent = cliente.Nombre || "";
   campos.cuit.textContent = cliente.CUIT || "";
   campos.iva.textContent = cliente.CondicionIVA || "";
@@ -119,110 +136,61 @@ async function mostrarCliente(cliente) {
   campos.telefono.textContent = cliente.Telefono || "";
   campos.mail.textContent = cliente.Mail || "";
 
-  const ventas = getVentasPorClienteLocal(cliente.Nombre);
-  mostrarVentas(ventas);
+  const ventasCliente = getVentasPorCliente(cliente.Nombre);
+  mostrarVentas(ventasCliente, true);
 }
 
-async function manejarBusqueda() {
-  const texto = buscadorInput.value.trim();
-  if (!texto) {
-    Object.values(campos).forEach((c) => (c.textContent = ""));
-    cuerpoCC.innerHTML = filaEditableHTML();
-    localStorage.removeItem("ultimoCliente");
-    return;
-  }
-  localStorage.setItem("ultimoCliente", texto);
-  const cliente = buscarClienteLocal(texto);
-  await mostrarCliente(cliente);
-}
-
-let timeoutBusqueda;
 buscadorInput.addEventListener("input", () => {
-  clearTimeout(timeoutBusqueda);
-  timeoutBusqueda = setTimeout(() => {
-    const texto = buscadorInput.value.trim();
-    if (texto.length > 2) manejarBusqueda();
-  }, 500);
-});
-
-window.addEventListener("DOMContentLoaded", async () => {
-  const ultimo = localStorage.getItem("ultimoCliente");
-  if (ultimo) {
-    buscadorInput.value = ultimo;
-    await manejarBusqueda();
+  const texto = buscadorInput.value.trim();
+  if (texto.length > 2) {
+    const cliente = buscarCliente(texto);
+    mostrarCliente(cliente);
+  } else {
+    mostrarCliente(null);
   }
 });
 
-cuerpoCC.addEventListener("click", (e) => {
+cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
-
-  if (e.target.classList.contains("bMod")) {
-    const celdas = fila.querySelectorAll("td:not(.bot)");
-    const valores = [...celdas].map((td) => td.textContent.trim());
-    fila.innerHTML = `
-      <td><input type="date" name="fec" value="${valores[0] || ""}"></td>
-      <td><input type="text" name="factura" value="${valores[1] || ""}"></td>
-      <td>
-        <select name="tpago">
-          <option value="">Seleccione</option>
-          <option value="efectivo">Efectivo</option>
-          <option value="debito">Débito</option>
-          <option value="credito">Crédito</option>
-          <option value="transferencia">Transferencia</option>
-        </select>
-      </td>
-      <td><input type="number" name="debe" value="${valores[3] || 0}"></td>
-      <td><input type="number" name="pago" value="${valores[4] || 0}"></td>
-      <td><input type="number" name="saldo" value="${valores[5] || 0}" readonly></td>
-      <td class="bot">
-        <button class="bGua" type="button">Guardar</button>
-        <button class="bEli" type="button">Eliminar</button>
-      </td>
-    `;
-  }
+  const idFila = fila.dataset.id;
+  const clienteNombre = campos.nombre.textContent.trim() || buscadorInput.value.trim();
 
   if (e.target.classList.contains("bGua")) {
-    const clienteNombre = campos.nombre.textContent.trim();
     if (!clienteNombre) {
-      alert("⚠️ Debe seleccionar un cliente antes de guardar movimientos.");
+      alert("Primero debe seleccionar o buscar un comprador antes de guardar.");
       return;
     }
-
-    const id = fila.dataset.id || crypto.randomUUID();
-    const ventasPrevias = getVentasPorClienteLocal(clienteNombre);
-    const ultimoSaldo = ventasPrevias.length
-      ? Number(ventasPrevias[ventasPrevias.length - 1].Saldo)
-      : 0;
-
-    const ingreso = Number(fila.querySelector('[name="debe"]').value);
-    const egreso = Number(fila.querySelector('[name="pago"]').value);
-    const nuevoSaldo = ultimoSaldo + ingreso - egreso;
-
     const datos = {
-      id,
       Fecha: fila.querySelector('[name="fec"]').value,
       Factura: fila.querySelector('[name="factura"]').value,
-      TipoPago: fila.querySelector('[name="tpago"]').value || "",
-      Ingreso: ingreso,
-      Egreso: egreso,
-      Saldo: nuevoSaldo,
+      TipoPago: fila.querySelector('[name="tpago"]').value,
+      Ingreso: Number(fila.querySelector('[name="debe"]').value),
+      Egreso: Number(fila.querySelector('[name="pago"]').value),
       Cliente: clienteNombre,
     };
+    if (!datos.Fecha) return;
+    await enviarVentaAlBackend(datos, idFila || null);
+    await traerVentas();
+    mostrarVentas(getVentasPorCliente(clienteNombre), true);
+  }
 
-    if (fila.dataset.id) actualizarVentaLocal(id, datos);
-    else guardarVentaLocal(datos);
-
-    mostrarVentas(getVentasPorClienteLocal(clienteNombre));
+  if (e.target.classList.contains("bMod")) {
+    const v = ventas.find((x) => x.id === idFila);
+    if (!v) return;
+    fila.outerHTML = filaEditableHTML(v);
   }
 
   if (e.target.classList.contains("bEli")) {
-    if (confirm("¿Eliminar este registro?")) {
-      const id = fila.dataset.id;
-      eliminarVentaLocal(id);
-      fila.remove();
-      const clienteNombre = campos.nombre.textContent.trim();
-      mostrarVentas(getVentasPorClienteLocal(clienteNombre));
-    }
+    if (!confirm("¿Eliminar esta venta?")) return;
+    await eliminarVentaDelBackend(idFila);
+    await traerVentas();
+    mostrarVentas(getVentasPorCliente(clienteNombre), true);
   }
+});
+
+window.addEventListener("DOMContentLoaded", async () => {
+  await traerClientes();
+  await traerVentas();
+  mostrarVentas([], false);
 });

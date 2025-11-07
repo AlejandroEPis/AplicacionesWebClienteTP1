@@ -1,22 +1,34 @@
 import { BASE_ID, API_TOKEN } from "./environment.js";
 import { TABLE_CAJA } from "./config.js";
 
-const proxy = "http://localhost:8080/proxy?url=";
+const proxy = "http://127.0.0.1:8080/proxy?url=";
 const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}`;
 const urlCaja = `${proxy}${encodeURIComponent(airtableUrl)}`;
 
 const tablaBody = document.querySelector(".tCaja tbody");
 const inputFecha = document.querySelector("#fecha");
 const saldoFooter = document.getElementById("saldo-footer");
+const buscadorInput = document.querySelector("#q"); // puede no existir (por eso lo controlamos)
 
-let movimientos = JSON.parse(localStorage.getItem("movimientos")) || [];
+let movimientos = [];
 
-function guardarEnLocal() {
-  localStorage.setItem("movimientos", JSON.stringify(movimientos));
-}
-
-function filtrarPorFecha(fecha) {
-  return movimientos.filter((m) => m.Fecha === fecha);
+async function traerDesdeAirtable() {
+  try {
+    const res = await fetch(urlCaja, {
+      headers: { Authorization: `Bearer ${API_TOKEN}` },
+    });
+    const data = await res.json();
+    movimientos = data.records.map((r) => ({
+      id: r.id,
+      Fecha: r.fields.Fecha,
+      Descripcion: r.fields.Descripcion,
+      Ingreso: r.fields.Ingreso || 0,
+      Egreso: r.fields.Egreso || 0,
+    }));
+    mostrarMovimientos(inputFecha.value);
+  } catch (err) {
+    console.error("⚡ Error al traer datos desde Airtable:", err);
+  }
 }
 
 async function enviarAlBackend(movimiento, metodo = "POST") {
@@ -32,9 +44,12 @@ async function enviarAlBackend(movimiento, metodo = "POST") {
         body: JSON.stringify({ fields: movimiento }),
       }
     );
+
+    const result = await res.json().catch(() => null);
+    console.log("📨 Respuesta Airtable:", result);
     return res.ok;
   } catch (err) {
-    console.error("Error al conectar con el backend:", err);
+    console.error("⚡ Error al conectar con el backend:", err);
     return false;
   }
 }
@@ -47,29 +62,13 @@ async function eliminarDelBackend(id) {
     });
     return res.ok;
   } catch (err) {
-    console.error("Error al eliminar del backend:", err);
+    console.error("⚡ Error al eliminar del backend:", err);
     return false;
   }
 }
 
-async function sincronizarDesdeBackend() {
-  try {
-    const res = await fetch(urlCaja, {
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
-    });
-    const data = await res.json();
-    movimientos = data.records.map((r) => ({
-      id: r.id,
-      Fecha: r.fields.Fecha,
-      Descripcion: r.fields.Descripcion,
-      Ingreso: r.fields.Ingreso || 0,
-      Egreso: r.fields.Egreso || 0,
-    }));
-    guardarEnLocal();
-    mostrarMovimientos(inputFecha.value);
-  } catch (err) {
-    console.error("Error al traer datos del backend:", err);
-  }
+function filtrarPorFecha(fecha) {
+  return movimientos.filter((m) => m.Fecha === fecha);
 }
 
 function mostrarMovimientos(fecha) {
@@ -92,11 +91,11 @@ function mostrarMovimientos(fecha) {
           <button class="bMod" type="button">Modificar</button>
           <button class="bEli" type="button">Eliminar</button>
         </td>
-      </tr>
-    `
+      </tr>`
     );
   });
 
+  // Fila editable
   tablaBody.insertAdjacentHTML(
     "beforeend",
     `
@@ -109,8 +108,7 @@ function mostrarMovimientos(fecha) {
       <td class="bot">
         <button class="bGua" type="button">Guardar</button>
       </td>
-    </tr>
-  `
+    </tr>`
   );
 
   saldoFooter.textContent = "$ " + saldo.toFixed(2);
@@ -121,6 +119,39 @@ inputFecha.addEventListener("change", () => {
   if (!fechaSeleccionada) return;
   mostrarMovimientos(fechaSeleccionada);
 });
+
+if (buscadorInput) {
+  buscadorInput.addEventListener("input", () => {
+    const texto = buscadorInput.value.trim().toLowerCase();
+    if (texto.length > 1) {
+      const filtrado = movimientos.filter((m) =>
+        (m.Descripcion || "").toLowerCase().includes(texto)
+      );
+      tablaBody.innerHTML = "";
+      let saldo = 0;
+      filtrado.forEach((mov) => {
+        saldo += mov.Ingreso - mov.Egreso;
+        tablaBody.insertAdjacentHTML(
+          "beforeend",
+          `
+          <tr data-id="${mov.id}">
+            <td>${mov.Fecha}</td>
+            <td>${mov.Descripcion}</td>
+            <td>${mov.Ingreso.toFixed(2)}</td>
+            <td>${mov.Egreso.toFixed(2)}</td>
+            <td>${saldo.toFixed(2)}</td>
+            <td class="bot">
+              <button class="bMod" type="button">Modificar</button>
+              <button class="bEli" type="button">Eliminar</button>
+            </td>
+          </tr>`
+        );
+      });
+    } else {
+      mostrarMovimientos(inputFecha.value);
+    }
+  });
+}
 
 tablaBody.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
@@ -142,25 +173,17 @@ tablaBody.addEventListener("click", async (e) => {
     }
 
     if (idFila) {
-      const index = movimientos.findIndex((m) => m.id === idFila);
-      if (index !== -1) movimientos[index] = { ...datos, id: idFila };
-      await enviarAlBackend({ ...datos }, "PATCH");
+      const ok = await enviarAlBackend({ ...datos, id: idFila }, "PATCH");
+      if (ok) await traerDesdeAirtable();
     } else {
-      const nuevo = { ...datos };
-      const ok = await enviarAlBackend(nuevo, "POST");
-      if (ok) await sincronizarDesdeBackend();
-      else {
-        nuevo.id = Date.now().toString();
-        movimientos.push(nuevo);
-      }
+      const ok = await enviarAlBackend(datos, "POST");
+      if (ok) await traerDesdeAirtable();
     }
-
-    guardarEnLocal();
-    mostrarMovimientos(fechaActual);
   }
 
   if (e.target.classList.contains("bMod")) {
     const mov = movimientos.find((m) => m.id === idFila);
+    if (!mov) return;
     fila.innerHTML = `
       <td><input type="date" name="Fecha" value="${mov.Fecha}"></td>
       <td><input type="text" name="Descripcion" value="${mov.Descripcion}"></td>
@@ -170,17 +193,14 @@ tablaBody.addEventListener("click", async (e) => {
       <td class="bot">
         <button class="bGua" type="button">Guardar</button>
         <button class="bEli" type="button">Eliminar</button>
-      </td>
-    `;
+      </td>`;
     fila.dataset.id = mov.id;
   }
 
   if (e.target.classList.contains("bEli")) {
     if (confirm("¿Eliminar este movimiento?")) {
-      movimientos = movimientos.filter((m) => m.id !== idFila);
-      await eliminarDelBackend(idFila);
-      guardarEnLocal();
-      mostrarMovimientos(fechaActual);
+      const ok = await eliminarDelBackend(idFila);
+      if (ok) await traerDesdeAirtable();
     }
   }
 });
@@ -188,6 +208,5 @@ tablaBody.addEventListener("click", async (e) => {
 (async function init() {
   const hoy = new Date().toISOString().split("T")[0];
   inputFecha.value = hoy;
-  await sincronizarDesdeBackend();
+  await traerDesdeAirtable();
 })();
-

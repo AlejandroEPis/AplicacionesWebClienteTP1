@@ -6,39 +6,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/proxy", async (req, res) => {
+app.all("/proxy", async (req, res) => {
   const { url } = req.query;
-  const response = await fetch(url, {
-    headers: {
-      Authorization: req.headers.authorization || "",
-      "Content-Type": "application/json",
-    },
-  });
-  const text = await response.text();
-  try {
-    const data = JSON.parse(text);
-    res.json(data);
-  } catch {
-    res.status(response.status).send(text);
-  }
-});
+  if (!url) return res.status(400).send("Falta el parámetro 'url'");
 
-app.post("/proxy", async (req, res) => {
-  const { url } = req.query;
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: req.headers.authorization || "",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(req.body),
-  });
-  const text = await response.text();
   try {
-    const data = JSON.parse(text);
-    res.json(data);
-  } catch {
+    const options = {
+      method: req.method,
+      headers: {
+        Authorization: req.headers.authorization || "",
+        "Content-Type": "application/json",
+      },
+    };
+
+
+    if (req.method !== "GET" && req.body && Object.keys(req.body).length > 0) {
+      options.body = JSON.stringify(req.body);
+    }
+
+    const response = await fetch(url, options);
+    const text = await response.text();
+
     res.status(response.status).send(text);
+  } catch (err) {
+    res.status(500).send("Proxy error: " + err.message);
   }
 });
 
