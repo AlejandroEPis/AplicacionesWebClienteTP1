@@ -36,27 +36,34 @@ export const addCCCompra = async (data) => airtableRequest(TABLE_CCCOMPRAS, "POS
 export const getCaja = async () => airtableRequest(TABLE_CAJA);
 export const addCaja = async (data) => airtableRequest(TABLE_CAJA, "POST", data);
 
-export const getUltimoRegistro = async (tabla) => {
-  const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${tabla}?sort[0][field]=Fecha&sort[0][direction]=desc&maxRecords=1`;
+export const getUltimaVenta = async () => {
+  const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCVENTAS}?sort[0][field]=Fecha&sort[0][direction]=desc`;
   const url = `${proxy}${encodeURIComponent(airtableUrl)}`;
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${API_TOKEN}` },
-  });
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
   const data = await res.json();
-  return data.records.length > 0 ? data.records[0].fields : null;
+  const registrosValidos = data.records
+    .filter((r) => r.fields.Cliente && r.fields.Ingreso && r.fields.Ingreso > 0)
+    .sort((a, b) => new Date(b.fields.Fecha) - new Date(a.fields.Fecha));
+  return registrosValidos.length > 0 ? registrosValidos[0].fields : null;
+};
+
+export const getUltimaCompra = async () => {
+  const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCCOMPRAS}?sort[0][field]=Fecha&sort[0][direction]=desc`;
+  const url = `${proxy}${encodeURIComponent(airtableUrl)}`;
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
+  const data = await res.json();
+  const registrosValidos = data.records
+    .filter((r) => r.fields.Proveedor && r.fields.Egreso && r.fields.Egreso > 0)
+    .sort((a, b) => new Date(b.fields.Fecha) - new Date(a.fields.Fecha));
+  return registrosValidos.length > 0 ? registrosValidos[0].fields : null;
 };
 
 export const getSaldoActual = async () => {
-  const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}?sort[0][field]=Fecha&sort[0][direction]=asc`;
+  const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}?sort[0][field]=Fecha&sort[0][direction]=desc&maxRecords=1`;
   const url = `${proxy}${encodeURIComponent(airtableUrl)}`;
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${API_TOKEN}` },
-  });
+  const res = await fetch(url, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
   const data = await res.json();
-  let saldo = 0;
-  data.records.forEach((r) => {
-    const mov = r.fields;
-    saldo += (Number(mov.Ingreso) || 0) - (Number(mov.Egreso) || 0);
-  });
-  return saldo;
+  if (data.records.length === 0) return 0;
+  const registro = data.records[0].fields;
+  return Number(registro.Cálculo ?? registro.Saldo ?? 0);
 };

@@ -1,9 +1,9 @@
 import { BASE_ID, API_TOKEN } from "./environment.js";
-import { TABLE_PROVEEDORES, TABLE_CCCOMPRAS } from "./config.js";
+import { TABLE_CCCOMPRAS, TABLE_PROVEEDORES } from "./config.js";
 
 const proxy = "http://127.0.0.1:8080/proxy?url=";
-const urlProveedores = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_PROVEEDORES}`)}`;
 const urlCompras = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCCOMPRAS}`)}`;
+const urlProveedores = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_PROVEEDORES}`)}`;
 
 const buscadorInput = document.querySelector("#q");
 
@@ -90,13 +90,15 @@ function filaEditableHTML(v = {}) {
   `;
 }
 
-function mostrarCompras(lista) {
+function mostrarCompras(lista, habilitarEdicion = true) {
   cuerpoCC.innerHTML = "";
+  let saldo = 0;
   if (!lista || lista.length === 0) {
-    cuerpoCC.innerHTML = filaEditableHTML();
+    if (habilitarEdicion) {
+      cuerpoCC.innerHTML = filaEditableHTML();
+    }
     return;
   }
-  let saldo = 0;
   lista.forEach((c) => {
     saldo += (Number(c.Ingreso) || 0) - (Number(c.Egreso) || 0);
     c.Saldo = saldo;
@@ -117,22 +119,25 @@ function mostrarCompras(lista) {
       </tr>`
     );
   });
-  cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
+  if (habilitarEdicion) cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
 }
 
 function mostrarProveedor(proveedor) {
   if (!proveedor) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
-    cuerpoCC.innerHTML = filaEditableHTML();
+    mostrarCompras([], false);
     return;
   }
+
   campos.nombre.textContent = proveedor.RazonSocial || "";
   campos.cuit.textContent = proveedor.CUIT || "";
   campos.iva.textContent = proveedor.CondicionIVA || "";
   campos.domicilio.textContent = proveedor.Domicilio || "";
   campos.telefono.textContent = proveedor.Telefono || "";
   campos.mail.textContent = proveedor.Mail || "";
-  mostrarCompras(getComprasPorProveedor(proveedor.RazonSocial));
+
+  const comprasProveedor = getComprasPorProveedor(proveedor.RazonSocial);
+  mostrarCompras(comprasProveedor, true);
 }
 
 buscadorInput.addEventListener("input", () => {
@@ -140,6 +145,8 @@ buscadorInput.addEventListener("input", () => {
   if (texto.length > 2) {
     const proveedor = buscarProveedor(texto);
     mostrarProveedor(proveedor);
+  } else {
+    mostrarProveedor(null);
   }
 });
 
@@ -165,7 +172,7 @@ cuerpoCC.addEventListener("click", async (e) => {
     if (!datos.Fecha) return;
     await enviarCompraAlBackend(datos, idFila || null);
     await traerCompras();
-    mostrarCompras(getComprasPorProveedor(proveedorNombre));
+    mostrarCompras(getComprasPorProveedor(proveedorNombre), true);
   }
 
   if (e.target.classList.contains("bMod")) {
@@ -178,13 +185,12 @@ cuerpoCC.addEventListener("click", async (e) => {
     if (!confirm("¿Eliminar esta compra?")) return;
     await eliminarCompraDelBackend(idFila);
     await traerCompras();
-    mostrarCompras(getComprasPorProveedor(proveedorNombre));
+    mostrarCompras(getComprasPorProveedor(proveedorNombre), true);
   }
 });
 
 window.addEventListener("DOMContentLoaded", async () => {
   await traerProveedores();
   await traerCompras();
-  cuerpoCC.innerHTML = filaEditableHTML();
+  mostrarCompras([], false);
 });
-
