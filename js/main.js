@@ -1,47 +1,43 @@
-import { getUltimaVenta, getUltimaCompra, getSaldoActual } from "./api.js";
+const botonMenu = document.querySelector(".meHam");
+const menu = document.querySelector("nav ul");
+botonMenu.addEventListener("click", () => menu.classList.toggle("abierto"));
 
-async function mostrarUltimosMovimientos() {
+const indicadorPagina = document.querySelectorAll("nav ul li a");
+const paginaActual = window.location.pathname;
+indicadorPagina.forEach((link) => {
+  if (paginaActual.includes(link.getAttribute("href"))) link.classList.add("activo");
+});
+
+const panelBotones = document.querySelectorAll(".mPan a");
+panelBotones.forEach((boton, i) => setTimeout(() => boton.classList.add("visible"), i * 200));
+
+import { getTotalVentas, getTotalCompras, getSaldoActual } from "./api.js";
+
+async function mostrarTotales() {
+  const v = document.getElementById("total-ventas");
+  const c = document.getElementById("total-compras");
   try {
-    const ultimaVenta = await getUltimaVenta();
-    const ultimaCompra = await getUltimaCompra();
-
-    const ventaNombre = document.querySelector("aside h3:nth-of-type(1) + p");
-    const ventaImporte = document.querySelector("aside h3:nth-of-type(1) + p + p");
-    const compraNombre = document.querySelector("aside h3:nth-of-type(2) + p");
-    const compraImporte = document.querySelector("aside h3:nth-of-type(2) + p + p");
-
-    if (ultimaVenta) {
-      ventaNombre.textContent = ultimaVenta.Cliente || "—";
-      ventaImporte.textContent = `$${(ultimaVenta.Ingreso || 0).toFixed(2)}`;
-    } else {
-      ventaNombre.textContent = "—";
-      ventaImporte.textContent = "$0.00";
-    }
-
-    if (ultimaCompra) {
-      compraNombre.textContent = ultimaCompra.Proveedor || "—";
-      compraImporte.textContent = `$${(ultimaCompra.Egreso || 0).toFixed(2)}`;
-    } else {
-      compraNombre.textContent = "—";
-      compraImporte.textContent = "$0.00";
-    }
-  } catch (error) {
-    console.error("Error al cargar los últimos movimientos:", error);
+    const totalV = await getTotalVentas();
+    const totalC = await getTotalCompras();
+    if (v) v.textContent = `$${totalV.toLocaleString("es-AR")}`;
+    if (c) c.textContent = `$${totalC.toLocaleString("es-AR")}`;
+  } catch {
+    if (v) v.textContent = "$0";
+    if (c) c.textContent = "$0";
   }
 }
 
 async function mostrarSaldoFooter() {
-  const celdaFooter = document.getElementById("saldo-footer");
+  const f = document.getElementById("saldo-footer");
   try {
-    const saldo = await getSaldoActual();
-    if (celdaFooter) celdaFooter.textContent = `$ ${saldo.toFixed(2)}`;
-  } catch (err) {
-    console.error("Error al obtener saldo:", err);
-    if (celdaFooter) celdaFooter.textContent = "$ 0.00";
+    const s = await getSaldoActual();
+    if (f) f.textContent = `$ ${s.toFixed(2)}`;
+  } catch {
+    if (f) f.textContent = "$ 0.00";
   }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  mostrarUltimosMovimientos();
+  mostrarTotales();
   mostrarSaldoFooter();
 });
