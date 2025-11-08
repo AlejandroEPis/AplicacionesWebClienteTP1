@@ -196,10 +196,12 @@ tablaBody.addEventListener("click", async (e) => {
   inputFecha.value = hoy;
   await traerDesdeAirtable();
 })();
-
-document.addEventListener("DOMContentLoaded", () => {
-  const filas = document.querySelectorAll("table tr");
-  filas.forEach((fila, i) => {
-    setTimeout(() => fila.classList.add("visible"), i * 50);
-  });
+document.querySelectorAll("table").forEach((tabla, i) => {
+  tabla.style.opacity = "0";
+  tabla.style.transform = "translateY(20px)";
+  tabla.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+  setTimeout(() => {
+    tabla.style.opacity = "1";
+    tabla.style.transform = "translateY(0)";
+  }, 200 + i * 200);
 });

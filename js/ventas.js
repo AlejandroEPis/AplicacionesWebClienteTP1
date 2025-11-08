@@ -194,3 +194,12 @@ window.addEventListener("DOMContentLoaded", async () => {
   await traerVentas();
   mostrarVentas([], false);
 });
+document.querySelectorAll("table").forEach((tabla, i) => {
+  tabla.style.opacity = "0";
+  tabla.style.transform = "translateY(20px)";
+  tabla.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+  setTimeout(() => {
+    tabla.style.opacity = "1";
+    tabla.style.transform = "translateY(0)";
+  }, 200 + i * 200);
+});
