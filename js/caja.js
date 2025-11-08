@@ -1,70 +1,60 @@
 import { BASE_ID, API_TOKEN } from "./environment.js";
 import { TABLE_CAJA } from "./config.js";
 
-const proxy = "http://127.0.0.1:8080/proxy?url=";
-const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}`;
-const urlCaja = `${proxy}${encodeURIComponent(airtableUrl)}`;
+const urlCaja = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}`;
 
 const tablaBody = document.querySelector(".tCaja tbody");
 const inputFecha = document.querySelector("#fecha");
 const saldoFooter = document.getElementById("saldo-footer");
-const buscadorInput = document.querySelector("#q"); // puede no existir (por eso lo controlamos)
+const buscadorInput = document.querySelector("#q");
 
 let movimientos = [];
 
 async function traerDesdeAirtable() {
-  try {
-    const res = await fetch(urlCaja, {
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
-    });
-    const data = await res.json();
-    movimientos = data.records.map((r) => ({
-      id: r.id,
-      Fecha: r.fields.Fecha,
-      Descripcion: r.fields.Descripcion,
-      Ingreso: r.fields.Ingreso || 0,
-      Egreso: r.fields.Egreso || 0,
-    }));
-    mostrarMovimientos(inputFecha.value);
-  } catch (err) {
-    console.error("⚡ Error al traer datos desde Airtable:", err);
-  }
+  const res = await fetch(urlCaja, {
+    headers: { Authorization: `Bearer ${API_TOKEN}` },
+  });
+  const data = await res.json();
+  movimientos = data.records.map((r) => ({
+    id: r.id,
+    Fecha: r.fields.Fecha,
+    Descripcion: r.fields.Descripcion,
+    Ingreso: r.fields.Ingreso || 0,
+    Egreso: r.fields.Egreso || 0,
+  }));
+  mostrarMovimientos(inputFecha.value);
 }
 
 async function enviarAlBackend(movimiento, metodo = "POST") {
-  try {
-    const res = await fetch(
-      metodo === "POST" ? urlCaja : `${urlCaja}/${movimiento.id}`,
-      {
-        method: metodo,
-        headers: {
-          Authorization: `Bearer ${API_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ fields: movimiento }),
-      }
-    );
-
-    const result = await res.json().catch(() => null);
-    console.log("📨 Respuesta Airtable:", result);
-    return res.ok;
-  } catch (err) {
-    console.error("⚡ Error al conectar con el backend:", err);
-    return false;
-  }
+  const res = await fetch(
+    metodo === "POST" ? urlCaja : `${urlCaja}/${movimiento.id}`,
+    {
+      method: metodo,
+      headers: {
+        Authorization: `Bearer ${API_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ fields: movimiento }),
+    }
+  );
+  return res.ok;
 }
 
 async function eliminarDelBackend(id) {
-  try {
-    const res = await fetch(`${urlCaja}/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
-    });
-    return res.ok;
-  } catch (err) {
-    console.error("⚡ Error al eliminar del backend:", err);
-    return false;
-  }
+  const res = await fetch(`${urlCaja}/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${API_TOKEN}` },
+  });
+  return res.ok;
+}
+
+function mostrarMensaje(texto, color = "green", tiempo = 2000) {
+  const noti = document.getElementById("noti");
+  if (!noti) return;
+  noti.textContent = texto;
+  noti.style.background = color;
+  noti.classList.add("visible");
+  setTimeout(() => noti.classList.remove("visible"), tiempo);
 }
 
 function filtrarPorFecha(fecha) {
@@ -95,7 +85,6 @@ function mostrarMovimientos(fecha) {
     );
   });
 
-  // Fila editable
   tablaBody.insertAdjacentHTML(
     "beforeend",
     `
@@ -166,18 +155,13 @@ tablaBody.addEventListener("click", async (e) => {
       Ingreso: Number(fila.querySelector('[name="Ingreso"]').value),
       Egreso: Number(fila.querySelector('[name="Egreso"]').value),
     };
-
-    if (!datos.Fecha || !datos.Descripcion) {
-      alert("Completá la fecha y la descripción.");
-      return;
-    }
-
-    if (idFila) {
-      const ok = await enviarAlBackend({ ...datos, id: idFila }, "PATCH");
-      if (ok) await traerDesdeAirtable();
-    } else {
-      const ok = await enviarAlBackend(datos, "POST");
-      if (ok) await traerDesdeAirtable();
+    if (!datos.Fecha || !datos.Descripcion) return;
+    const ok = idFila
+      ? await enviarAlBackend({ ...datos, id: idFila }, "PATCH")
+      : await enviarAlBackend(datos, "POST");
+    if (ok) {
+      await traerDesdeAirtable();
+      mostrarMensaje("Movimiento guardado correctamente");
     }
   }
 
@@ -198,9 +182,11 @@ tablaBody.addEventListener("click", async (e) => {
   }
 
   if (e.target.classList.contains("bEli")) {
-    if (confirm("¿Eliminar este movimiento?")) {
-      const ok = await eliminarDelBackend(idFila);
-      if (ok) await traerDesdeAirtable();
+    if (!confirm("¿Eliminar este movimiento?")) return;
+    const ok = await eliminarDelBackend(idFila);
+    if (ok) {
+      await traerDesdeAirtable();
+      mostrarMensaje("Movimiento eliminado correctamente");
     }
   }
 });
@@ -210,6 +196,7 @@ tablaBody.addEventListener("click", async (e) => {
   inputFecha.value = hoy;
   await traerDesdeAirtable();
 })();
+
 document.addEventListener("DOMContentLoaded", () => {
   const filas = document.querySelectorAll("table tr");
   filas.forEach((fila, i) => {

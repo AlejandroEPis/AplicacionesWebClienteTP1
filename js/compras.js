@@ -1,9 +1,8 @@
-import { BASE_ID, API_TOKEN } from "./environment.js";
+import { API_TOKEN, BASE_ID } from "./environment.js";
 import { TABLE_CCCOMPRAS, TABLE_PROVEEDORES } from "./config.js";
 
-const proxy = "http://127.0.0.1:8080/proxy?url=";
-const urlCompras = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCCOMPRAS}`)}`;
-const urlProveedores = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_PROVEEDORES}`)}`;
+const urlCompras = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCCOMPRAS}`;
+const urlProveedores = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_PROVEEDORES}`;
 
 const buscadorInput = document.querySelector("#q");
 
@@ -22,7 +21,9 @@ let proveedores = [];
 let compras = [];
 
 async function traerProveedores() {
-  const res = await fetch(urlProveedores, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
+  const res = await fetch(urlProveedores, {
+    headers: { Authorization: `Bearer ${API_TOKEN}` },
+  });
   const data = await res.json();
   proveedores = data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
@@ -35,10 +36,10 @@ async function traerCompras() {
   compras = data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
 
-async function enviarCompraAlBackend(data, id = null) {
+async function guardarCompra(data, id = null) {
   const metodo = id ? "PATCH" : "POST";
   const url = id ? `${urlCompras}/${id}` : urlCompras;
-  const res = await fetch(url, {
+  await fetch(url, {
     method: metodo,
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
@@ -46,15 +47,22 @@ async function enviarCompraAlBackend(data, id = null) {
     },
     body: JSON.stringify({ fields: data }),
   });
-  return res.ok;
 }
 
-async function eliminarCompraDelBackend(id) {
-  const res = await fetch(`${urlCompras}/${id}`, {
+async function eliminarCompra(id) {
+  await fetch(`${urlCompras}/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${API_TOKEN}` },
   });
-  return res.ok;
+}
+
+function mostrarMensaje(texto, color = "green", tiempo = 2000) {
+  const noti = document.getElementById("noti");
+  if (!noti) return;
+  noti.textContent = texto;
+  noti.style.background = color;
+  noti.classList.add("visible");
+  setTimeout(() => noti.classList.remove("visible"), tiempo);
 }
 
 function buscarProveedor(texto) {
@@ -62,41 +70,37 @@ function buscarProveedor(texto) {
   return proveedores.find((p) => (p.RazonSocial || "").toLowerCase().includes(t)) || null;
 }
 
-function getComprasPorProveedor(nombreProveedor) {
-  return compras.filter((c) => c.Proveedor === nombreProveedor);
+function comprasDeProveedor(nombre) {
+  return compras.filter((c) => c.Proveedor === nombre);
 }
 
-function filaEditableHTML(v = {}) {
+function filaEditableHTML(c = {}) {
   return `
-    <tr data-id="${v.id || ""}">
-      <td><input type="date" name="fec" value="${v.Fecha || ""}"></td>
-      <td><input type="text" name="factura" value="${v.Factura || ""}"></td>
+    <tr data-id="${c.id || ""}">
+      <td><input type="date" name="fec" value="${c.Fecha || ""}"></td>
+      <td><input type="text" name="factura" value="${c.Factura || ""}"></td>
       <td>
         <select name="tpago">
           <option value="">Seleccione</option>
-          <option value="efectivo" ${v.TipoPago === "efectivo" ? "selected" : ""}>Efectivo</option>
-          <option value="debito" ${v.TipoPago === "debito" ? "selected" : ""}>Débito</option>
-          <option value="credito" ${v.TipoPago === "credito" ? "selected" : ""}>Crédito</option>
-          <option value="transferencia" ${v.TipoPago === "transferencia" ? "selected" : ""}>Transferencia</option>
+          <option value="efectivo" ${c.TipoPago === "efectivo" ? "selected" : ""}>Efectivo</option>
+          <option value="debito" ${c.TipoPago === "debito" ? "selected" : ""}>Débito</option>
+          <option value="credito" ${c.TipoPago === "credito" ? "selected" : ""}>Crédito</option>
+          <option value="transferencia" ${c.TipoPago === "transferencia" ? "selected" : ""}>Transferencia</option>
         </select>
       </td>
-      <td><input type="number" name="debe" value="${v.Ingreso || 0}"></td>
-      <td><input type="number" name="pago" value="${v.Egreso || 0}"></td>
-      <td>${v.Saldo ? v.Saldo.toFixed(2) : ""}</td>
-      <td class="bot">
-        <button class="bGua" type="button">Guardar</button>
-      </td>
+      <td><input type="number" name="debe" value="${c.Ingreso || 0}"></td>
+      <td><input type="number" name="pago" value="${c.Egreso || 0}"></td>
+      <td>${c.Saldo ? c.Saldo.toFixed(2) : ""}</td>
+      <td class="bot"><button class="bGua" type="button">Guardar</button></td>
     </tr>
   `;
 }
 
-function mostrarCompras(lista, habilitarEdicion = true) {
+function mostrarCompras(lista, editable = true) {
   cuerpoCC.innerHTML = "";
   let saldo = 0;
   if (!lista || lista.length === 0) {
-    if (habilitarEdicion) {
-      cuerpoCC.innerHTML = filaEditableHTML();
-    }
+    if (editable) cuerpoCC.innerHTML = filaEditableHTML();
     return;
   }
   lista.forEach((c) => {
@@ -119,7 +123,7 @@ function mostrarCompras(lista, habilitarEdicion = true) {
       </tr>`
     );
   });
-  if (habilitarEdicion) cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
+  if (editable) cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
 }
 
 function mostrarProveedor(proveedor) {
@@ -136,8 +140,8 @@ function mostrarProveedor(proveedor) {
   campos.telefono.textContent = proveedor.Telefono || "";
   campos.mail.textContent = proveedor.Mail || "";
 
-  const comprasProveedor = getComprasPorProveedor(proveedor.RazonSocial);
-  mostrarCompras(comprasProveedor, true);
+  const lista = comprasDeProveedor(proveedor.RazonSocial);
+  mostrarCompras(lista, true);
 }
 
 buscadorInput.addEventListener("input", () => {
@@ -153,8 +157,8 @@ buscadorInput.addEventListener("input", () => {
 cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
-  const idFila = fila.dataset.id;
-  const proveedorNombre = campos.nombre.textContent.trim() || buscadorInput.value.trim();
+  const id = fila.dataset.id;
+  const nombreProveedor = campos.nombre.textContent.trim() || buscadorInput.value.trim();
 
   if (e.target.classList.contains("bGua")) {
     const datos = {
@@ -163,25 +167,27 @@ cuerpoCC.addEventListener("click", async (e) => {
       TipoPago: fila.querySelector('[name="tpago"]').value,
       Ingreso: Number(fila.querySelector('[name="debe"]').value),
       Egreso: Number(fila.querySelector('[name="pago"]').value),
-      Proveedor: proveedorNombre,
+      Proveedor: nombreProveedor,
     };
     if (!datos.Fecha) return;
-    await enviarCompraAlBackend(datos, idFila || null);
+    await guardarCompra(datos, id || null);
     await traerCompras();
-    mostrarCompras(getComprasPorProveedor(proveedorNombre), true);
+    mostrarCompras(comprasDeProveedor(nombreProveedor), true);
+    mostrarMensaje("Compra guardada correctamente");
   }
 
   if (e.target.classList.contains("bMod")) {
-    const c = compras.find((x) => x.id === idFila);
+    const c = compras.find((x) => x.id === id);
     if (!c) return;
     fila.outerHTML = filaEditableHTML(c);
   }
 
   if (e.target.classList.contains("bEli")) {
     if (!confirm("¿Eliminar esta compra?")) return;
-    await eliminarCompraDelBackend(idFila);
+    await eliminarCompra(id);
     await traerCompras();
-    mostrarCompras(getComprasPorProveedor(proveedorNombre), true);
+    mostrarCompras(comprasDeProveedor(nombreProveedor), true);
+    mostrarMensaje("Compra eliminada correctamente");
   }
 });
 
@@ -189,10 +195,4 @@ window.addEventListener("DOMContentLoaded", async () => {
   await traerProveedores();
   await traerCompras();
   mostrarCompras([], false);
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const filas = document.querySelectorAll("table tr");
-  filas.forEach((fila, i) => {
-    setTimeout(() => fila.classList.add("visible"), i * 50);
-  });
 });

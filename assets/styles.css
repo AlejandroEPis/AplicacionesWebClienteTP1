@@ -397,18 +397,6 @@ div.fila {
   transform: translateY(0);
 }
 
-/*Animacion Tablas*/
-table tr {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-table tr.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /*Hoja Nuevo Cliente/Proveedor*/
 
 .nuevoCP {
@@ -445,7 +433,7 @@ select {
   position: fixed;
   bottom: 30px;
   left: 30px; 
-  background: #333;
+  background: green;
   color: #fff;
   padding: 12px 20px;
   border-radius: 10px;

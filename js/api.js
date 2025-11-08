@@ -1,11 +1,8 @@
 import { API_TOKEN, BASE_ID } from "./environment.js";
 import { TABLE_CCVENTAS, TABLE_CCCOMPRAS, TABLE_CAJA } from "./config.js";
 
-const proxy = "http://localhost:8080/proxy?url=";
-
 async function airtableRequest(tabla) {
-  const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${tabla}`;
-  const url = `${proxy}${encodeURIComponent(airtableUrl)}`;
+  const url = `https://api.airtable.com/v0/${BASE_ID}/${tabla}`;
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${API_TOKEN}` }
   });
@@ -24,12 +21,10 @@ export const getTotalCompras = async () => {
 };
 
 export const getSaldoActual = async () => {
-  const airtableUrl = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}?sort[0][field]=Fecha&sort[0][direction]=desc&maxRecords=1`;
-  const url = `${proxy}${encodeURIComponent(airtableUrl)}`;
+  const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}?sort[0][field]=Fecha&sort[0][direction]=desc&maxRecords=1`;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
   const data = await res.json();
   if (data.records.length === 0) return 0;
   const registro = data.records[0].fields;
   return Number(registro.Cálculo ?? registro.Saldo ?? 0);
 };
-

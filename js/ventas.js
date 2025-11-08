@@ -1,9 +1,8 @@
-import { BASE_ID, API_TOKEN } from "./environment.js";
+import { API_TOKEN, BASE_ID } from "./environment.js";
 import { TABLE_CCVENTAS, TABLE_CLIENTES } from "./config.js";
 
-const proxy = "http://127.0.0.1:8080/proxy?url=";
-const urlVentas = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCVENTAS}`)}`;
-const urlClientes = `${proxy}${encodeURIComponent(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_CLIENTES}`)}`;
+const urlVentas = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCVENTAS}`;
+const urlClientes = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CLIENTES}`;
 
 const buscadorInput = document.querySelector("#q");
 
@@ -22,7 +21,9 @@ let clientes = [];
 let ventas = [];
 
 async function traerClientes() {
-  const res = await fetch(urlClientes, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
+  const res = await fetch(urlClientes, {
+    headers: { Authorization: `Bearer ${API_TOKEN}` },
+  });
   const data = await res.json();
   clientes = data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
@@ -35,10 +36,10 @@ async function traerVentas() {
   ventas = data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
 
-async function enviarVentaAlBackend(data, id = null) {
+async function guardarVenta(data, id = null) {
   const metodo = id ? "PATCH" : "POST";
   const url = id ? `${urlVentas}/${id}` : urlVentas;
-  const res = await fetch(url, {
+  await fetch(url, {
     method: metodo,
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
@@ -46,15 +47,22 @@ async function enviarVentaAlBackend(data, id = null) {
     },
     body: JSON.stringify({ fields: data }),
   });
-  return res.ok;
 }
 
-async function eliminarVentaDelBackend(id) {
-  const res = await fetch(`${urlVentas}/${id}`, {
+async function eliminarVenta(id) {
+  await fetch(`${urlVentas}/${id}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${API_TOKEN}` },
   });
-  return res.ok;
+}
+
+function mostrarMensaje(texto, color = "green", tiempo = 2000) {
+  const noti = document.getElementById("noti");
+  if (!noti) return;
+  noti.textContent = texto;
+  noti.style.background = color;
+  noti.classList.add("visible");
+  setTimeout(() => noti.classList.remove("visible"), tiempo);
 }
 
 function buscarCliente(texto) {
@@ -62,8 +70,8 @@ function buscarCliente(texto) {
   return clientes.find((c) => (c.Nombre || "").toLowerCase().includes(t)) || null;
 }
 
-function getVentasPorCliente(nombreCliente) {
-  return ventas.filter((v) => v.Cliente === nombreCliente);
+function ventasDeCliente(nombre) {
+  return ventas.filter((v) => v.Cliente === nombre);
 }
 
 function filaEditableHTML(v = {}) {
@@ -83,20 +91,16 @@ function filaEditableHTML(v = {}) {
       <td><input type="number" name="debe" value="${v.Ingreso || 0}"></td>
       <td><input type="number" name="pago" value="${v.Egreso || 0}"></td>
       <td>${v.Saldo ? v.Saldo.toFixed(2) : ""}</td>
-      <td class="bot">
-        <button class="bGua" type="button">Guardar</button>
-      </td>
+      <td class="bot"><button class="bGua" type="button">Guardar</button></td>
     </tr>
   `;
 }
 
-function mostrarVentas(lista, habilitarEdicion = true) {
+function mostrarVentas(lista, editable = true) {
   cuerpoCC.innerHTML = "";
   let saldo = 0;
   if (!lista || lista.length === 0) {
-    if (habilitarEdicion) {
-      cuerpoCC.innerHTML = filaEditableHTML();
-    }
+    if (editable) cuerpoCC.innerHTML = filaEditableHTML();
     return;
   }
   lista.forEach((v) => {
@@ -119,7 +123,7 @@ function mostrarVentas(lista, habilitarEdicion = true) {
       </tr>`
     );
   });
-  if (habilitarEdicion) cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
+  if (editable) cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
 }
 
 function mostrarCliente(cliente) {
@@ -128,16 +132,14 @@ function mostrarCliente(cliente) {
     mostrarVentas([], false);
     return;
   }
-
   campos.nombre.textContent = cliente.Nombre || "";
   campos.cuit.textContent = cliente.CUIT || "";
   campos.iva.textContent = cliente.CondicionIVA || "";
   campos.domicilio.textContent = cliente.Domicilio || "";
   campos.telefono.textContent = cliente.Telefono || "";
   campos.mail.textContent = cliente.Mail || "";
-
-  const ventasCliente = getVentasPorCliente(cliente.Nombre);
-  mostrarVentas(ventasCliente, true);
+  const lista = ventasDeCliente(cliente.Nombre);
+  mostrarVentas(lista, true);
 }
 
 buscadorInput.addEventListener("input", () => {
@@ -153,8 +155,8 @@ buscadorInput.addEventListener("input", () => {
 cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
-  const idFila = fila.dataset.id;
-  const clienteNombre = campos.nombre.textContent.trim() || buscadorInput.value.trim();
+  const id = fila.dataset.id;
+  const nombreCliente = campos.nombre.textContent.trim() || buscadorInput.value.trim();
 
   if (e.target.classList.contains("bGua")) {
     const datos = {
@@ -163,25 +165,27 @@ cuerpoCC.addEventListener("click", async (e) => {
       TipoPago: fila.querySelector('[name="tpago"]').value,
       Ingreso: Number(fila.querySelector('[name="debe"]').value),
       Egreso: Number(fila.querySelector('[name="pago"]').value),
-      Cliente: clienteNombre,
+      Cliente: nombreCliente,
     };
     if (!datos.Fecha) return;
-    await enviarVentaAlBackend(datos, idFila || null);
+    await guardarVenta(datos, id || null);
     await traerVentas();
-    mostrarVentas(getVentasPorCliente(clienteNombre), true);
+    mostrarVentas(ventasDeCliente(nombreCliente), true);
+    mostrarMensaje("Venta guardada correctamente");
   }
 
   if (e.target.classList.contains("bMod")) {
-    const v = ventas.find((x) => x.id === idFila);
+    const v = ventas.find((x) => x.id === id);
     if (!v) return;
     fila.outerHTML = filaEditableHTML(v);
   }
 
   if (e.target.classList.contains("bEli")) {
     if (!confirm("¿Eliminar esta venta?")) return;
-    await eliminarVentaDelBackend(idFila);
+    await eliminarVenta(id);
     await traerVentas();
-    mostrarVentas(getVentasPorCliente(clienteNombre), true);
+    mostrarVentas(ventasDeCliente(nombreCliente), true);
+    mostrarMensaje("Venta eliminada correctamente");
   }
 });
 
@@ -189,10 +193,4 @@ window.addEventListener("DOMContentLoaded", async () => {
   await traerClientes();
   await traerVentas();
   mostrarVentas([], false);
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const filas = document.querySelectorAll("table tr");
-  filas.forEach((fila, i) => {
-    setTimeout(() => fila.classList.add("visible"), i * 50);
-  });
 });
