@@ -1,15 +1,20 @@
+/*Importaciones*/
 import { BASE_ID, API_TOKEN } from "./environment.js";
 import { TABLE_CAJA } from "./config.js";
 
+/*URL para acceder a la tabla de Caja en Airtable*/
 const urlCaja = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CAJA}`;
 
+/*Selecciona los elementos principales del DOM*/
 const tablaBody = document.querySelector(".tCaja tbody");
 const inputFecha = document.querySelector("#fecha");
 const saldoFooter = document.getElementById("saldo-footer");
 const buscadorInput = document.querySelector("#q");
 
+/*Array donde se guardan todos los movimientos*/
 let movimientos = [];
 
+/*Carga todos los movimientos guardados en Airtable*/
 async function traerDesdeAirtable() {
   const res = await fetch(urlCaja, {
     headers: { Authorization: `Bearer ${API_TOKEN}` },
