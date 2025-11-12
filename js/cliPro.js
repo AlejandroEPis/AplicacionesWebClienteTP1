@@ -1,12 +1,16 @@
+/*Importaciones*/
 import { BASE_ID, API_TOKEN } from "./environment.js";
 import { TABLE_CLIENTES, TABLE_PROVEEDORES } from "./config.js";
 
+/*URL para acceder a la tabla de Caja en Airtable*/
 const urlClientes = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CLIENTES}`;
 const urlProveedores = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_PROVEEDORES}`;
 
+/*Array donde se guardan todos los datos*/
 let clientes = [];
 let proveedores = [];
 
+/*Envía los datos de un cliente o proveedor a Airtable*/
 async function enviarAlBackend(tabla, data) {
   const url = tabla === "Clientes" ? urlClientes : urlProveedores;
   const res = await fetch(url, {
@@ -20,6 +24,7 @@ async function enviarAlBackend(tabla, data) {
   return res.ok;
 }
 
+/*Sincroniza los datos desde Airtable hacia la web*/
 async function sincronizarDesdeBackend(tabla) {
   const url = tabla === "Clientes" ? urlClientes : urlProveedores;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${API_TOKEN}` } });
@@ -47,6 +52,7 @@ async function sincronizarDesdeBackend(tabla) {
   }
 }
 
+/*Formulario nuevo cliente*/
 const formCliente = document.querySelector(".taClPr");
 formCliente.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -66,6 +72,7 @@ formCliente.addEventListener("submit", async (e) => {
   formCliente.reset();
 });
 
+/*Formulario nuevo provedor*/
 const formProveedor = document.querySelector(".taClPro");
 formProveedor.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -85,6 +92,7 @@ formProveedor.addEventListener("submit", async (e) => {
   formProveedor.reset();
 });
 
+/*Confirmacion accion*/
 function mostrarMensaje(texto, color = "green", tiempo = 2000) {
   const noti = document.getElementById("noti");
   if (!noti) return;
@@ -93,6 +101,8 @@ function mostrarMensaje(texto, color = "green", tiempo = 2000) {
   noti.classList.add("visible");
   setTimeout(() => noti.classList.remove("visible"), tiempo);
 }
+
+/*Animacion*/
 document.querySelectorAll("table").forEach((tabla, i) => {
   tabla.style.opacity = "0";
   tabla.style.transform = "translateY(20px)";

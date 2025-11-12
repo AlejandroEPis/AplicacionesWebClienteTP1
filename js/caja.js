@@ -30,6 +30,7 @@ async function traerDesdeAirtable() {
   mostrarMovimientos(inputFecha.value);
 }
 
+/*Envia o actuliza movimiento en Airtable*/
 async function enviarAlBackend(movimiento, metodo = "POST") {
   const res = await fetch(
     metodo === "POST" ? urlCaja : `${urlCaja}/${movimiento.id}`,
@@ -45,6 +46,7 @@ async function enviarAlBackend(movimiento, metodo = "POST") {
   return res.ok;
 }
 
+/*Elimina movimiento en Airtable*/
 async function eliminarDelBackend(id) {
   const res = await fetch(`${urlCaja}/${id}`, {
     method: "DELETE",
@@ -53,6 +55,7 @@ async function eliminarDelBackend(id) {
   return res.ok;
 }
 
+/*Confirmacion accion*/
 function mostrarMensaje(texto, color = "green", tiempo = 2000) {
   const noti = document.getElementById("noti");
   if (!noti) return;
@@ -62,10 +65,12 @@ function mostrarMensaje(texto, color = "green", tiempo = 2000) {
   setTimeout(() => noti.classList.remove("visible"), tiempo);
 }
 
+/*Filtra por fecha*/
 function filtrarPorFecha(fecha) {
   return movimientos.filter((m) => m.Fecha === fecha);
 }
 
+/*Muestra los movimiento*/
 function mostrarMovimientos(fecha) {
   const lista = filtrarPorFecha(fecha);
   tablaBody.innerHTML = "";
@@ -90,6 +95,7 @@ function mostrarMovimientos(fecha) {
     );
   });
 
+  /*Agrega fila para cargar movimiento*/
   tablaBody.insertAdjacentHTML(
     "beforeend",
     `
@@ -108,12 +114,14 @@ function mostrarMovimientos(fecha) {
   saldoFooter.textContent = "$ " + saldo.toFixed(2);
 }
 
+/*Ordena por fecha*/
 inputFecha.addEventListener("change", () => {
   const fechaSeleccionada = inputFecha.value;
   if (!fechaSeleccionada) return;
   mostrarMovimientos(fechaSeleccionada);
 });
 
+/*Permite agregar descripcion*/
 if (buscadorInput) {
   buscadorInput.addEventListener("input", () => {
     const texto = buscadorInput.value.trim().toLowerCase();
@@ -147,12 +155,15 @@ if (buscadorInput) {
   });
 }
 
+
+/*Escucha los botones*/
 tablaBody.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
   const idFila = fila.dataset.id;
   const fechaActual = inputFecha.value;
 
+  /*Guarda lo nuevo o editado*/
   if (e.target.classList.contains("bGua")) {
     const datos = {
       Fecha: fila.querySelector('[name="Fecha"]').value || fechaActual,
@@ -170,6 +181,7 @@ tablaBody.addEventListener("click", async (e) => {
     }
   }
 
+  /*Activa la edicion del movimiento*/
   if (e.target.classList.contains("bMod")) {
     const mov = movimientos.find((m) => m.id === idFila);
     if (!mov) return;
@@ -185,7 +197,7 @@ tablaBody.addEventListener("click", async (e) => {
       </td>`;
     fila.dataset.id = mov.id;
   }
-
+/*Elimina movimiento*/
   if (e.target.classList.contains("bEli")) {
     if (!confirm("¿Eliminar este movimiento?")) return;
     const ok = await eliminarDelBackend(idFila);
@@ -196,11 +208,14 @@ tablaBody.addEventListener("click", async (e) => {
   }
 });
 
+/*Inicia con la fecha de hoy*/
 (async function init() {
   const hoy = new Date().toISOString().split("T")[0];
   inputFecha.value = hoy;
   await traerDesdeAirtable();
 })();
+
+/*Animacion*/
 document.querySelectorAll("table").forEach((tabla, i) => {
   tabla.style.opacity = "0";
   tabla.style.transform = "translateY(20px)";
