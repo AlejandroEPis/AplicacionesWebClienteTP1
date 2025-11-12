@@ -169,6 +169,32 @@ buscadorInput.addEventListener("input", () => {
   }
 });
 
+/*Muestra un modal de confirmación y devuelve una promesa*/
+function confirmarAccion(mensaje = "¿Seguro?") {
+  return new Promise((resolve) => {
+    const modal = document.getElementById("confirmModal");
+    const text = document.getElementById("confirmText");
+    const yes = document.getElementById("confirmYes");
+    const no = document.getElementById("confirmNo");
+
+    text.textContent = mensaje;
+    modal.style.display = "flex";
+
+    const cerrar = (respuesta) => {
+      modal.style.display = "none";
+      yes.removeEventListener("click", onYes);
+      no.removeEventListener("click", onNo);
+      resolve(respuesta);
+    };
+
+    const onYes = () => cerrar(true);
+    const onNo = () => cerrar(false);
+
+    yes.addEventListener("click", onYes);
+    no.addEventListener("click", onNo);
+  });
+}
+
   /*Maneja las acciones de los botones dentro de la tabla*/
 cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
@@ -202,7 +228,7 @@ cuerpoCC.addEventListener("click", async (e) => {
 
   /*Eliminar una compra existente*/
   if (e.target.classList.contains("bEli")) {
-    if (!confirm("¿Eliminar esta compra?")) return;
+    if (!(await confirmarAccion("¿Eliminar esta compra?"))) return;
     await eliminarCompra(id);
     await traerCompras();
     mostrarCompras(comprasDeProveedor(nombreProveedor), true);
