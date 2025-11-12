@@ -1,9 +1,12 @@
+/*Conexión con la base de datos Airtable*/
 import { API_TOKEN, BASE_ID } from "./environment.js";
 import { TABLE_CCVENTAS, TABLE_CLIENTES } from "./config.js";
 
+/*URLs para acceder a las tablas de ventas y clientes*/
 const urlVentas = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCVENTAS}`;
 const urlClientes = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CLIENTES}`;
 
+/*Elementos del DOM*/
 const buscadorInput = document.querySelector("#q");
 
 const campos = {
@@ -17,9 +20,11 @@ const campos = {
 
 const cuerpoCC = document.querySelector(".ccBody");
 
+/*Arrays donde se guardan los datos de clientes y ventas*/
 let clientes = [];
 let ventas = [];
 
+/*Carga todos los clientes desde Airtable*/
 async function traerClientes() {
   const res = await fetch(urlClientes, {
     headers: { Authorization: `Bearer ${API_TOKEN}` },
@@ -28,6 +33,7 @@ async function traerClientes() {
   clientes = data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
 
+/*Carga todas las ventas desde Airtable*/
 async function traerVentas() {
   const res = await fetch(`${urlVentas}?sort[0][field]=Fecha&sort[0][direction]=asc`, {
     headers: { Authorization: `Bearer ${API_TOKEN}` },
@@ -36,6 +42,7 @@ async function traerVentas() {
   ventas = data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
 
+/*Guarda una nueva venta o actualiza una existente*/
 async function guardarVenta(data, id = null) {
   const metodo = id ? "PATCH" : "POST";
   const url = id ? `${urlVentas}/${id}` : urlVentas;
@@ -49,6 +56,7 @@ async function guardarVenta(data, id = null) {
   });
 }
 
+/*Elimina una venta de Airtable*/
 async function eliminarVenta(id) {
   await fetch(`${urlVentas}/${id}`, {
     method: "DELETE",
@@ -56,6 +64,7 @@ async function eliminarVenta(id) {
   });
 }
 
+/*Muestra un mensaje visual en pantalla*/
 function mostrarMensaje(texto, color = "green", tiempo = 2000) {
   const noti = document.getElementById("noti");
   if (!noti) return;
@@ -65,15 +74,18 @@ function mostrarMensaje(texto, color = "green", tiempo = 2000) {
   setTimeout(() => noti.classList.remove("visible"), tiempo);
 }
 
+/*Busca un cliente por nombre*/
 function buscarCliente(texto) {
   const t = texto.toLowerCase();
   return clientes.find((c) => (c.Nombre || "").toLowerCase().includes(t)) || null;
 }
 
+/*Filtra las ventas del cliente seleccionado*/
 function ventasDeCliente(nombre) {
   return ventas.filter((v) => v.Cliente === nombre);
 }
 
+/*Crea una fila editable para cargar o modificar una venta*/
 function filaEditableHTML(v = {}) {
   return `
     <tr data-id="${v.id || ""}">
@@ -96,6 +108,7 @@ function filaEditableHTML(v = {}) {
   `;
 }
 
+/*Muestra todas las ventas del cliente en la tabla*/
 function mostrarVentas(lista, editable = true) {
   cuerpoCC.innerHTML = "";
   let saldo = 0;
@@ -126,6 +139,7 @@ function mostrarVentas(lista, editable = true) {
   if (editable) cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
 }
 
+/*Muestra los datos del cliente y sus ventas*/
 function mostrarCliente(cliente) {
   if (!cliente) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
@@ -142,6 +156,7 @@ function mostrarCliente(cliente) {
   mostrarVentas(lista, true);
 }
 
+/*Activa el buscador de clientes*/
 buscadorInput.addEventListener("input", () => {
   const texto = buscadorInput.value.trim();
   if (texto.length > 2) {
@@ -152,12 +167,14 @@ buscadorInput.addEventListener("input", () => {
   }
 });
 
+/*Maneja las acciones de los botones dentro de la tabla*/
 cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
   const id = fila.dataset.id;
   const nombreCliente = campos.nombre.textContent.trim() || buscadorInput.value.trim();
 
+  /*Guardar venta nueva o modificada*/
   if (e.target.classList.contains("bGua")) {
     const datos = {
       Fecha: fila.querySelector('[name="fec"]').value,
@@ -174,12 +191,14 @@ cuerpoCC.addEventListener("click", async (e) => {
     mostrarMensaje("Venta guardada correctamente");
   }
 
+  /*Activa la edición de una venta existente*/
   if (e.target.classList.contains("bMod")) {
     const v = ventas.find((x) => x.id === id);
     if (!v) return;
     fila.outerHTML = filaEditableHTML(v);
   }
 
+  /*Elimina una venta del registro*/
   if (e.target.classList.contains("bEli")) {
     if (!confirm("¿Eliminar esta venta?")) return;
     await eliminarVenta(id);
@@ -189,6 +208,7 @@ cuerpoCC.addEventListener("click", async (e) => {
   }
 });
 
+/*Carga inicial de datos al abrir la página*/
 window.addEventListener("DOMContentLoaded", async () => {
   await traerClientes();
   await traerVentas();

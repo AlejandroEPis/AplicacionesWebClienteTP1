@@ -1,9 +1,12 @@
+/*Importaciones*/
 import { API_TOKEN, BASE_ID } from "./environment.js";
 import { TABLE_CCCOMPRAS, TABLE_PROVEEDORES } from "./config.js";
 
+/*URL para acceder a la tabla de compras en Airtable*/
 const urlCompras = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_CCCOMPRAS}`;
 const urlProveedores = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_PROVEEDORES}`;
 
+/*Elementos principales del DOM*/
 const buscadorInput = document.querySelector("#q");
 
 const campos = {
@@ -17,9 +20,11 @@ const campos = {
 
 const cuerpoCC = document.querySelector(".ccBody");
 
+/*Arrays donde se guardan los datos de Airtable*/
 let proveedores = [];
 let compras = [];
 
+/*Carga los proveedores desde Airtable*/
 async function traerProveedores() {
   const res = await fetch(urlProveedores, {
     headers: { Authorization: `Bearer ${API_TOKEN}` },
@@ -28,6 +33,7 @@ async function traerProveedores() {
   proveedores = data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
 
+/*Carga los compras desde Airtable*/
 async function traerCompras() {
   const res = await fetch(`${urlCompras}?sort[0][field]=Fecha&sort[0][direction]=asc`, {
     headers: { Authorization: `Bearer ${API_TOKEN}` },
@@ -36,6 +42,7 @@ async function traerCompras() {
   compras = data.records.map((r) => ({ id: r.id, ...r.fields }));
 }
 
+/*Guarda una compra nueva o modifica una existente*/
 async function guardarCompra(data, id = null) {
   const metodo = id ? "PATCH" : "POST";
   const url = id ? `${urlCompras}/${id}` : urlCompras;
@@ -49,6 +56,7 @@ async function guardarCompra(data, id = null) {
   });
 }
 
+/*Elimina una compra del servidor Airtable*/
 async function eliminarCompra(id) {
   await fetch(`${urlCompras}/${id}`, {
     method: "DELETE",
@@ -56,6 +64,7 @@ async function eliminarCompra(id) {
   });
 }
 
+/*Muestra un mensaje visual de confirmación*/
 function mostrarMensaje(texto, color = "green", tiempo = 2000) {
   const noti = document.getElementById("noti");
   if (!noti) return;
@@ -65,15 +74,18 @@ function mostrarMensaje(texto, color = "green", tiempo = 2000) {
   setTimeout(() => noti.classList.remove("visible"), tiempo);
 }
 
+/*Busca un proveedor por nombre*/
 function buscarProveedor(texto) {
   const t = texto.toLowerCase();
   return proveedores.find((p) => (p.RazonSocial || "").toLowerCase().includes(t)) || null;
 }
 
+/*Filtra las compras del proveedor seleccionado*/
 function comprasDeProveedor(nombre) {
   return compras.filter((c) => c.Proveedor === nombre);
 }
 
+/*Crea el HTML de una fila editable en la tabla*/
 function filaEditableHTML(c = {}) {
   return `
     <tr data-id="${c.id || ""}">
@@ -96,6 +108,7 @@ function filaEditableHTML(c = {}) {
   `;
 }
 
+/*Muestra todas las compras del provedor en la tabla*/
 function mostrarCompras(lista, editable = true) {
   cuerpoCC.innerHTML = "";
   let saldo = 0;
@@ -126,6 +139,7 @@ function mostrarCompras(lista, editable = true) {
   if (editable) cuerpoCC.insertAdjacentHTML("beforeend", filaEditableHTML());
 }
 
+/*Muestra los datos del proveedor en pantalla*/
 function mostrarProveedor(proveedor) {
   if (!proveedor) {
     Object.values(campos).forEach((c) => (c.textContent = ""));
@@ -144,6 +158,7 @@ function mostrarProveedor(proveedor) {
   mostrarCompras(lista, true);
 }
 
+/*Activa el buscador por nombre del proveedor*/
 buscadorInput.addEventListener("input", () => {
   const texto = buscadorInput.value.trim();
   if (texto.length > 2) {
@@ -154,12 +169,14 @@ buscadorInput.addEventListener("input", () => {
   }
 });
 
+  /*Maneja las acciones de los botones dentro de la tabla*/
 cuerpoCC.addEventListener("click", async (e) => {
   const fila = e.target.closest("tr");
   if (!fila) return;
   const id = fila.dataset.id;
   const nombreProveedor = campos.nombre.textContent.trim() || buscadorInput.value.trim();
 
+/*Guardar compra nueva o editada*/
   if (e.target.classList.contains("bGua")) {
     const datos = {
       Fecha: fila.querySelector('[name="fec"]').value,
@@ -176,12 +193,14 @@ cuerpoCC.addEventListener("click", async (e) => {
     mostrarMensaje("Compra guardada correctamente");
   }
 
+  /*Modificar una compra existente*/
   if (e.target.classList.contains("bMod")) {
     const c = compras.find((x) => x.id === id);
     if (!c) return;
     fila.outerHTML = filaEditableHTML(c);
   }
 
+  /*Eliminar una compra existente*/
   if (e.target.classList.contains("bEli")) {
     if (!confirm("¿Eliminar esta compra?")) return;
     await eliminarCompra(id);
@@ -191,11 +210,14 @@ cuerpoCC.addEventListener("click", async (e) => {
   }
 });
 
+/*Carga inicial de datos al abrir la página*/
 window.addEventListener("DOMContentLoaded", async () => {
   await traerProveedores();
   await traerCompras();
   mostrarCompras([], false);
 });
+
+/*Aplica animación de entrada a la tabla*/
 document.querySelectorAll("table").forEach((tabla, i) => {
   tabla.style.opacity = "0";
   tabla.style.transform = "translateY(20px)";
