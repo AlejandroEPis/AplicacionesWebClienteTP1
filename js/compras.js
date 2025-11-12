@@ -169,7 +169,7 @@ buscadorInput.addEventListener("input", () => {
   }
 });
 
-/*Muestra un modal de confirmación y devuelve una promesa*/
+/*Ventana para confirmar la acción del usuario*/
 function confirmarAccion(mensaje = "¿Seguro?") {
   return new Promise((resolve) => {
     const modal = document.getElementById("confirmModal");

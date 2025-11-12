@@ -155,6 +155,31 @@ if (buscadorInput) {
   });
 }
 
+/*Ventana para confirmar la acción del usuario*/
+function confirmarAccion(mensaje = "¿Seguro?") {
+  return new Promise((resolve) => {
+    const modal = document.getElementById("confirmModal");
+    const text = document.getElementById("confirmText");
+    const yes = document.getElementById("confirmYes");
+    const no = document.getElementById("confirmNo");
+
+    text.textContent = mensaje;
+    modal.style.display = "flex";
+
+    const cerrar = (respuesta) => {
+      modal.style.display = "none";
+      yes.removeEventListener("click", onYes);
+      no.removeEventListener("click", onNo);
+      resolve(respuesta);
+    };
+
+    const onYes = () => cerrar(true);
+    const onNo = () => cerrar(false);
+
+    yes.addEventListener("click", onYes);
+    no.addEventListener("click", onNo);
+  });
+}
 
 /*Escucha los botones*/
 tablaBody.addEventListener("click", async (e) => {
@@ -199,7 +224,7 @@ tablaBody.addEventListener("click", async (e) => {
   }
 /*Elimina movimiento*/
   if (e.target.classList.contains("bEli")) {
-    if (!confirm("¿Eliminar este movimiento?")) return;
+    if (!(await confirmarAccion("¿Eliminar este movimiento?"))) return;
     const ok = await eliminarDelBackend(idFila);
     if (ok) {
       await traerDesdeAirtable();
